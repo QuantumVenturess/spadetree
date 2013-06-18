@@ -1,0 +1,94 @@
+.join {
+  background-image: url("../img/join_background.png");
+  background-repeat: no-repeat;
+  height: 560px;
+  width: 100%; }
+  .join .joinTexture {
+    background-image: url("../img/texture.png");
+    height: 100%;
+    width: 100%; }
+    .join .joinTexture .intro {
+      height: 100%;
+      margin: 0 auto;
+      max-width: 960px;
+      width: 100%; }
+      .join .joinTexture .intro .introContent {
+        background: rgba(0, 0, 0, 0.7);
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        color: white;
+        float: right;
+        height: 400px;
+        margin: 80px 0;
+        max-width: 460px;
+        padding: 20px;
+        width: 100%; }
+        .join .joinTexture .intro .introContent h1 {
+          font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 36px;
+          font-weight: 300;
+          margin: 20px 0;
+          text-align: right; }
+        .join .joinTexture .intro .introContent h2 {
+          font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 27px;
+          margin: 0;
+          text-align: right; }
+        .join .joinTexture .intro .introContent .facebookButton {
+          background: #476ea3;
+          -webkit-border-radius: 2px;
+          -moz-border-radius: 2px;
+          -ms-border-radius: 2px;
+          border-radius: 2px;
+          display: block;
+          margin: 40px 0 0 0;
+          padding: 10px; }
+          .join .joinTexture .intro .introContent .facebookButton img {
+            float: left;
+            height: 40px;
+            width: 40px; }
+          .join .joinTexture .intro .introContent .facebookButton p {
+            color: white;
+            font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            line-height: 40px;
+            text-align: center; }
+        .join .joinTexture .intro .introContent .facebookNote {
+          font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          margin: 40px 0 0 0;
+          text-align: center; }
+          .join .joinTexture .intro .introContent .facebookNote p {
+            font-size: 14px;
+            line-height: 21px; }
+
+.audience {
+  color: #333333;
+  display: -webkit-box;
+  display: moz-box;
+  display: ms-flexbox;
+  margin: 80px 0; }
+  .audience .section {
+    width: 50%; }
+    .audience .section h1 {
+      font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 300;
+      margin: 0;
+      text-align: center; }
+    .audience .section .image {
+      height: 50%;
+      margin: 20px auto 0 auto;
+      width: 50%; }
+      .audience .section .image img {
+        max-height: 100%;
+        max-width: 100%; }
+    .audience .section p {
+      font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 27px;
+      margin: 20px 0 0 0;
+      padding: 0 50px; }

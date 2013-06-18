@@ -1,0 +1,22 @@
+{% load compress %}
+
+{% compress css %}
+<link rel='stylesheet' type='text/css' href='{{ static }}css/footer.css'>
+<link rel='stylesheet' type='text/css' href='{{ static }}css/header.css'>
+<link rel='stylesheet' type='text/css' href='{{ static }}css/join.css'>
+<link rel='stylesheet' type='text/css' href='{{ static }}css/main.css'>
+<style>
+/* Font face */
+@font-face {
+  font-family: 'Hattori Hanzo';
+  src: url('{{ static }}css/Hattori_Hanzo-webfont.eot'),
+       url('{{ static }}css/Hattori_Hanzo-webfont.ttf');
+}
+
+@font-face {
+  font-family: 'Varela';
+  src: url('{{ static }}css/Varela-Regular-webfont.eot'),
+       url('{{ static }}css/Varela-Regular-webfont.ttf');
+}
+</style>
+{% endcompress %}

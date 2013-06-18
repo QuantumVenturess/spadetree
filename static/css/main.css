@@ -1,0 +1,37 @@
+html, body {
+  height: 100%; }
+
+body {
+  background: #91ff42;
+  background: white;
+  color: #282828;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  overflow-x: hidden; }
+  body .wrapper {
+    min-height: 100%;
+    overflow: hidden; }
+    body .wrapper .content {
+      margin: 0 auto;
+      max-width: 960px; }
+
+a {
+  text-decoration: none; }
+
+p {
+  margin: 0; }
+
+img {
+  border: none;
+  vertical-align: bottom; }
+
+input:focus, textarea:focus {
+  outline: none; }
+
+.clear {
+  clear: both;
+  font-size: 1px;
+  height: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0; }

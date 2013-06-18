@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block fullscreen %}
+<div class='join'>
+  <div class='joinTexture'>
+    <div class='intro'>
+      <div class='introContent'>
+        <h1>Knowledge for everyone</h1>
+        <h2>We connect passionate people with youth who are eager</h2>
+        <h2>to learn new skills that are not typically taught in school.</h2>
+        <a href='{% url oauth.views.facebook %}' class='facebookButton'>
+          <img src='{{ static }}img/fb.png'>
+          <p>Join using your Facebook</p>
+        </a>
+        <div class='facebookNote'>
+          <p>Using Facebook to sign up will help us confirm</p>
+          <p>your identity and keep SpadeTree safe.</p>
+          <p>We will never post on your behalf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class='audience'>
+  <div class='section tutees'>
+    <h1>Tutees</h1>
+    <div class='image'>
+      <img src='{{ static }}img/tutees.png'>
+    </div>
+    <p>If you love doing anything but do not have the resources or knowledge to grow, become a tutee and join us so that we can help you learn what you love.</p>
+  </div>
+  <div class='section tutors'>
+    <h1>Tutors</h1>
+    <div class='image'>
+      <img src='{{ static }}img/tutors.png'>
+    </div>
+    <p>If you have a passion and would like to teach your skill to a youth, become a tutor and join us in our mission to make the world a better place.</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,17 +1,17 @@
 from django.conf.urls import patterns, include, url
+from django.contrib import admin
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'spadetree.views.home', name='home'),
-    # url(r'^spadetree/', include('spadetree.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    # Root path
+    url(r'^$', 'users.views.join', name='root_path'),
+    # Admin
+    url(r'^admin/', include(admin.site.urls)),
+    # OAuth
+    url(r'^oauth/', include('oauth.urls')),
+    # Sessions
+    url(r'^sessions/', include('sessions.urls')),
+    # Users
+    url(r'^join/$', 'users.views.join'),
 )

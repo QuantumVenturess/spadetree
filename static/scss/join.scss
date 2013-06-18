@@ -1,0 +1,112 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.join {
+  background-image: url('../img/join_background.png');
+  background-repeat: no-repeat;
+  height: 560px;
+  width: 100%;
+  .joinTexture {
+    background-image: url('../img/texture.png');
+    height: 100%;
+    width: 100%;
+    .intro {
+      height: 100%;
+      margin: 0 auto;
+      max-width: 960px;
+      width: 100%;
+      .introContent {
+        background: rgba(0, 0, 0, 0.7);
+        @include browser(box-sizing, border-box);
+        color: rgb(255, 255, 255);
+        float: right;
+        height: 400px;
+        margin: 80px 0;
+        max-width: 460px;
+        padding: 20px;
+        width: 100%;
+        h1 {
+          font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 36px;
+          font-weight: 300;
+          margin: 20px 0;
+          text-align: right;
+        }
+        h2 {
+          font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 27px;
+          margin: 0;
+          text-align: right;
+        }
+        .facebookButton {
+          background: rgb(71, 110, 163);
+          @include browser(border-radius, 2px);
+          display: block;
+          margin: 40px 0 0 0;
+          padding: 10px;
+          img {
+            float: left;
+            height: 40px;
+            width: 40px;
+          }
+          p {
+            color: rgb(255, 255, 255);
+            font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            line-height: 40px;
+            text-align: center;
+          }
+        }
+        .facebookNote {
+          font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          margin: 40px 0 0 0;
+          text-align: center;
+          p {
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.audience {
+  color: rgb(51, 51, 51);
+  display: -webkit-box;
+  display: moz-box;
+  display: ms-flexbox;
+  margin: 80px 0;
+  .section {
+    width: 50%;
+    h1 {
+      font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 300;
+      margin: 0;
+      text-align: center;
+    }
+    .image {
+      height: 50%;
+      margin: 20px auto 0 auto;
+      width: 50%;
+      img {
+        max-height: 100%;
+        max-width: 100%
+      }
+    }
+    p {
+      font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 27px;
+      margin: 20px 0 0 0;
+      padding: 0 50px;
+    }
+  }
+}

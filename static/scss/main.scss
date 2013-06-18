@@ -1,0 +1,46 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background: rgb(145, 255, 66);
+  background: rgb(255, 255, 255);
+  color: rgb(40, 40, 40);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  .wrapper {
+    min-height: 100%;
+    overflow: hidden;
+    .content {
+      margin: 0 auto;
+      max-width: 960px;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  border: none;
+  vertical-align: bottom;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+.clear {
+  clear: both;
+  font-size: 1px;
+  height: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}

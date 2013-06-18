@@ -1,0 +1,23 @@
+header {
+  background: rgb(40, 40, 40);
+  height: 44px;
+  .header {
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+    .logo {
+      display: block;
+      float: left;
+      height: 44px;
+      .spade {
+        max-height: 24px;
+        padding: 10px 0;
+      }
+      .spadetree {
+        margin: 0 0 0 10px;
+        max-height: 16px;
+        padding: 14px 0;
+      }
+    }
+  }
+}
