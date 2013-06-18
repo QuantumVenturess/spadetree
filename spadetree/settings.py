@@ -35,16 +35,24 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE':   'django.db.backends.postgresql_psycopg2',
-        'NAME':     'spadetree',
-        'USER':     'postgres',
-        'PASSWORD': 'postgres',
-        'HOST':     '' if platform.system() == 'Windows' else '192.168.1.70',
-        'PORT':     '5432',
+if DEV:
+    DATABASES_HOST = '' if platform.system() == 'Windows' else '192.168.1.70'
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'spadetree',
+            'USER':     'postgres',
+            'PASSWORD': 'postgres',
+            'HOST':     DATABASES_HOST,
+            'PORT':     '5432',
+        }
     }
-}
+else:
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
+    }
 
 # Facebook
 if DEV:
