@@ -1,5 +1,6 @@
+/* Sign up */
 .join {
-  background-image: url("../img/join_background.png");
+  background-image: url("../img/join_background.jpg");
   background-repeat: no-repeat;
   height: 560px;
   width: 100%; }
@@ -22,7 +23,7 @@
         float: right;
         height: 400px;
         margin: 80px 0;
-        padding: 20px; }
+        padding: 20px 40px; }
         .join .joinTexture .intro .introContent h1 {
           font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 36px;
@@ -45,6 +46,8 @@
           display: block;
           margin: 40px 0 0 0;
           padding: 10px; }
+          .join .joinTexture .intro .introContent .facebookButton:hover {
+            background: #5178ad; }
           .join .joinTexture .intro .introContent .facebookButton img {
             float: left;
             height: 40px;
@@ -63,12 +66,15 @@
             font-size: 14px;
             line-height: 21px; }
 
-.audience {
-  color: #333333;
+/* Target audience */
+.audience, .howItWorks {
   display: -webkit-box;
   display: moz-box;
   display: ms-flexbox;
-  margin: 80px 0; }
+  max-width: 960px; }
+
+.audience {
+  margin: 80px auto; }
   .audience .section {
     width: 50%; }
     .audience .section h1 {
@@ -90,3 +96,81 @@
       line-height: 27px;
       margin: 20px 0 0 0;
       padding: 0 50px; }
+
+/* How it works */
+.howItWorksContainer {
+  padding: 80px 0;
+  width: 100%; }
+  .howItWorksContainer.tutee {
+    background-color: #ebebeb; }
+  .howItWorksContainer.tutor {
+    background-color: #d7d7d7; }
+  .howItWorksContainer h1 {
+    font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin: 0;
+    text-align: center; }
+  .howItWorksContainer .howItWorks {
+    margin: 40px auto 0 auto; }
+    .howItWorksContainer .howItWorks .section {
+      width: 33%; }
+      .howItWorksContainer .howItWorks .section .image {
+        height: 50%;
+        margin: 20px auto 0 auto;
+        width: 50%; }
+        .howItWorksContainer .howItWorks .section .image img {
+          max-height: 100%;
+          max-width: 100%; }
+      .howItWorksContainer .howItWorks .section p {
+        font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 27px;
+        margin: 20px 0 0 0;
+        padding: 0 50px; }
+
+/* Join closing */
+.joinClosingContainer {
+  background-image: url("../img/texture2.png");
+  margin: 0 0 49px 0;
+  padding: 80px 0; }
+  .joinClosingContainer .joinClosing {
+    margin: 0 auto;
+    max-width: 960px; }
+    .joinClosingContainer .joinClosing h1 {
+      float: left;
+      font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 36px;
+      margin: 7px 0 0 0;
+      width: 36%; }
+    .joinClosingContainer .joinClosing .image {
+      margin: 0 auto;
+      height: 20%;
+      width: 20%; }
+      .joinClosingContainer .joinClosing .image img {
+        max-height: 100%;
+        max-width: 100%; }
+    .joinClosingContainer .joinClosing a {
+      background: #87de38;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      -ms-border-radius: 2px;
+      border-radius: 2px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+      color: white;
+      display: block;
+      float: right;
+      font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 40px;
+      margin: 66px 0 0 0;
+      padding: 10px;
+      text-align: center;
+      width: 36%; }
+      .joinClosingContainer .joinClosing a:hover {
+        background: #91e842; }

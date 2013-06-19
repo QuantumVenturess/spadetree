@@ -1,3 +1,5 @@
 footer {
-  background: #282828;
-  height: 49px; }
+  background: #323232;
+  height: 49px;
+  margin: -49px 0 0 0;
+  width: 100%; }

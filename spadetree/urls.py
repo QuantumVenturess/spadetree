@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^sessions/', include('sessions.urls')),
     # Users
     url(r'^join/$', 'users.views.join'),
+    url(r'^u/', include('users.urls')),
 )

@@ -18,7 +18,11 @@ class Profile(models.Model):
     user     = models.ForeignKey(User)
 
     def __unicode__(self):
-      return unicode(self.user)
+        return unicode(self.user)
+
+    def has_chosen(self):
+        if self.tutee or self.tutor:
+            return True
 
 def create_profile(sender, instance, **kwargs):
     try:

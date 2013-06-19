@@ -105,11 +105,6 @@ def facebook_authenticate(request):
                     facebook_id=facebook_id, provider='facebook')
             # Sign in user
             auth.login(request, auth.authenticate(email=user.email))
-            # friendly forwarding
-            if request.session.get('next'):
-                next = request.session['next']
-                del request.session['next']
-                return HttpResponseRedirect(next)
         # If user is signed in
         else:
             # Check to see if oauth with facebook id exists
@@ -122,6 +117,16 @@ def facebook_authenticate(request):
             except ObjectDoesNotExist:
                 request.user.oauth_set.create(access_token=access_token,
                     facebook_id=facebook_id, provider='facebook')
+        # Redirect user
+        if user.profile.has_chosen():
+            if request.session.get('next'):
+                # Friendly forwarding
+                next = request.session['next']
+                del request.session['next']
+                return HttpResponseRedirect(next)
+        else:
+            # Redirect user to choose between tutee or tutor
+            return HttpResponseRedirect(reverse('users.views.choose'))
     # If the user came straight to this URL
     if request.user.is_anonymous():
         return HttpResponseRedirect(reverse('users.views.join'))

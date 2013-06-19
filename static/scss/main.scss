@@ -3,9 +3,8 @@ html, body {
 }
 
 body {
-  background: rgb(145, 255, 66);
   background: rgb(255, 255, 255);
-  color: rgb(40, 40, 40);
+  color: rgb(50, 50, 50);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
   overflow-x: hidden;
@@ -43,4 +42,17 @@ input:focus, textarea:focus {
   line-height: 0;
   margin: 0;
   padding: 0;
+}
+
+/* Font face */
+@font-face {
+  font-family: 'Hattori Hanzo';
+  src: url('../css/Hattori_Hanzo-webfont.eot'),
+       url('../css/Hattori_Hanzo-webfont.ttf');
+}
+
+@font-face {
+  font-family: 'Varela';
+  src: url('../css/Varela-Regular-webfont.eot'),
+       url('../css/Varela-Regular-webfont.ttf');
 }

@@ -1,6 +1,19 @@
 <div class='header'>
-  <a href='' class='logo'>
+  <a href='{% url root_path %}' class='logo'>
     <img src='{{ static }}img/spade_green.png' class='spade'>
     <img src='{{ static }}img/spadetree.png' class='spadetree'>
   </a>
+  <nav>
+    <ul>
+      {% if user.is_anonymous %}
+        <li>
+          <a href='{% url oauth.views.facebook %}'>Sign in</a>        
+        </li>
+      {% else %}
+        <li>
+          <a href='{% url sessions.views.sign_out %}'>Sign out</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>

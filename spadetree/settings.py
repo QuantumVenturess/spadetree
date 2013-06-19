@@ -79,6 +79,9 @@ TIME_ZONE = 'UTC'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+# Default @login_required login_url is /login/
+LOGIN_URL = '/join/'
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
