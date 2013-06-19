@@ -1,0 +1,80 @@
+/* Choose */
+.choose h1 {
+  font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 300;
+  margin: 40px 0 0 0;
+  text-align: center; }
+.choose .audience {
+  margin: 40px 0 0 0; }
+  .choose .audience form {
+    width: 50%; }
+    .choose .audience form button {
+      background: none;
+      border: none;
+      float: left;
+      margin: 0;
+      width: 100%;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      -ms-border-radius: 2px;
+      border-radius: 2px;
+      color: #323232;
+      padding: 20px; }
+      .choose .audience form button:hover {
+        background: gainsboro;
+        cursor: pointer; }
+      .choose .audience form button p {
+        text-align: center; }
+
+/* Detail */
+.userDetail .top {
+  border-bottom: 1px solid #c8c8c8;
+  height: 100px;
+  padding: 20px 0; }
+  .userDetail .top .name {
+    float: left; }
+    .userDetail .top .name h1 {
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 52px;
+      margin: 6px 0 0 0; }
+    .userDetail .top .name p {
+      color: #646464;
+      font-size: 18px;
+      line-height: 26px;
+      margin: 10px 0 0 0; }
+  .userDetail .top .image {
+    float: right;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+    width: 100px; }
+    .userDetail .top .image img {
+      max-height: 100px; }
+.userDetail .bottom {
+  padding: 20px 0; }
+  .userDetail .bottom .section {
+    width: 40%; }
+    .userDetail .bottom .section .label {
+      margin: 0 0 10px 0; }
+      .userDetail .bottom .section .label .image {
+        float: left;
+        height: 26px;
+        width: 26px; }
+        .userDetail .bottom .section .label .image img {
+          max-height: 26px;
+          max-width: 26px; }
+      .userDetail .bottom .section .label h1 {
+        float: left;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 26px;
+        margin: 0 0 0 10px; }
+    .userDetail .bottom .section p {
+      font-size: 14px;
+      line-height: 27px; }
+  .userDetail .bottom .about {
+    float: left; }
+  .userDetail .bottom .skills {
+    float: right; }

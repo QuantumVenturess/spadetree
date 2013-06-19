@@ -24,6 +24,26 @@ class Profile(models.Model):
         if self.tutee or self.tutor:
             return True
 
+    def image_big(self):
+        if self.image:
+            # return big image from amazon
+            pass
+        elif self.user.oauth_set.all():
+            return 'http://graph.facebook.com/%s/picture?type=large' % (
+                self.user.oauth_set.all()[0].facebook_id)
+        else:
+            return '%sdefault_big.jpg' % settings.USER_IMAGE_URL
+
+    def image_small(self):
+        if self.image:
+            # return small image from amazon
+            pass
+        elif self.user.oauth_set.all():
+            return 'http://graph.facebook.com/%s/picture' % (
+                self.user.oauth_set.all()[0].facebook_id)
+        else:
+            return '%sdefault_small.jpg' % settings.USER_IMAGE_URL
+
 def create_profile(sender, instance, **kwargs):
     try:
         profile = Profile.objects.get(user=instance)

@@ -35,15 +35,63 @@ header {
         padding: 0;
         li {
           display: inline-block;
+          float: left;
           a {
             @include browser(box-sizing, border-box);
-            color: rgb(255, 255, 255);
+            color: rgb(135, 222, 56);
             display: block;
             font-size: 14px;
             line-height: 44px;
             padding: 0 20px;
             &:hover {
-              color: rgb(145, 232, 66);
+              background: rgb(135, 222, 56);
+              color: rgb(255, 255, 255);
+            }
+            &.menu {
+              &:hover {
+                background: rgb(100, 100, 100);
+              }
+            }
+            &.menuShow {
+              background: rgb(70, 70, 70);
+              color: rgb(150, 150, 150);
+              &:hover {
+                color: rgb(255, 255, 255);
+              }
+            }
+            div {
+              float: left;
+              height: 20px;
+              margin: 12px 10px 0 0;
+              overflow: hidden;
+              width: 20px;
+              img {
+                float: left;
+                max-height: 20px;
+              }
+            }
+          }
+        }
+      }
+      #menu {
+        display: none;
+        position: relative;
+        ul {
+          background: rgb(70, 70, 70);
+          position: absolute;
+          right: 0;
+          top: 44px;
+          width: 160px;
+          z-index: 500;
+          li {
+            display: block;
+            float: none;
+            a {
+              color: rgb(150, 150, 150);
+              &:hover {
+                background: rgb(100, 100, 100);
+                color: rgb(255, 255, 255);
+              }
             }
           }
         }

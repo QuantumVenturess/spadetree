@@ -84,9 +84,9 @@
       margin: 0;
       text-align: center; }
     .audience .section .image {
-      height: 50%;
+      height: 240px;
       margin: 20px auto 0 auto;
-      width: 50%; }
+      width: 240px; }
       .audience .section .image img {
         max-height: 100%;
         max-width: 100%; }
@@ -132,7 +132,6 @@
 /* Join closing */
 .joinClosingContainer {
   background-image: url("../img/texture2.png");
-  margin: 0 0 49px 0;
   padding: 80px 0; }
   .joinClosingContainer .joinClosing {
     margin: 0 auto;
@@ -165,12 +164,13 @@
       color: white;
       display: block;
       float: right;
-      font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 18px;
-      line-height: 40px;
       margin: 66px 0 0 0;
       padding: 10px;
-      text-align: center;
       width: 36%; }
       .joinClosingContainer .joinClosing a:hover {
         background: #91e842; }
+      .joinClosingContainer .joinClosing a p {
+        font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 40px;
+        text-align: center; }

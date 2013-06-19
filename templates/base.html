@@ -8,6 +8,7 @@
   {% get_static_prefix as static %}
   <link rel='icon' type='image/png' href='{{ static }}img/favicon.png'>
   {% include 'stylesheets.html' %}
+  {% include 'javascripts.html' %}
   {% block head %}{% endblock %}
 </head>
 <body>
@@ -15,6 +16,7 @@
     <header>
       {% include 'header.html' %}
     </header>
+    {% include 'messages.html' %}
     {% block fullscreen %}{% endblock %}
     <div class='content'>
       {% block content %}{% endblock %}

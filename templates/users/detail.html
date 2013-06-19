@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
+<div class='userDetail'>
+  <div class='top'>
+    <div class='name'>
+      <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+      <p>{{ user.profile.city.name }}, {{ user.profile.city.state.name }}</p>
+    </div>
+    <div class='image'>
+      <img src='{{ user.profile.image_big }}'>
+    </div>
+  </div>
+  <div class='bottom'>
+    <div class='section about'>
+      <div class='label'>
+        <div class='image'>
+          <img src='{{ static }}img/about.png'>
+        </div>
+        <h1>About</h1>
+        <div class='clear'></div>
+      </div>
+      <p>{{ user.profile.about }}</p>
+    </div>
+    <div class='section skills'>
+      <div class='label'>
+        <div class='image'>
+          <img src='{{ static }}img/skills.png'>
+        </div>
+        <h1>Skills</h1>
+        <div class='clear'></div>
+      </div>
 
+    </div>
+    <div class='clear'></div>
+  </div>
+</div>
 {% endblock %}

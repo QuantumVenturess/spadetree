@@ -1,0 +1,107 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+/* Choose */
+.choose {
+  h1 {
+    font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin: 40px 0 0 0;
+    text-align: center;
+  }
+  .audience {
+    margin: 40px 0 0 0;
+    form {
+      width: 50%;
+      button {
+        background: none;
+        border: none;
+        float: left;
+        margin: 0;
+        width: 100%;
+        @include browser(border-radius, 2px);
+        color: rgb(50, 50, 50);
+        padding: 20px;
+        &:hover {
+          background: rgb(220, 220, 220);
+          cursor: pointer;
+        }
+        p {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+/* Detail */
+.userDetail {
+  .top {
+    border-bottom: 1px solid rgb(200, 200, 200);
+    height: 100px;
+    padding: 20px 0;
+    .name {
+      float: left;
+      h1 {
+        font-size: 36px;
+        font-weight: 300;
+        line-height: 52px;
+        margin: 6px 0 0 0;
+      }
+      p {
+        color: rgb(100, 100, 100);
+        font-size: 18px;
+        line-height: 26px;
+        margin: 10px 0 0 0;
+      }
+    }
+    .image {
+      float: right;
+      height: 100px;
+      overflow: hidden;
+      text-align: center;
+      width: 100px;
+      img {
+        max-height: 100px;
+      }
+    }
+  }
+  .bottom {
+    padding: 20px 0;
+    .section {
+      width: 40%;
+      .label {
+        margin: 0 0 10px 0;
+        .image {
+          float: left;
+          height: 26px;
+          width: 26px;
+          img {
+            max-height: 26px;
+            max-width: 26px;
+          }
+        }
+        h1 {
+          float: left;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 26px;
+          margin: 0 0 0 10px;
+        }
+      }
+      p {
+        font-size: 14px;
+        line-height: 27px;
+      }
+    }
+    .about {
+      float: left;
+    }
+    .skills {
+      float: right;
+    }
+  }
+}

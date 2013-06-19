@@ -1,0 +1,40 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.messages {
+  @include browser(box-sizing, border-box);
+  font-size: 14px;
+  list-style-type: none;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0;
+  width: 100%;
+  li {
+    max-width: 960px;
+    position: absolute;
+    width: 100%;
+    z-index: 400;
+    div {
+      padding: 10px;
+      &.success {
+        background: rgb(230, 239, 194);
+        border: 1px solid rgb(110, 220, 90);
+        color: rgb(38, 68, 9);
+      }
+      &.error {
+        background: rgb(251, 227, 228);
+        border: 1px solid rgb(255, 26, 0);
+        color: rgb(138, 31, 17);
+      }
+      &.warning {
+        background: rgb(255, 246, 191);
+        border: 1px solid rgb(255, 211, 36);
+        color: rgb(81, 71, 33);
+      }
+    }
+  }
+}

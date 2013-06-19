@@ -24,16 +24,52 @@ header {
         margin: 0;
         padding: 0; }
         header .header nav ul li {
-          display: inline-block; }
+          display: inline-block;
+          float: left; }
           header .header nav ul li a {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             -ms-box-sizing: border-box;
             box-sizing: border-box;
-            color: white;
+            color: #87de38;
             display: block;
             font-size: 14px;
             line-height: 44px;
             padding: 0 20px; }
             header .header nav ul li a:hover {
-              color: #91e842; }
+              background: #87de38;
+              color: white; }
+            header .header nav ul li a.menu:hover {
+              background: #646464; }
+            header .header nav ul li a.menuShow {
+              background: #464646;
+              color: #969696; }
+              header .header nav ul li a.menuShow:hover {
+                color: white; }
+            header .header nav ul li a div {
+              float: left;
+              height: 20px;
+              margin: 12px 10px 0 0;
+              overflow: hidden;
+              width: 20px; }
+              header .header nav ul li a div img {
+                float: left;
+                max-height: 20px; }
+      header .header nav #menu {
+        display: none;
+        position: relative; }
+        header .header nav #menu ul {
+          background: #464646;
+          position: absolute;
+          right: 0;
+          top: 44px;
+          width: 160px;
+          z-index: 500; }
+          header .header nav #menu ul li {
+            display: block;
+            float: none; }
+            header .header nav #menu ul li a {
+              color: #969696; }
+              header .header nav #menu ul li a:hover {
+                background: #646464;
+                color: white; }

@@ -11,9 +11,30 @@
         </li>
       {% else %}
         <li>
-          <a href='{% url sessions.views.sign_out %}'>Sign out</a>
+          <a href='#' class='menu'>
+            <div><img src='{{ user.profile.image_small }}'></div>
+            <span>{{ user.first_name }}</span>
+          </a>
         </li>
       {% endif %}
     </ul>
+    {% if not user.is_anonymous %}
+      <nav id='menu'>
+        <ul>
+          <li>
+            <a href='#'>Notifications</a>
+          </li>
+          <li>
+            <a href='#'>Messages</a>
+          </li>
+          <li>
+            <a href='#'>Edit profile</a>
+          </li>
+          <li>
+            <a href='{% url sessions.views.sign_out %}'>Sign out</a>
+          </li>
+        </ul>
+      </nav>
+    {% endif %}
   </nav>
 </div>

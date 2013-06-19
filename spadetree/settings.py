@@ -104,14 +104,15 @@ else:
 
 MEDIA_URL = '/media/'
 
-USER_IMAGE_URL = '/img/users/'
-
 if DEV:
     STATIC_ROOT = ''
     STATIC_URL  = '/static/'
 else:
     STATIC_ROOT = os.path.dirname(__file__).replace('\\', '/') + '/..static'
     STATIC_URL  = 'http://s3.amazonaws.com/%s/' % project_name
+
+
+USER_IMAGE_URL = STATIC_URL + 'img/users/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
