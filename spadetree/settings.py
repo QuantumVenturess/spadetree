@@ -4,9 +4,9 @@ import os, platform, socket
 # Check environment
 if os.environ.get('MYSITE_PRODUCTION', False):
     # Production
-    DEBUG = TEMPLATE_DEBUG = True
+    DEBUG = TEMPLATE_DEBUG = False
     DEV                    = False
-    COMPRESS_ENABLED       = False
+    COMPRESS_ENABLED       = True
 else:
     # Development
     DEBUG = TEMPLATE_DEBUG = True
@@ -209,8 +209,9 @@ USE_TZ = True
 USER_IMAGE_URL = STATIC_URL + 'img/users/'
 
 # Django Compressor Amazon S3
-COMPRESS_URL     = 'http://s3.amazonaws.com/%s/' % project_name
-COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+if not DEV:
+    COMPRESS_URL     = 'http://s3.amazonaws.com/%s/' % project_name
+    COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'spadetree.wsgi.application'
