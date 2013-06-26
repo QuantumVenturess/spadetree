@@ -6,7 +6,7 @@ if os.environ.get('MYSITE_PRODUCTION', False):
     # Production
     DEBUG = TEMPLATE_DEBUG = True
     DEV                    = False
-    COMPRESS_ENABLED       = True
+    COMPRESS_ENABLED       = False
 else:
     # Development
     DEBUG = TEMPLATE_DEBUG = True
