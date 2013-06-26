@@ -108,10 +108,10 @@
             float: left;
             width: 50%;
             &:hover {
-              color: rgb(135, 222, 56);
+              color: rgb(41, 154, 11);
             }
             a {
-              color: rgb(50, 50, 50);
+              color: rgb(41, 154, 11);
               display: block;
               font-size: 14px;
               height: 18px;
@@ -120,7 +120,7 @@
               padding: 5px 0;
               text-overflow: ellipsis;
               &:hover {
-                text-decoration: underline;
+                color: rgb(50, 50, 50);
               }
             }
           }

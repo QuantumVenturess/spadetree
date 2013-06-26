@@ -87,9 +87,9 @@
           float: left;
           width: 50%; }
           .userDetail .bottom .section.skills ul li:hover {
-            color: #87de38; }
+            color: #299a0b; }
           .userDetail .bottom .section.skills ul li a {
-            color: #323232;
+            color: #299a0b;
             display: block;
             font-size: 14px;
             height: 18px;
@@ -98,7 +98,7 @@
             padding: 5px 0;
             text-overflow: ellipsis; }
             .userDetail .bottom .section.skills ul li a:hover {
-              text-decoration: underline; }
+              color: #323232; }
     .userDetail .bottom .section h1 {
       background-repeat: no-repeat;
       background-size: 25px 25px;

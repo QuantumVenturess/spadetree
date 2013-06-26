@@ -8,7 +8,7 @@
       <img class='lazy' data-original='{{ userd.profile.image_big }}' src='{% lazy_image %}'>
     </div>
     <div class='name'>
-      <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+      <h1>{{ userd.first_name }} {{ userd.last_name }}</h1>
       <p>{{ userd.profile.location.title }}</p>
     </div>
     {% if show_choice_button %}

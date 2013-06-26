@@ -2,6 +2,7 @@
 .messageList {
   padding: 40px 0; }
   .messageList .recentMessage {
+    border-left: 3px solid transparent;
     color: #323232;
     display: block;
     margin: 10px 0 0 0;
@@ -10,6 +11,8 @@
       margin: 0; }
     .messageList .recentMessage.unviewed {
       background: #f0f0f0; }
+    .messageList .recentMessage:hover {
+      border-left: 3px solid #73ca24; }
     .messageList .recentMessage .image {
       float: left;
       height: 40px;
