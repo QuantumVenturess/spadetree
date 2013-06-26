@@ -41,15 +41,6 @@
         .interestList .results .group ul li .interestNameLink:hover {
           background: #f0f0f0;
           color: #73ca24; }
-      .interestList .results .group ul li .tutorsInsert h3 {
-        background: #f0f0f0;
-        color: #969696;
-        font-size: 14px;
-        font-style: italic;
-        font-weight: 300;
-        line-height: 21px;
-        margin: 0;
-        padding: 10px; }
 
 /* Detail */
 .interestDetail {
@@ -77,6 +68,15 @@
     .interestList .tutor:hover .name h2 {
       color: #73ca24; }
 
+.interestDetail h3, .interestList h3 {
+  background: #f0f0f0;
+  color: #969696;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 21px;
+  margin: 0;
+  padding: 10px; }
 .interestDetail .tutor, .interestList .tutor {
   display: block;
   padding: 10px; }

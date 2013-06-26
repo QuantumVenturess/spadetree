@@ -54,18 +54,6 @@
               color: rgb(115, 202, 36);
             }
           }
-          .tutorsInsert {
-            h3 {
-              background: rgb(240, 240, 240);
-              color: rgb(150, 150, 150);
-              font-size: 14px;
-              font-style: italic;
-              font-weight: 300;
-              line-height: 21px;
-              margin: 0;
-              padding: 10px;
-            }
-          }
         }
       }
     }
@@ -108,6 +96,16 @@
   }
 }
 .interestDetail, .interestList {
+  h3 {
+    background: rgb(240, 240, 240);
+    color: rgb(150, 150, 150);
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 21px;
+    margin: 0;
+    padding: 10px;
+  }
   .tutor {
     display: block;
     padding: 10px;

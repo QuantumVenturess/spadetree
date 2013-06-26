@@ -41,16 +41,9 @@ $(document).ready(function() {
           type: 'GET',
           url: $(this).attr('href'),
           success: function(response) {
-            // If there are tutors
-            if (response.tutors.length > 1) {
-              var tutors = response.tutors;
-            }
-            // If there are no tutors
-            else {
-              var tutors = '<h3>Sorry, no tutors yet</h3>';
-            }
             var pk = response.pk;
-            $('.interestList #interest_' + pk + ' .tutorsInsert').html(tutors);
+            $('.interestList #interest_' + pk + ' .tutorsInsert').html(
+              response.tutors);
             // Lazy load
             $('.lazy').lazyload({
               event: 'load',
