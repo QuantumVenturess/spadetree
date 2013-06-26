@@ -1,0 +1,29 @@
+.dialog {
+  margin: 40px auto;
+  text-align: center;
+  width: 500px; }
+  .dialog h1 {
+    font-size: 27px;
+    font-weight: 300;
+    line-height: 36px;
+    margin: 0; }
+  .dialog p {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 40px 0 0 0; }
+  .dialog a {
+    background: #73ca24;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    color: white;
+    display: block;
+    font-size: 18px;
+    height: 20px;
+    line-height: 20px;
+    margin: 40px auto;
+    padding: 20px;
+    width: 200px; }
+    .dialog a:hover {
+      background: #7dd42e; }
