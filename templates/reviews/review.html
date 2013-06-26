@@ -1,0 +1,18 @@
+{% load common_tags %}
+<div class='review'>
+  <div class='info'>
+    <div class='image'>
+      <img class='lazy' data-original='{{ review.tutee.profile.image_small }}' src='{% lazy_image %}'>
+    </div>
+    <div class='imageThumb'>
+      <img src='{{ review.image_thumb }}'>
+    </div>
+    <div class='name'>
+      <h1>{{ review.tutee.profile.full_name }}</h1>
+      <p>{{ review.date_string }}</p>
+    </div>
+  </div>
+  <div class='reviewContent'>
+    <p>{{ review.content|linebreaks }}
+  </div>
+</div>

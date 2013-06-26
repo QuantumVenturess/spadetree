@@ -1,0 +1,44 @@
+.endlessPagination {
+  display: none;
+}
+.pagination {
+  font-size: 13px;
+  height: 36px;
+  padding: 40px 0;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline;
+      &:first-child {
+        border-left-width: 1px;
+      }
+    }
+  }
+  a, .falsePage p {
+    border-left-width: 0;
+    float: left;
+    line-height: 14px;
+    padding: 10px 15px;
+  }
+  a {
+    border: 1px solid rgb(200, 200, 200);
+    color: rgb(50, 50, 50);
+    &:hover {
+      background: rgb(50, 50, 50);
+      color: rgb(255, 255, 255);
+    }
+  }
+  .falsePage p {
+    border: 1px solid transparent;
+    border-right: 1px solid rgb(200, 200, 200);
+  }
+  .current a {
+    color: rgb(150, 150, 150);
+    cursor: default;
+    &:hover {
+      background: rgb(240, 240, 240);
+    }
+  }
+}

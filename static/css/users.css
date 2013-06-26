@@ -29,9 +29,18 @@
 
 /* Detail */
 .userDetail .top {
-  border-bottom: 1px solid #c8c8c8;
+  background: gainsboro;
   height: 100px;
-  padding: 20px 0; }
+  padding: 40px 20px; }
+  .userDetail .top .image {
+    float: left;
+    height: 100px;
+    margin: 0 20px 0 0;
+    overflow: hidden;
+    text-align: center;
+    width: 100px; }
+    .userDetail .top .image img {
+      max-height: 100px; }
   .userDetail .top .name {
     float: left; }
     .userDetail .top .name h1 {
@@ -40,41 +49,117 @@
       line-height: 52px;
       margin: 6px 0 0 0; }
     .userDetail .top .name p {
-      color: #646464;
+      background-image: url("../img/location.png");
+      background-repeat: no-repeat;
+      background-size: 18px 18px;
       font-size: 18px;
-      line-height: 26px;
-      margin: 10px 0 0 0; }
-  .userDetail .top .image {
+      line-height: 18px;
+      margin: 10px 0 0 0;
+      padding: 0 0 0 23px; }
+  .userDetail .top .chooseTutor {
+    background: #73ca24;
+    color: white;
+    display: block;
     float: right;
-    height: 100px;
-    overflow: hidden;
-    text-align: center;
-    width: 100px; }
-    .userDetail .top .image img {
-      max-height: 100px; }
+    font-size: 18px;
+    line-height: 24px;
+    margin: 28px 0 0 0;
+    padding: 10px 20px; }
 .userDetail .bottom {
-  padding: 20px 0; }
+  background: #f0f0f0;
+  padding: 20px; }
   .userDetail .bottom .section {
-    width: 40%; }
-    .userDetail .bottom .section .label {
-      margin: 0 0 10px 0; }
-      .userDetail .bottom .section .label .image {
-        float: left;
-        height: 26px;
-        width: 26px; }
-        .userDetail .bottom .section .label .image img {
-          max-height: 26px;
-          max-width: 26px; }
-      .userDetail .bottom .section .label h1 {
-        float: left;
-        font-size: 18px;
-        font-weight: 300;
-        line-height: 26px;
-        margin: 0 0 0 10px; }
+    width: 45%; }
+    .userDetail .bottom .section.about {
+      float: left; }
+      .userDetail .bottom .section.about h1 {
+        background-image: url("../img/about.png"); }
+    .userDetail .bottom .section.skills {
+      float: right; }
+      .userDetail .bottom .section.skills h1 {
+        background-image: url("../img/skills.png"); }
+      .userDetail .bottom .section.skills ul {
+        list-style-position: inside;
+        list-style-type: square;
+        margin: 0;
+        padding: 0; }
+        .userDetail .bottom .section.skills ul li {
+          float: left;
+          width: 50%; }
+          .userDetail .bottom .section.skills ul li:hover {
+            color: #87de38; }
+          .userDetail .bottom .section.skills ul li a {
+            color: #323232;
+            display: block;
+            font-size: 14px;
+            height: 18px;
+            line-height: 21px;
+            overflow: hidden;
+            padding: 5px 0;
+            text-overflow: ellipsis; }
+            .userDetail .bottom .section.skills ul li a:hover {
+              text-decoration: underline; }
+    .userDetail .bottom .section h1 {
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      font-size: 27px;
+      font-weight: 300;
+      line-height: 27px;
+      margin: 0 0 20px 0;
+      padding: 0 0 0 35px; }
     .userDetail .bottom .section p {
       font-size: 14px;
       line-height: 27px; }
-  .userDetail .bottom .about {
-    float: left; }
-  .userDetail .bottom .skills {
-    float: right; }
+
+/* Edit */
+.userEdit {
+  margin: 0 0 40px 0; }
+  .userEdit .section {
+    margin: 40px 0 0 0; }
+    .userEdit .section.skills h1 {
+      background-image: url("../img/skills.png"); }
+    .userEdit .section.skills .skillBox {
+      background: #f0f0f0;
+      min-height: 36px;
+      padding: 10px; }
+    .userEdit .section.skills .addSkill {
+      margin: 10px 0 0 0; }
+      .userEdit .section.skills .addSkill .inputBox {
+        padding: 0 110px 0 0; }
+        .userEdit .section.skills .addSkill .inputBox input {
+          float: left; }
+      .userEdit .section.skills .addSkill .addSkillButton {
+        background: #73ca24;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        color: white;
+        float: right;
+        font-size: 14px;
+        line-height: 16px;
+        padding: 13px 20px 14px 20px;
+        text-align: center;
+        width: 100px; }
+    .userEdit .section.about h1 {
+      background-image: url("../img/about.png"); }
+    .userEdit .section.location h1 {
+      background-image: url("../img/location.png"); }
+    .userEdit .section.location .field {
+      float: left;
+      margin: 0 10px 0 0;
+      width: 25%; }
+    .userEdit .section h1 {
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      font-size: 27px;
+      font-weight: 300;
+      line-height: 27px;
+      margin: 0 0 20px 0;
+      padding: 0 0 0 35px; }
+    .userEdit .section input, .userEdit .section textarea {
+      width: 100%; }
+    .userEdit .section textarea {
+      height: 127px; }
+  .userEdit .action {
+    margin: 40px 0 0 0; }

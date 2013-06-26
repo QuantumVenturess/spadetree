@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 class Interest(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -10,3 +11,8 @@ class Interest(models.Model):
 
     def __unicode__(self):
         return unicode(self.name)
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        self.slug = slugify(self.name)
+        super(Interest, self).save(*args, **kwargs)

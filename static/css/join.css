@@ -102,9 +102,9 @@
   padding: 80px 0;
   width: 100%; }
   .howItWorksContainer.tutee {
-    background-color: #ebebeb; }
+    background-color: #f0f0f0; }
   .howItWorksContainer.tutor {
-    background-color: #d7d7d7; }
+    background-color: gainsboro; }
   .howItWorksContainer h1 {
     font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 36px;
@@ -152,7 +152,7 @@
         max-height: 100%;
         max-width: 100%; }
     .joinClosingContainer .joinClosing a {
-      background: #87de38;
+      background: #73ca24;
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
       -ms-border-radius: 2px;
@@ -165,12 +165,12 @@
       display: block;
       float: right;
       margin: 66px 0 0 0;
-      padding: 10px;
+      padding: 20px 10px;
       width: 36%; }
       .joinClosingContainer .joinClosing a:hover {
-        background: #91e842; }
+        background: #7dd42e; }
       .joinClosingContainer .joinClosing a p {
         font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 18px;
-        line-height: 40px;
+        line-height: 20px;
         text-align: center; }

@@ -1,5 +1,31 @@
 footer {
   background: #323232;
+  font-size: 13px;
   height: 49px;
   margin: -49px 0 0 0;
   width: 100%; }
+  footer .footer {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 960px; }
+    footer .footer nav {
+      float: left; }
+      footer .footer nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 15px 0; }
+        footer .footer nav ul li {
+          display: inline;
+          margin: 0 20px 0 0; }
+          footer .footer nav ul li:last-child {
+            margin: 0; }
+          footer .footer nav ul li a {
+            color: #73ca24;
+            line-height: 19px; }
+            footer .footer nav ul li a:hover {
+              color: white; }
+  footer p {
+    color: #969696;
+    float: right;
+    line-height: 49px;
+    padding: 0 20px; }

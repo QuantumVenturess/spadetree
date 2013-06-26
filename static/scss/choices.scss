@@ -1,0 +1,126 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+/* User detail new choice form */
+.userDetail {
+  .newChoiceForm {
+    background: rgb(50, 50, 50);
+    @include browser(box-sizing, border-box);
+    display: none;
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 20px;
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    .skillToLearn {
+      h1 {
+        color: rgb(255, 255, 255);
+        font-size: 27px;
+        font-weight: 300;
+        line-height: 27px;
+        margin: 0;
+      }
+      .skillChoices {
+        background: rgb(255, 255, 255);
+        font-size: 14px;
+        margin: 20px 0 0 0;
+        padding: 10px;
+        a {
+          color: rgb(50, 50, 50);
+          display: block;
+          float: left;
+          padding: 10px 20px;
+          text-align: center;
+          &:hover {
+            background: rgb(220, 220, 220);
+          }
+          &.selected {
+            color: rgb(255, 255, 255);
+            background: rgb(115, 202, 36);
+          }
+        }
+      }
+    }
+    .message {
+      margin: 20px 0 0 0;
+      textarea {
+        height: 64px;
+        width: 100%;
+      }
+    }
+    .action {
+      margin: 20px 0 0 0;
+      float: right;
+    }
+  }
+}
+/* Request page, choice partial */
+.choices {
+  padding: 20px 0;
+  .choice {
+    background: rgb(240, 240, 240);
+    margin: 20px 0 0 0;
+    padding: 20px 20px;
+    &:first-child {
+      margin: 0;
+    }
+    .top {
+      .image {
+        float: left;
+        height: 50px;
+        overflow: hidden;
+        width: 50px;
+        img {
+          max-height: 50px;
+        }
+      }
+      .timestamp {
+        float: right;
+        p {
+          font-size: 13px;
+          line-height: 20px;
+          text-align: right;
+        }
+      }
+      .name {
+        margin: 0 0 0 60px;
+        h1 {
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 27px;
+          margin: 0;
+        }
+        p {
+          font-size: 14px;
+          line-height: 23px;
+        }
+        a {
+          color: rgb(50, 50, 50);
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .bottom {
+      margin: 10px 0 0 0;
+      p {
+        font-size: 13px;
+        line-height: 20px;
+      }
+    }
+    .action {
+      button {
+        margin: 10px 0 0 0;
+      }
+      .deny {
+        background: rgb(50, 50, 50);
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
+}

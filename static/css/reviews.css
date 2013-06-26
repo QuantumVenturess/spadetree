@@ -1,0 +1,70 @@
+/* Partial */
+.tutorReviews {
+  display: none;
+  padding: 20px 0;
+  width: 100%; }
+
+.review {
+  background: #f0f0f0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+  max-width: 470px;
+  padding: 20px;
+  position: absolute;
+  width: 49%; }
+  .review .info .image {
+    float: left;
+    height: 40px;
+    overflow: hidden;
+    width: 40px; }
+    .review .info .image img {
+      max-height: 40px; }
+  .review .info .imageThumb {
+    float: right;
+    height: 20px;
+    overflow: hidden;
+    width: 20px; }
+    .review .info .imageThumb img {
+      max-height: 20px;
+      opacity: 0.5; }
+  .review .info .name {
+    margin: 0 0 0 50px; }
+    .review .info .name h1, .review .info .name p {
+      font-size: 14px;
+      line-height: 20px; }
+    .review .info .name h1 {
+      color: #323232;
+      margin: 0; }
+    .review .info .name p {
+      color: #969696; }
+  .review .reviewContent {
+    line-height: 21px;
+    margin: 5px 0 0 0; }
+
+/* User detail new review form */
+.newReviewForm textarea {
+  height: 85px;
+  line-height: 21px;
+  width: 100%; }
+.newReviewForm .action {
+  margin: 10px 0 0 0;
+  text-align: right; }
+  .newReviewForm .action span {
+    float: left;
+    height: 20px;
+    opacity: 0.5;
+    overflow: hidden;
+    padding: 8px 10px;
+    text-align: center;
+    width: 20px; }
+    .newReviewForm .action span.selected, .newReviewForm .action span:hover {
+      cursor: pointer; }
+    .newReviewForm .action span.selected {
+      opacity: 1; }
+    .newReviewForm .action span img {
+      max-height: 20px;
+      max-width: 20px; }

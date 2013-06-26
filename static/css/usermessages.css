@@ -1,0 +1,119 @@
+/* List */
+.messageList {
+  padding: 40px 0; }
+  .messageList .recentMessage {
+    color: #323232;
+    display: block;
+    margin: 10px 0 0 0;
+    padding: 10px; }
+    .messageList .recentMessage:first-child {
+      margin: 0; }
+    .messageList .recentMessage.unviewed {
+      background: #f0f0f0; }
+    .messageList .recentMessage .image {
+      float: left;
+      height: 40px;
+      overflow: hidden;
+      width: 40px; }
+      .messageList .recentMessage .image img {
+        max-height: 40px; }
+    .messageList .recentMessage .timestamp {
+      color: #969696;
+      float: right;
+      font-size: 13px; }
+    .messageList .recentMessage .info {
+      margin: 0 0 0 50px; }
+      .messageList .recentMessage .info h1 {
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 3px 0;
+        line-height: 21px; }
+      .messageList .recentMessage .info p {
+        font-size: 13px;
+        line-height: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+
+/* Detail */
+.messageDetail {
+  padding: 44px 0 40px 0; }
+  .messageDetail .recipient {
+    float: left; }
+  .messageDetail .sender {
+    float: right; }
+    .messageDetail .sender .messageUser {
+      margin-left: -100px;
+      text-align: right; }
+  .messageDetail .messageUser {
+    color: #323232;
+    display: block;
+    margin-top: 40px;
+    position: fixed;
+    width: 100px; }
+    .messageDetail .messageUser:hover {
+      text-decoration: underline; }
+    .messageDetail .messageUser .image {
+      height: 100px;
+      margin: 0 0 10px 0;
+      overflow: hidden;
+      width: 100px; }
+      .messageDetail .messageUser .image img {
+        max-height: 100px; }
+    .messageDetail .messageUser p {
+      font-size: 14px;
+      line-height: 21px; }
+  .messageDetail .userMessages {
+    margin: 0 auto;
+    max-width: 720px;
+    width: 75%; }
+    .messageDetail .userMessages h1 {
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 700;
+      margin: 0;
+      padding: 10px;
+      text-align: center; }
+    .messageDetail .userMessages .userMessage {
+      font-size: 13px;
+      line-height: 20px; }
+      .messageDetail .userMessages .userMessage.sent .messageContainer, .messageDetail .userMessages .userMessage.sent .messageContent, .messageDetail .userMessages .userMessage.sent .messageTime {
+        float: left; }
+      .messageDetail .userMessages .userMessage.sent .messageContainer {
+        background: #fafafa;
+        border-left: 1px solid #c8c8c8; }
+      .messageDetail .userMessages .userMessage.received .messageContainer, .messageDetail .userMessages .userMessage.received .messageContent, .messageDetail .userMessages .userMessage.received .messageTime {
+        float: right; }
+      .messageDetail .userMessages .userMessage.received .messageContainer {
+        background: #f0f0f0;
+        border-right: 1px solid #c8c8c8; }
+      .messageDetail .userMessages .userMessage .messageContainer {
+        max-width: 60%;
+        overflow: hidden;
+        padding: 10px;
+        position: relative; }
+        .messageDetail .userMessages .userMessage .messageContainer .messageContent {
+          max-width: 100%;
+          position: relative;
+          z-index: 10; }
+          .messageDetail .userMessages .userMessage .messageContainer .messageContent a {
+            color: #73ca24; }
+            .messageDetail .userMessages .userMessage .messageContainer .messageContent a:hover {
+              text-decoration: underline; }
+          .messageDetail .userMessages .userMessage .messageContainer .messageContent p {
+            word-wrap: break-word; }
+      .messageDetail .userMessages .userMessage .messageTime {
+        color: #969696;
+        padding: 10px; }
+  .messageDetail .replyMessageForm {
+    margin: 0 auto;
+    max-width: 720px;
+    width: 75%; }
+    .messageDetail .replyMessageForm .field textarea {
+      font-size: 13px;
+      height: 82px;
+      line-height: 20px;
+      width: 100%; }
+    .messageDetail .replyMessageForm .action {
+      margin: 10px 0 0 0;
+      text-align: right; }

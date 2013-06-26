@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='userEdit'>
+  <div class='section skills'>
+    <h1>{{ user.profile.skills_or_interests }}</h1>
+    <div class='skillBox'>
+      <span>
+        {% for skill in skills %}
+          {% include 'skills/skill_delete_form.html' %}
+        {% endfor %}
+      </span>
+      <div class='clear'></div>
+    </div>
+    <div class='addSkill'>
+      {% include 'skills/skill_add_form.html' %}
+    </div>
+  </div>
+  <form action='' method='POST'>
+    {% csrf_token %}
+    <div class='section about'>
+      <h1>About</h1>
+      <div class='field'>
+        {{ profile_form.about }}
+      </div>
+    </div>
+    <div class='section location'>
+      <h1>Location</h1>
+      <div class='field'>
+        <input autocomplete='off' name='city_name' type='text' placeholder='City' value='{{ user.profile.city.name.title }}'>
+      </div>
+      <div class='field'>
+        <input autocomplete='off' name='state_name' type='text' placeholder='State' value='{{ user.profile.city.state.name.title }}'>
+      </div>
+      <div class='clear'></div>
+    </div>
+    <div class='action'>
+      <button>Update</button>
+      <a href='{% url users.views.detail user.profile.slug %}'>Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='interestDetail'>
+  <div class='label'>
+    <h1>{{ interest.name.title }} Tutors</h1>
+  </div>
+  {% include 'interests/tutors.html' %}
+</div>
+{% include 'pagination.html' %}
+{% endblock %}

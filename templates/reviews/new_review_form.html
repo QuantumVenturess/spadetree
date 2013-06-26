@@ -1,0 +1,14 @@
+<form action='{% url users.views.new_review userd.profile.slug %}' method='POST'>
+  {% csrf_token %}
+  <input class='positive' name='positive' type='hidden' value='1'>
+  <textarea class='newReviewFormContent' name='content' placeholder='Write your review here'></textarea>
+  <div class='action'>
+    <span class='thumbsUp selected'>
+      <img src='{{ static }}img/thumbs_up.png'>
+    </span>
+    <span class='thumbsDown'>
+      <img src='{{ static }}img/thumbs_down.png'>
+    </span>
+    <button>Submit Review</button>
+  </div>
+</form>

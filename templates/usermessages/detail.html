@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='messageDetail'>
+  {% load common_tags %}
+  <div class='recipient'>
+    <a class='messageUser' href='{% url users.views.detail user.profile.slug %}'>
+      <div class='image'>
+        <img class='lazy' data-original='{{ user.profile.image_big }}' src='{% lazy_image %}'>
+      </div>
+      <p>{{ user.first_name }}</p>
+      <p>{{ user.last_name }}</p>
+    </a>
+  </div>
+  <div class='sender'>
+    <a class='messageUser' href='{% if sender.profile.tutor %}{% url users.views.detail sender.profile.slug %}{% else %}#{% endif %}'>
+      <div class='image'>
+        <img class='lazy' data-original='{{ sender.profile.image_big }}' src='{% lazy_image %}'>
+      </div>
+      <p>{{ sender.first_name }}</p>
+      {% if sender.profile.tutor %}
+        <p>{{ sender.last_name }}</p>
+      {% endif %}
+    </a>
+  </div>
+  <div class='userMessages'>
+    {% for day, messages in days %}
+      <h1>{{ day }}</h1>
+      {% for message in messages %}
+        {% include 'usermessages/message.html' %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+  <div class='replyMessageForm'>
+    {% include 'usermessages/reply_message_form.html' %}
+  </div>
+</div>
+{% endblock %}
+{% block head %}
+<script>
+$(document).ready(function() {
+  $('html, body').animate({ scrollTop: $(document).height() }, 0);
+  $('header').css('position', 'fixed').css('top', 0).css('z-index', 500);
+  $('footer').css('position', 'fixed').css('bottom', 0).css('z-index', 500);
+  $('.replyMessageForm textarea:last').focus();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,169 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+/* List */
+.interestList {
+  padding: 0 0 40px 0;
+  .search {
+    margin: 40px 0 0 0;
+    .field {
+      @include browser(box-sizing, border-box);
+      padding: 0 95px 0 0;
+      width: 100%;
+      input {
+        float: left;
+        width: 100%;
+      }
+    }
+    .action {
+      float: right;
+      button {
+        line-height: 21px;
+        padding: 11px 20px;
+        width: 85px;
+      }
+    }
+  }
+  .results {
+    margin: 40px 0 0 0;
+    .group {
+      h1 {
+        border-bottom: 1px solid rgb(200, 200, 200);
+        font-size: 27px;
+        font-weight: 300;
+        line-height: 40px;
+        margin: 0;
+        padding: 10px 10px;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+          .interestNameLink {
+            color: rgb(50, 50, 50);
+            display: block;
+            font-size: 14px;
+            line-height: 21px;
+            padding: 10px;
+            &:hover {
+              background: rgb(240, 240, 240);
+              color: rgb(115, 202, 36);
+            }
+          }
+          .tutorsInsert {
+            h3 {
+              background: rgb(240, 240, 240);
+              color: rgb(150, 150, 150);
+              font-size: 14px;
+              font-style: italic;
+              font-weight: 300;
+              line-height: 21px;
+              margin: 0;
+              padding: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* Detail */
+.interestDetail {
+  padding: 40px 0;
+  .label {
+    padding: 0 10px;
+    h1 {
+      background-image: url('../img/tutors.png');
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      font-size: 27px;
+      font-weight: 300;
+      line-height: 27px;
+      margin: 0 0 20px 0;
+      padding: 0 0 0 35px;
+    }
+  }
+  .tutor {
+    background: rgb(240, 240, 240);
+    &:hover {
+      background: rgb(230, 230, 230);
+    }
+  }
+}
+.interestList {
+  .tutor {
+    background: rgb(250, 250, 250);
+    &:hover {
+      background: rgb(240, 240, 240);
+      .name {
+        h2 {
+          color: rgb(115, 202, 36);
+        }
+      }
+    }
+  }
+}
+.interestDetail, .interestList {
+  .tutor {
+    display: block;
+    padding: 10px;
+    .image {
+      float: left;
+      height: 40px;
+      overflow: hidden;
+      width: 40px;
+      img {
+        max-height: 40px;
+      }
+    }
+    .name {
+      margin: 0 0 0 50px;
+      h2, p {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h2 {
+        color: rgb(50, 50, 50);
+        font-weight: 700;
+        margin: 0;
+      }
+      p {
+        color: rgb(150, 150, 150);
+      }
+    }
+  }
+}
+/* User edit */
+.userEdit {
+  .interestResults {
+    @include browser(box-sizing, border-box);
+    max-width: 850px;
+    position: absolute;
+    width: 100%;
+    ul {
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(115, 202, 36);
+      border-top: none;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      li {
+        a {
+          color: rgb(50, 50, 50);
+          display: block;
+          font-size: 14px;
+          line-height: 21px;
+          padding: 10px;
+          &:hover, &.selected {
+            background: rgb(240, 240, 240);
+            color: rgb(115, 202, 36);
+          }
+        }
+      }
+    }
+  }
+}

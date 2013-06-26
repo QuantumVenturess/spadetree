@@ -1,0 +1,47 @@
+<div class='choice' id='choice_{{ choice.pk }}'>
+  <div class='top'>
+    {% load common_tags %}
+    <div class='image'>
+      {% if user.profile.tutor %}
+        <img class='lazy' data-original='{{ choice.tutee.profile.image_small }}' src='{% lazy_image %}'>
+      {% elif user.profile.tutee %}
+        <img class='lazy' data-original='{{ choice.tutor.profile.image_small }}' src='{% lazy_image %}'>
+      {% endif %}
+    </div>
+    <div class='timestamp'>
+      <p>
+        <span class='gray150'>{{ choice.date_string }}</span>
+      </p>
+      <span class='requestStatus'>
+        {% include 'choices/request_status.html' %}
+      </span>
+    </div>
+    <div class='name'>
+      <h1>
+        {% if user.profile.tutor %}
+          {{ choice.tutee.profile.full_name }}
+        {% elif user.profile.tutee %}
+          To:
+          {% if choice.tutor.profile.tutor %}
+            <a href='{% url users.views.detail choice.tutor.profile.slug %}'>
+              {{ choice.tutor.profile.full_name }}
+            </a>
+          {% else %}
+            {{ choice.tutor.profile.full_name }}
+          {% endif %}
+        {% endif %}
+      </h1>
+      <p>
+        <a href='{% url interests.views.detail choice.interest.slug %}'>
+          {{ choice.interest.name.title }}
+        </a>
+      </p>
+    </div>
+  </div>
+  <div class='bottom'>
+    {{ choice.content|linebreaks }}
+  </div>
+  <div class='choiceActionForm'>
+    {% include 'choices/choice_action_form.html' %}
+  </div>
+</div>

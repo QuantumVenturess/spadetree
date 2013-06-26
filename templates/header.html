@@ -11,9 +11,16 @@
         </li>
       {% else %}
         <li>
-          <a href='#' class='menu'>
+          <a class='browse' href='{% url interests.views.browse %}'>
+            Browse
+          </a>
+        </li>
+        <li>
+          <a href='{% url users.views.detail user.profile.slug %}' class='menu'>
             <div><img src='{{ user.profile.image_small }}'></div>
-            <span>{{ user.first_name }}</span>
+            <span class='{% if user.profile.title_count %}red{% endif %}'>
+              {{ user.first_name }}
+            </span>
           </a>
         </li>
       {% endif %}
@@ -22,16 +29,34 @@
       <nav id='menu'>
         <ul>
           <li>
-            <a href='#'>Notifications</a>
+            <a href='{% url choices.views.requests %}'>
+              Requests
+              <span class='choiceCount'>
+                {% if user.profile.choice_count %}
+                  {{ user.profile.choice_count}}
+                {% endif %}
+              </span>
+            </a>
           </li>
           <li>
-            <a href='#'>Messages</a>
+            <a href='{% url usermessages.views.list %}'>
+              Messages
+              <span class='messageCount'>
+                {% if user.profile.unread_message_count %}
+                  {{ user.profile.unread_message_count }}
+                {% endif %}
+              </span>
+            </a>
           </li>
           <li>
-            <a href='#'>Edit profile</a>
+            <a href='{% url users.views.edit user.profile.slug %}'>
+              Edit profile
+            </a>
           </li>
           <li>
-            <a href='{% url sessions.views.sign_out %}'>Sign out</a>
+            <a href='{% url sessions.views.sign_out %}'>
+              Sign out
+            </a>
           </li>
         </ul>
       </nav>

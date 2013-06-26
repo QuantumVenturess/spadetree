@@ -31,14 +31,17 @@ header {
             -moz-box-sizing: border-box;
             -ms-box-sizing: border-box;
             box-sizing: border-box;
-            color: #87de38;
+            color: #73ca24;
             display: block;
             font-size: 14px;
+            height: 44px;
             line-height: 44px;
             padding: 0 20px; }
             header .header nav ul li a:hover {
-              background: #87de38;
+              background: #73ca24;
               color: white; }
+            header .header nav ul li a.selected {
+              border-bottom: 3px solid #73ca24; }
             header .header nav ul li a.menu:hover {
               background: #646464; }
             header .header nav ul li a.menuShow {
@@ -73,3 +76,6 @@ header {
               header .header nav #menu ul li a:hover {
                 background: #646464;
                 color: white; }
+              header .header nav #menu ul li a span {
+                color: #ff1a00;
+                float: right; }

@@ -1,0 +1,15 @@
+<p>
+  {% if choice.completed %}
+    <span class='gray150'>
+      Completed on {{ choice.date_completed_string }}
+    </span>
+  {% else %}
+    {% if choice.accepted %}
+      <span class='green'>Accepted</span>
+    {% elif choice.denied %}
+      <span class='red'>Denied</span>
+    {% else %}
+      <span class='gray150'>Pending</span>
+    {% endif %}
+  {% endif %}
+</p>

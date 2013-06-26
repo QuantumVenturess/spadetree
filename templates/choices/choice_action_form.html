@@ -1,0 +1,20 @@
+{% if not choice.completed %}
+  <form action='{% url choices.views.action choice.pk %}' method='POST'>
+    {% csrf_token %}
+    <div class='action'>
+      <input class='choiceActionField' name='action' type='hidden'>
+      {% if user.profile.tutor %}
+        {% if not choice.accepted %}
+          <button class='accept' name='action' value='accept'>Accept</button>
+        {% endif %}
+        {% if not choice.denied %}
+          <button class='deny' name='action' value='deny'>Deny</button>
+        {% endif %}
+      {% elif user.profile.tutee and choice.accepted %}
+        <button class='complete' name='action' value='complete'>
+          Complete
+        </button>
+      {% endif %}
+    </div>
+  </form>
+{% endif %}

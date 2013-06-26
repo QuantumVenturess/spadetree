@@ -28,7 +28,7 @@ body {
 
 a {
   text-decoration: none;
-  @include browser(transition, all .01s linear);
+  // @include browser(transition, all 0.05s linear);
 }
 
 p {
@@ -64,4 +64,15 @@ input:focus, textarea:focus {
   font-family: 'Varela';
   src: url('../css/Varela-Regular-webfont.eot'),
        url('../css/Varela-Regular-webfont.ttf');
+}
+
+/* Colors */
+.gray150 {
+  color: rgb(150, 150, 150);
+}
+.green {
+  color: rgb(115, 202, 36);
+}
+.red {
+  color: rgb(255, 26, 0);
 }

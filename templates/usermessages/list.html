@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='messageList'>
+  {% load common_tags %}
+  {% for message in objects %}
+    <a class='recentMessage{% if not message.viewed %} unviewed{% endif %}' href='{% url usermessages.views.detail message.sender.pk %}'>
+      <div class='image'>
+        <img class='lazy' data-original='{{ message.sender.profile.image_small }}' src='{% lazy_image %}'>
+      </div>
+      <div class='timestamp'>
+        {{ message.date_time }}
+      </div>
+      <div class='info'>
+        <h1>{{ message.sender.profile.full_name }}</h1>
+        <p>{{ message.content }}</p>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

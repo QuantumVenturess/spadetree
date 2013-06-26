@@ -1,0 +1,22 @@
+<form action='{% url users.views.choose userd.profile.slug %}' method='POST'>
+  {% csrf_token %}
+  <input class='skillPk' name='skill_pk' type='hidden'>
+  <div class='skillToLearn'>
+    <h1>Click on the skill you want to learn</h1>
+    <div class='skillChoices'>
+      {% for skill in skills %}
+        <a href='#' data-value='{{ skill.pk }}'>
+          {{ skill.interest.name.title }}
+        </a>
+      {% endfor %}
+      <div class='clear'></div>
+    </div>
+  </div>
+  <div class='message'>
+    <textarea name='content' placeholder='Include your message here'></textarea>
+  </div>
+  <div class='action'>
+    <button>Submit</button>
+    <a href='#'>Cancel</a>
+  </div>
+</form>

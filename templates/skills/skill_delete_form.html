@@ -1,0 +1,9 @@
+<div class='skillDeleteForm' id='skillDeleteForm_{{ skill.pk }}'>
+  <form action='{% url skills.views.delete skill.pk ".js" %}' method='POST'>
+    {% csrf_token %}
+    <button>
+      <img src='{{ static }}img/cancel.png'>
+      <p>{{ skill.interest.name.title }}</p>
+    </button>
+  </form>
+</div>

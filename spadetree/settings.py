@@ -5,20 +5,17 @@ import os, platform, socket
 if os.environ.get('MYSITE_PRODUCTION', False):
     # Production
     DEBUG = TEMPLATE_DEBUG = False
-    DEV   = False
-    COMPRESS_ENABLED = True
+    DEV                    = False
+    COMPRESS_ENABLED       = True
 else:
     # Development
     DEBUG = TEMPLATE_DEBUG = True
-    DEV   = True
-    COMPRESS_ENABLED = False
+    DEV                    = True
+    COMPRESS_ENABLED       = False
 
 # Project name
 project_name = 'spadetree'
 project_root = os.path.abspath(os.path.dirname(__file__))
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = MANAGERS = (
     ('Tommy Dang', 'quantumventuress@gmail.com')
@@ -30,11 +27,22 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+# Amazon S3
+AWS_ACCESS_KEY_ID       = 'AKIAIXM2DMH4M2PAT5TA'
+AWS_SECRET_ACCESS_KEY   = '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'
+AWS_STORAGE_BUCKET_NAME = project_name
+AWS_HEADERS = {
+    'Expires': 'Sun, 19 Jul 2020 18:06:32 GMT'
+}
+AWS_QUERYSTRING_AUTH = False
+
+# Compressor
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
 
+# Database
 if DEV:
     DATABASES_HOST = '' if platform.system() == 'Windows' else '192.168.1.70'
     DATABASES = {
@@ -54,6 +62,15 @@ else:
         'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
     }
 
+# Email
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_HOST_USER     = 'quantumventuress@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+DEFAULT_FROM_EMAIL  = ''
+SERVER_EMAIL        = ''
+
 # Facebook
 if DEV:
     FACEBOOK_APP_ID       = '144755539050891'
@@ -66,14 +83,8 @@ else:
 FACEBOOK_SCOPE = ','.join([
     'email', 
     'user_about_me', 
-    'user_interests', 
-    'user_location'])
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'UTC'
+    'user_location'
+])
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -81,19 +92,6 @@ LANGUAGE_CODE = 'en-us'
 
 # Default @login_required login_url is /login/
 LOGIN_URL = '/join/'
-
-SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
-USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
-USE_L10N = True
-
-# If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
 
 # Media
 if DEV:
@@ -104,56 +102,21 @@ else:
 
 MEDIA_URL = '/media/'
 
-if DEV:
-    STATIC_ROOT = ''
-    STATIC_URL  = '/static/'
-else:
-    STATIC_ROOT = os.path.dirname(__file__).replace('\\', '/') + '/..static'
-    STATIC_URL  = 'http://s3.amazonaws.com/%s/' % project_name
+# Memcachier
+if not DEV:
+    os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD', '')
+    os.environ['MEMCACHE_SERVERS']  = os.environ.get('MEMCACHIER_SERVERS', 
+        '').replace(',', ';')
+    os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME', '')
 
-
-USER_IMAGE_URL = STATIC_URL + 'img/users/'
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    os.path.join(project_root, '..', 'static').replace(
-        '\\', '/').replace('\%s' % project_name, '/%s' % project_name),
-)
-
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
-    'compressor.finders.CompressorFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '%ahnypdkx!!un2(ss$4co3*3o9(*t-w0$o$gitlvpn@4o#kfd9'
-
-TEMPLATE_DIRS = (
-    os.path.join(project_root, '..', 'templates').replace(
-        '\\', '/').replace('\%s' % project_name, '/%s' % project_name),
-)
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    # Pass MEDIA_URL through RequestContext
-    'django.core.context_processors.media',
-    # Pass request.user through RequestContext
-    'django.core.context_processors.request',
-    # Pass messages through RequestContext
-    'django.contrib.messages.context_processors.messages',
-)
+    CACHES = {
+      'default': {
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'LOCATION': os.environ.get('MEMCACHIER_SERVERS', '').replace(',', ';'),
+        'TIMEOUT': 500,
+        'BINARY': True,
+      }
+    }
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -169,6 +132,85 @@ MIDDLEWARE_CLASSES = (
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 ROOT_URLCONF = 'spadetree.urls'
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '%ahnypdkx!!un2(ss$4co3*3o9(*t-w0$o$gitlvpn@4o#kfd9'
+
+# Session
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# Static
+if DEV:
+    STATIC_ROOT = ''
+    STATIC_URL  = '/static/'
+else:
+    STATIC_ROOT = os.path.dirname(__file__).replace('\\', '/') + '/..static'
+    STATIC_URL  = 'http://s3.amazonaws.com/%s/' % project_name
+# Additional locations of static files
+STATICFILES_DIRS = (
+    os.path.join(project_root, '..', 'static').replace(
+        '\\', '/').replace('\%s' % project_name, '/%s' % project_name),
+)
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+# Static file server
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+SITE_ID = 1
+
+# Template
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    # Pass MEDIA_URL through RequestContext
+    'django.core.context_processors.media',
+    # Pass request.user through RequestContext
+    'django.core.context_processors.request',
+    # Pass messages through RequestContext
+    'django.contrib.messages.context_processors.messages',
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(project_root, '..', 'templates').replace(
+        '\\', '/').replace('\%s' % project_name, '/%s' % project_name),
+)
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# In a Windows environment this must be set to your system time zone.
+TIME_ZONE = 'UTC'
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale.
+USE_L10N = True
+
+# If you set this to False, Django will not use timezone-aware datetimes.
+USE_TZ = True
+
+# User image URL
+USER_IMAGE_URL = STATIC_URL + 'img/users/'
+
+# Django Compressor Amazon S3
+COMPRESS_URL     = 'http://s3.amazonaws.com/%s/' % project_name
+COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'spadetree.wsgi.application'
@@ -187,15 +229,21 @@ INSTALLED_APPS = (
 INSTALLED_APPS += (
     'compressor',
     'south',
+    'storages',
 )
 # project apps
 INSTALLED_APPS += (
+    'choices',
     'cities',
+    'globaltags',
     'interests',
     'oauth',
+    'pages',
+    'reviews',
     'sessions',
     'skills',
     'states',
+    'usermessages',
     'users',
 )
 

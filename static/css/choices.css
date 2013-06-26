@@ -1,0 +1,91 @@
+/* User detail new choice form */
+.userDetail .newChoiceForm {
+  background: #323232;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 20px;
+  position: absolute;
+  top: 100px;
+  width: 100%; }
+  .userDetail .newChoiceForm .skillToLearn h1 {
+    color: white;
+    font-size: 27px;
+    font-weight: 300;
+    line-height: 27px;
+    margin: 0; }
+  .userDetail .newChoiceForm .skillToLearn .skillChoices {
+    background: white;
+    font-size: 14px;
+    margin: 20px 0 0 0;
+    padding: 10px; }
+    .userDetail .newChoiceForm .skillToLearn .skillChoices a {
+      color: #323232;
+      display: block;
+      float: left;
+      padding: 10px 20px;
+      text-align: center; }
+      .userDetail .newChoiceForm .skillToLearn .skillChoices a:hover {
+        background: gainsboro; }
+      .userDetail .newChoiceForm .skillToLearn .skillChoices a.selected {
+        color: white;
+        background: #73ca24; }
+  .userDetail .newChoiceForm .message {
+    margin: 20px 0 0 0; }
+    .userDetail .newChoiceForm .message textarea {
+      height: 64px;
+      width: 100%; }
+  .userDetail .newChoiceForm .action {
+    margin: 20px 0 0 0;
+    float: right; }
+
+/* Request page, choice partial */
+.choices {
+  padding: 20px 0; }
+  .choices .choice {
+    background: #f0f0f0;
+    margin: 20px 0 0 0;
+    padding: 20px 20px; }
+    .choices .choice:first-child {
+      margin: 0; }
+    .choices .choice .top .image {
+      float: left;
+      height: 50px;
+      overflow: hidden;
+      width: 50px; }
+      .choices .choice .top .image img {
+        max-height: 50px; }
+    .choices .choice .top .timestamp {
+      float: right; }
+      .choices .choice .top .timestamp p {
+        font-size: 13px;
+        line-height: 20px;
+        text-align: right; }
+    .choices .choice .top .name {
+      margin: 0 0 0 60px; }
+      .choices .choice .top .name h1 {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 27px;
+        margin: 0; }
+      .choices .choice .top .name p {
+        font-size: 14px;
+        line-height: 23px; }
+      .choices .choice .top .name a {
+        color: #323232; }
+        .choices .choice .top .name a:hover {
+          text-decoration: underline; }
+    .choices .choice .bottom {
+      margin: 10px 0 0 0; }
+      .choices .choice .bottom p {
+        font-size: 13px;
+        line-height: 20px; }
+    .choices .choice .action button {
+      margin: 10px 0 0 0; }
+    .choices .choice .action .deny {
+      background: #323232;
+      color: white; }

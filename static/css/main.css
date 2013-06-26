@@ -16,11 +16,7 @@ body {
       padding: 0 0 49px 0; }
 
 a {
-  text-decoration: none;
-  -webkit-transition: all 0.01s linear;
-  -moz-transition: all 0.01s linear;
-  -ms-transition: all 0.01s linear;
-  transition: all 0.01s linear; }
+  text-decoration: none; }
 
 p {
   margin: 0; }
@@ -48,3 +44,13 @@ input:focus, textarea:focus {
 @font-face {
   font-family: 'Varela';
   src: url("../css/Varela-Regular-webfont.eot"), url("../css/Varela-Regular-webfont.ttf"); }
+
+/* Colors */
+.gray150 {
+  color: #969696; }
+
+.green {
+  color: #73ca24; }
+
+.red {
+  color: #ff1a00; }

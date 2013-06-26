@@ -118,10 +118,10 @@
   padding: 80px 0;
   width: 100%;
   &.tutee {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(240, 240, 240);
   }
   &.tutor {
-    background-color: rgb(215, 215, 215);
+    background-color: rgb(220, 220, 220);
   }
   h1 {
     font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -179,22 +179,22 @@
       }
     }
     a {
-      background: rgb(135, 222, 56);
+      background: rgb(115, 202, 36);
       @include browser(border-radius, 2px);
       @include browser(box-sizing, border-box);
       color: rgb(255, 255, 255);
       display: block;
       float: right;
       margin: 66px 0 0 0;
-      padding: 10px;
+      padding: 20px 10px;
       width: 36%;
       &:hover {
-        background: rgb(145, 232, 66);
+        background: rgb(125, 212, 46);
       }
       p {
         font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 18px;
-        line-height: 40px;
+        line-height: 20px;
         text-align: center;
       }
     }

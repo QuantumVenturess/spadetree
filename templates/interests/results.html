@@ -1,0 +1,11 @@
+{% if results %}
+<ul>
+  {% for interest in results %}
+    <li>
+      <a href='#' id='interestResult_{{ interest.pk }}'>
+        {{ interest.name.title }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}

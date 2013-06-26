@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='interestList'>
+  <div class='search'>
+    <form action='{% url interests.views.browse_search %}' method='GET'>
+      <div class='field'>
+        <input autocomplete='off' name='q' placeholder='What are you interested in?' type='text'>
+      </div>
+      <div class='action'>
+        <button>Search</button>
+      </div>
+    </form>
+    <div class='clear'></div>
+  </div>
+  <div class='results'>
+    {% include 'interests/browse_results.html' %}
+  </div>
+</div>
+{% endblock %}
+{% block head %}
+<script>
+$(document).ready(function() {
+  $('header .browse').addClass('selected');
+  $('.interestList .search input').focus();
+});
+</script>
+{% endblock %}

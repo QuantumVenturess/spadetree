@@ -1,0 +1,12 @@
+{% load common_tags %}
+{% for user in objects %}
+  <a class='tutor' href='{% url users.views.detail user.profile.slug %}'>
+    <div class='image'>
+      <img class='lazy' data-original='{{ user.profile.image_small }}' src='{% lazy_image %}'>
+    </div>
+    <div class='name'>
+      <h2>{{ user.profile.full_name }}</h2>
+      <p>{{ user.profile.location.title }}</p>
+    </div>
+  </a>
+{% endfor %}

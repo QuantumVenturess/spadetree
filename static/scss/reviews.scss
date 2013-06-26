@@ -1,0 +1,92 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+/* Partial */
+.tutorReviews {
+  display: none;
+  padding: 20px 0;
+  width: 100%;
+}
+.review {
+  background: rgb(240, 240, 240);
+  @include browser(box-sizing, border-box);
+  font-size: 14px;
+  margin: 0 0 20px 0;
+  max-width: 470px;
+  padding: 20px;
+  position: absolute;
+  width: 49%;
+  .info {
+    .image {
+      float: left;
+      height: 40px;
+      overflow: hidden;
+      width: 40px;
+      img {
+        max-height: 40px;
+      }
+    }
+    .imageThumb {
+      float: right;
+      height: 20px;
+      overflow: hidden;
+      width: 20px;
+      img {
+        max-height: 20px;
+        opacity: 0.5;
+      }
+    }
+    .name {
+      margin: 0 0 0 50px;
+      h1, p {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h1 {
+        color: rgb(50, 50, 50);
+        margin: 0;
+      }
+      p {
+        color: rgb(150, 150, 150);
+      }
+    }
+  }
+  .reviewContent {
+    line-height: 21px;
+    margin: 5px 0 0 0;
+  }
+}
+/* User detail new review form */
+.newReviewForm {
+  textarea {
+    height: 85px;
+    line-height: 21px;
+    width: 100%;
+  }
+  .action {
+    margin: 10px 0 0 0;
+    text-align: right;
+    span {
+      float: left;
+      height: 20px;
+      opacity: 0.5;
+      overflow: hidden;
+      padding: 8px 10px;
+      text-align: center;
+      width: 20px;
+      &.selected, &:hover {
+        cursor: pointer;
+      }
+      &.selected {
+        opacity: 1;
+      }
+      img {
+        max-height: 20px;
+        max-width: 20px;
+      }
+    }
+  }
+}

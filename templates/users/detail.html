@@ -1,38 +1,61 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
+{% load common_tags %}
 <div class='userDetail'>
   <div class='top'>
+    <div class='image'>
+      <img class='lazy' data-original='{{ userd.profile.image_big }}' src='{% lazy_image %}'>
+    </div>
     <div class='name'>
       <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-      <p>{{ user.profile.city.name }}, {{ user.profile.city.state.name }}</p>
+      <p>{{ userd.profile.location.title }}</p>
     </div>
-    <div class='image'>
-      <img src='{{ user.profile.image_big }}'>
-    </div>
+    {% if show_choice_button %}
+      <a href='#' class='chooseTutor'>Choose Tutor</a>
+    {% endif %}
   </div>
   <div class='bottom'>
     <div class='section about'>
-      <div class='label'>
-        <div class='image'>
-          <img src='{{ static }}img/about.png'>
-        </div>
-        <h1>About</h1>
-        <div class='clear'></div>
-      </div>
-      <p>{{ user.profile.about }}</p>
+      <h1>About</h1>
+      <p>{{ userd.profile.about|linebreaks }}</p>
+      <div class='clear'></div>
     </div>
     <div class='section skills'>
-      <div class='label'>
-        <div class='image'>
-          <img src='{{ static }}img/skills.png'>
-        </div>
-        <h1>Skills</h1>
+      <h1>{{ userd.profile.skills_or_interests }}</h1>
+      <ul>
+        {% for skill in skills %}
+          <li>
+            <a href='{% url interests.views.detail skill.interest.slug %}'>
+              {{ skill.interest.name.title }}
+            </a>
+          </li>
+        {% endfor %}
         <div class='clear'></div>
-      </div>
-
+      </ul>
+      <div class='clear'></div>
     </div>
     <div class='clear'></div>
   </div>
+  <div class='tutorReviews'>
+    {% if user != userd and user.profile.tutee %}
+      <div class='review'>
+        <div class='newReviewForm'>
+          {% include 'reviews/new_review_form.html' %}
+        </div>
+      </div>
+    {% endif %}
+    <span class='prepend'>
+      {% include 'reviews/reviews.html' %}
+    </span>
+  </div>
+  {% if show_choice_button %}
+    <div class='newChoiceForm'>
+      {% include 'choices/new_choice_form.html' %}
+    </div>
+  {% endif %}
 </div>
+<span class='endlessPagination'>
+  {% include 'pagination.html' %}
+</span>
 {% endblock %}

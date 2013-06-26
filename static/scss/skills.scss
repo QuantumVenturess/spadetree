@@ -1,0 +1,25 @@
+/* Form */
+.skillDeleteForm {
+  button {
+    background: none;
+    color: rgb(50, 50, 50);
+    float: left;
+    padding: 10px;
+    &:hover {
+      img {
+        opacity: 1;
+      }
+    }
+    p {
+      line-height: 16px;
+      padding: 0 17px 0 0;
+    }
+    img {
+      float: right;
+      max-height: 12px;
+      max-width: 12px;
+      opacity: 0.5;
+      padding: 2px 0;
+    }
+  }
+}

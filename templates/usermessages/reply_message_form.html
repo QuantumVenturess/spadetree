@@ -1,0 +1,9 @@
+<form action='{% url usermessages.views.new sender.pk %}' method='POST'>
+  {% csrf_token %}
+  <div class='field'>
+    {{ form.content }}
+  </div>
+  <div class='action'>
+    <button>Send message</button>
+  </div>
+</form>

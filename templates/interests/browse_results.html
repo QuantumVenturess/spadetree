@@ -1,0 +1,18 @@
+{% for letter, interests in groups %}
+  <div class='group'>
+    <h1>{{ letter.title }}</h1>
+    <ul>
+      {% for interest in interests %}
+        <li id='interest_{{ interest.pk }}'>
+          <a class='interestNameLink' href='{% url interests.views.detail interest.slug %}'>
+            {{ interest.name.title }}
+          </a>
+          <div class='tutorsInsert'></div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+<span class='endlessPagination'>
+  {% include 'pagination.html' %}
+</span>

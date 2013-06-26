@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='choices'>
+  {% for choice in objects %}
+    {% include 'choices/choice.html' %}
+  {% endfor %}
+</div>
+{% include 'pagination.html' %}
+{% endblock %}

@@ -1,0 +1,159 @@
+/* List */
+.messageList {
+  padding: 40px 0;
+  .recentMessage {
+    color: rgb(50, 50, 50);
+    display: block;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    &:first-child {
+      margin: 0;
+    }
+    &.unviewed {
+      background: rgb(240, 240, 240);
+    }
+    .image {
+      float: left;
+      height: 40px;
+      overflow: hidden;
+      width: 40px;
+      img {
+        max-height: 40px;
+      }
+    }
+    .timestamp {
+      color: rgb(150, 150, 150);
+      float: right;
+      font-size: 13px;
+    }
+    .info {
+      margin: 0 0 0 50px;
+      h1 {
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 3px 0;
+        line-height: 21px;
+      }
+      p {
+        font-size: 13px;
+        line-height: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+/* Detail */
+.messageDetail {
+  padding: 44px 0 40px 0;
+  .recipient {
+    float: left;
+  }
+  .sender {
+    float: right;
+    .messageUser {
+      margin-left: -100px;
+      text-align: right;
+    }
+  }
+  .messageUser {
+    color: rgb(50, 50, 50);
+    display: block;
+    margin-top: 40px;
+    position: fixed;
+    width: 100px;
+    &:hover {
+      text-decoration: underline;
+    }
+    .image {
+      height: 100px;
+      margin: 0 0 10px 0;
+      overflow: hidden;
+      width: 100px;
+      img {
+        max-height: 100px;
+      }
+    }
+    p {
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+  .userMessages {
+    margin: 0 auto;
+    max-width: 720px;
+    width: 75%;
+    h1 {
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 700;
+      margin: 0;
+      padding: 10px;
+      text-align: center;
+    }
+    .userMessage {
+      font-size: 13px;
+      line-height: 20px;
+      &.sent {
+        .messageContainer, .messageContent, .messageTime {
+          float: left;
+        }
+        .messageContainer {
+          background: rgb(250, 250, 250);
+          border-left: 1px solid rgb(200, 200, 200);
+        }
+      }
+      &.received {
+        .messageContainer, .messageContent, .messageTime {
+          float: right;
+        }
+        .messageContainer {
+          background: rgb(240, 240, 240);
+          border-right: 1px solid rgb(200, 200, 200);
+        }
+      }
+      .messageContainer {
+        max-width: 60%;
+        overflow: hidden;
+        padding: 10px;
+        position: relative;
+        .messageContent {
+          max-width: 100%;
+          position: relative;
+          z-index: 10;
+          a {
+            color: rgb(115, 202, 36);
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          p {
+            word-wrap: break-word;
+          }
+        }
+      }
+      .messageTime {
+        color: rgb(150, 150, 150);
+        padding: 10px;
+      }
+    }
+  }
+  .replyMessageForm {
+    margin: 0 auto;
+    max-width: 720px;
+    width: 75%;
+    .field {
+      textarea {
+        font-size: 13px;
+        height: 82px;
+        line-height: 20px;
+        width: 100%;
+      }
+    }
+    .action {
+      margin: 10px 0 0 0;
+      text-align: right;
+    }
+  }
+}

@@ -1,6 +1,40 @@
 footer {
   background: rgb(50, 50, 50);
+  font-size: 13px;
   height: 49px;
   margin: -49px 0 0 0;
   width: 100%;
+  .footer {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 960px;
+    nav {
+      float: left;
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 15px 0;
+        li {
+          display: inline;
+          margin: 0 20px 0 0;
+          &:last-child { 
+            margin: 0;
+          }
+          a {
+            color: rgb(115, 202, 36);
+            line-height: 19px;
+            &:hover {
+              color: rgb(255, 255, 255);
+            }
+          }
+        }
+      }
+    }
+  }
+  p {
+    color: rgb(150, 150, 150);
+    float: right;
+    line-height: 49px;
+    padding: 0 20px;
+  }
 }

@@ -16,5 +16,6 @@ class City(models.Model):
         return unicode(self.name)
 
     def save(self, *args, **kwargs):
+        self.name = self.name.lower()
         self.slug = slugify(self.name)
         super(City, self).save(*args, **kwargs)

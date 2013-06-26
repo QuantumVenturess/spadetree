@@ -1,0 +1,126 @@
+/* List */
+.interestList {
+  padding: 0 0 40px 0; }
+  .interestList .search {
+    margin: 40px 0 0 0; }
+    .interestList .search .field {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 0 95px 0 0;
+      width: 100%; }
+      .interestList .search .field input {
+        float: left;
+        width: 100%; }
+    .interestList .search .action {
+      float: right; }
+      .interestList .search .action button {
+        line-height: 21px;
+        padding: 11px 20px;
+        width: 85px; }
+  .interestList .results {
+    margin: 40px 0 0 0; }
+    .interestList .results .group h1 {
+      border-bottom: 1px solid #c8c8c8;
+      font-size: 27px;
+      font-weight: 300;
+      line-height: 40px;
+      margin: 0;
+      padding: 10px 10px; }
+    .interestList .results .group ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0; }
+      .interestList .results .group ul li .interestNameLink {
+        color: #323232;
+        display: block;
+        font-size: 14px;
+        line-height: 21px;
+        padding: 10px; }
+        .interestList .results .group ul li .interestNameLink:hover {
+          background: #f0f0f0;
+          color: #73ca24; }
+      .interestList .results .group ul li .tutorsInsert h3 {
+        background: #f0f0f0;
+        color: #969696;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 300;
+        line-height: 21px;
+        margin: 0;
+        padding: 10px; }
+
+/* Detail */
+.interestDetail {
+  padding: 40px 0; }
+  .interestDetail .label {
+    padding: 0 10px; }
+    .interestDetail .label h1 {
+      background-image: url("../img/tutors.png");
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      font-size: 27px;
+      font-weight: 300;
+      line-height: 27px;
+      margin: 0 0 20px 0;
+      padding: 0 0 0 35px; }
+  .interestDetail .tutor {
+    background: #f0f0f0; }
+    .interestDetail .tutor:hover {
+      background: #e6e6e6; }
+
+.interestList .tutor {
+  background: #fafafa; }
+  .interestList .tutor:hover {
+    background: #f0f0f0; }
+    .interestList .tutor:hover .name h2 {
+      color: #73ca24; }
+
+.interestDetail .tutor, .interestList .tutor {
+  display: block;
+  padding: 10px; }
+  .interestDetail .tutor .image, .interestList .tutor .image {
+    float: left;
+    height: 40px;
+    overflow: hidden;
+    width: 40px; }
+    .interestDetail .tutor .image img, .interestList .tutor .image img {
+      max-height: 40px; }
+  .interestDetail .tutor .name, .interestList .tutor .name {
+    margin: 0 0 0 50px; }
+    .interestDetail .tutor .name h2, .interestDetail .tutor .name p, .interestList .tutor .name h2, .interestList .tutor .name p {
+      font-size: 14px;
+      line-height: 20px; }
+    .interestDetail .tutor .name h2, .interestList .tutor .name h2 {
+      color: #323232;
+      font-weight: 700;
+      margin: 0; }
+    .interestDetail .tutor .name p, .interestList .tutor .name p {
+      color: #969696; }
+
+/* User edit */
+.userEdit .interestResults {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 850px;
+  position: absolute;
+  width: 100%; }
+  .userEdit .interestResults ul {
+    background: white;
+    border: 1px solid #73ca24;
+    border-top: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    .userEdit .interestResults ul li a {
+      color: #323232;
+      display: block;
+      font-size: 14px;
+      line-height: 21px;
+      padding: 10px; }
+      .userEdit .interestResults ul li a:hover, .userEdit .interestResults ul li a.selected {
+        background: #f0f0f0;
+        color: #73ca24; }

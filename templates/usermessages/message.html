@@ -1,0 +1,12 @@
+<div class='userMessage {% if user == message.sender %}sent{% else %}received{% endif %}'>
+  {% load common_tags %}
+  <div class='messageContainer'>
+    <div class='messageContent'>
+      {{ message.content|urlize|target_blank|linebreaks }}
+    </div>
+  </div>
+  <div class='messageTime'>
+    {{ message.time }}
+  </div>
+  <div class='clear'></div>
+</div>

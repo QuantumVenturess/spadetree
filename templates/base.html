@@ -2,6 +2,11 @@
 <html lang='en'>
 <head>
   <title>
+    {% if not user.is_anonymous %}
+      {% if user.profile.title_count %}
+        ({{ user.profile.title_count }})
+      {% endif %}
+    {% endif %}
     {% block title %}SpadeTree{% endblock %}
   </title>
   {% load static %}

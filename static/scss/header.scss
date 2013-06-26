@@ -38,14 +38,18 @@ header {
           float: left;
           a {
             @include browser(box-sizing, border-box);
-            color: rgb(135, 222, 56);
+            color: rgb(115, 202, 36);
             display: block;
             font-size: 14px;
+            height: 44px;
             line-height: 44px;
             padding: 0 20px;
             &:hover {
-              background: rgb(135, 222, 56);
+              background: rgb(115, 202, 36);
               color: rgb(255, 255, 255);
+            }
+            &.selected {
+              border-bottom: 3px solid rgb(115, 202, 36);
             }
             &.menu {
               &:hover {
@@ -91,6 +95,10 @@ header {
               &:hover {
                 background: rgb(100, 100, 100);
                 color: rgb(255, 255, 255);
+              }
+              span {
+                color: rgb(255, 26, 0);
+                float: right;
               }
             }
           }
