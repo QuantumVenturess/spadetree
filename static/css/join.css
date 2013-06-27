@@ -21,14 +21,15 @@
         box-sizing: border-box;
         color: white;
         float: right;
-        height: 400px;
-        margin: 80px 0;
-        padding: 20px 40px; }
+        margin: 80px 0 0 0;
+        max-height: 400px;
+        padding: 40px; }
         .join .joinTexture .intro .introContent h1 {
           font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 36px;
           font-weight: 300;
-          margin: 20px 0;
+          line-height: 43px;
+          margin: 0 0 20px 0;
           text-align: right; }
         .join .joinTexture .intro .introContent h2 {
           font-family: 'Hattori Hanzo', 'Helvetica Neue', Helvetica, Arial, sans-serif;

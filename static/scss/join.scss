@@ -24,14 +24,15 @@
         @include browser(box-sizing, border-box);
         color: rgb(255, 255, 255);
         float: right;
-        height: 400px;
-        margin: 80px 0;
-        padding: 20px 40px;
+        margin: 80px 0 0 0;
+        max-height: 400px;
+        padding: 40px;
         h1 {
           font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 36px;
           font-weight: 300;
-          margin: 20px 0;
+          line-height: 43px;
+          margin: 0 0 20px 0;
           text-align: right;
         }
         h2 {
