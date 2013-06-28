@@ -143,12 +143,26 @@
         width: 100px; }
     .userEdit .section.about h1 {
       background-image: url("../img/about.png"); }
-    .userEdit .section.location h1 {
-      background-image: url("../img/location.png"); }
-    .userEdit .section.location .field {
+    .userEdit .section.location {
       float: left;
-      margin: 0 10px 0 0;
-      width: 25%; }
+      width: 55%; }
+      .userEdit .section.location h1 {
+        background-image: url("../img/location.png"); }
+      .userEdit .section.location .field {
+        float: left;
+        margin: 0 10px 0 0;
+        width: 45%; }
+    .userEdit .section.phone {
+      float: right;
+      width: 40%; }
+      .userEdit .section.phone h1 {
+        background-image: url("../img/phone.png"); }
+      .userEdit .section.phone .contactNote {
+        color: #969696;
+        font-size: 13px;
+        line-height: 20px;
+        margin: 10px 0 0 0;
+        text-align: center; }
     .userEdit .section h1 {
       background-repeat: no-repeat;
       background-size: 25px 25px;

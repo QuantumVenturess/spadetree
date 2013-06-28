@@ -84,8 +84,19 @@
       .choices .choice .bottom p {
         font-size: 13px;
         line-height: 20px; }
-    .choices .choice .action button {
-      margin: 10px 0 0 0; }
-    .choices .choice .action .deny {
-      background: #323232;
-      color: white; }
+    .choices .choice .choiceActionForm {
+      float: left; }
+      .choices .choice .choiceActionForm .action button {
+        margin: 10px 0 0 0; }
+      .choices .choice .choiceActionForm .action .deny {
+        background: #323232;
+        color: white; }
+    .choices .choice .contactNumber {
+      float: right; }
+      .choices .choice .contactNumber p {
+        color: #969696;
+        font-size: 13px;
+        line-height: 20px;
+        margin: 10px 0 0 0; }
+        .choices .choice .contactNumber p span {
+          color: #323232; }

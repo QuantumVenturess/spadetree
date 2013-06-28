@@ -183,13 +183,29 @@
       }
     }
     &.location {
+      float: left;
+      width: 55%;
       h1 {
         background-image: url('../img/location.png');
       }
       .field {
         float: left;
         margin: 0 10px 0 0;
-        width: 25%;
+        width: 45%;
+      }
+    }
+    &.phone {
+      float: right;
+      width: 40%;
+      h1 {
+        background-image: url('../img/phone.png')
+      }
+      .contactNote {
+        color: rgb(150, 150, 150);
+        font-size: 13px;
+        line-height: 20px;
+        margin: 10px 0 0 0;
+        text-align: center;
       }
     }
     h1 {

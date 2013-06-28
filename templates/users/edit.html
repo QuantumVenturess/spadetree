@@ -34,6 +34,25 @@
       </div>
       <div class='clear'></div>
     </div>
+    <div class='section phone'>
+      <h1>
+        {% if user.profile.tutee %}
+          Parent's
+        {% endif %}
+        Contact Number
+      </h1>
+      <div class='field'>
+        {{ profile_form.phone }}
+      </div>
+      <div class='contactNote'>
+        {% if user.profile.tutor %}
+          This will only show when you accept a tutee's request
+        {% elif user.profile.tutee %}
+          This will only show when a tutor accepts your request
+        {% endif %}
+      </div>
+    </div>
+    <div class='clear'></div>
     <div class='action'>
       <button>Update</button>
       <a href='{% url users.views.detail user.profile.slug %}'>Cancel</a>

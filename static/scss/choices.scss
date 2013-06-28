@@ -113,13 +113,28 @@
         line-height: 20px;
       }
     }
-    .action {
-      button {
-        margin: 10px 0 0 0;
+    .choiceActionForm {
+      float: left;
+      .action {
+        button {
+          margin: 10px 0 0 0;
+        }
+        .deny {
+          background: rgb(50, 50, 50);
+          color: rgb(255, 255, 255);
+        }
       }
-      .deny {
-        background: rgb(50, 50, 50);
-        color: rgb(255, 255, 255);
+    }
+    .contactNumber  {
+      float: right;
+      p {
+        color: rgb(150, 150, 150);
+        font-size: 13px;
+        line-height: 20px;
+        margin: 10px 0 0 0;
+        span {
+          color: rgb(50, 50, 50);
+        }
       }
     }
   }

@@ -93,6 +93,9 @@ def edit(request, slug):
         profile_form = ProfileForm(request.POST, instance=profile)
         if profile_form.is_valid():
             profile = profile_form.save()
+            if request.POST.get('phone'):
+                profile.phone = request.POST.get('phone')[0:10]
+                profile.save()
         city_name  = request.POST.get('city_name')
         state_name = request.POST.get('state_name')
         if city_name and state_name:

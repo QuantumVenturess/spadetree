@@ -1,0 +1,15 @@
+{% if choice.accepted and not choice.completed %}
+  <p>
+    {% if user.profile.tutor %}
+      {% if choice.tutee.profile.phone_string %}
+        You can contact the parent at
+        <span>{{ choice.tutee.profile.phone_string }}</span>
+      {% endif %}
+    {% elif user.profile.tutee %}
+      {% if choice.tutor.profile.phone_string %}
+        You can contact your tutor at
+        <span>{{ choice.tutor.profile.phone_string }}</span>
+      {% endif %}
+    {% endif %}
+  </p>
+{% endif %}

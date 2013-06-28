@@ -31,6 +31,8 @@ $(document).ready(function() {
         var pk = response.pk;
         $('#choice_' + pk + ' .choiceActionForm').html(
           response.choice_action_form);
+        $('#choice_' + pk + ' .contactNumber').html(
+          response.contact_number);
         $('#choice_' + pk + ' .requestStatus').html(
           response.request_status);
         // Update choice count and title count

@@ -44,11 +44,13 @@ def action(request, pk):
             }
             choice_action_form = loader.get_template(
                 'choices/choice_action_form.html')
+            contact_number = loader.get_template('choices/contact_number.html')
             request_status = loader.get_template('choices/request_status.html')
             context = RequestContext(request, add_csrf(request, d))
             data = {
                 'choice_action_form': choice_action_form.render(context),
                 'choice_count': request.user.profile.choice_count(),
+                'contact_number': contact_number.render(context),
                 'pk': choice.pk,
                 'request_status': request_status.render(context),
                 'title_count': request.user.profile.title_count(),

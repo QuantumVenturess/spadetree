@@ -16,6 +16,7 @@ class Profile(models.Model):
     image    = models.ImageField(blank=True, null=True, 
                    upload_to=settings.USER_IMAGE_URL)
     in_count = models.IntegerField(default=0)
+    phone    = models.BigIntegerField(blank=True, null=True)
     slug     = models.SlugField(blank=True, null=True, max_length=255)
     tutee    = models.BooleanField(default=False)
     tutor    = models.BooleanField(default=False)
@@ -84,6 +85,12 @@ class Profile(models.Model):
             Q(recipient=self.user, sender=sender) |
             Q(recipient=sender, sender=self.user))
         return user_messages
+
+    def phone_string(self):
+        """Return (408) 123-4567."""
+        n = str(self.phone)
+        if len(n) >= 10:
+            return '(%s) %s-%s' % (n[0:3], n[3:6], n[6:10])
 
     def recent_messages(self):
         """Return a list of the most recent messages."""
