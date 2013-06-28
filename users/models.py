@@ -111,22 +111,34 @@ class Profile(models.Model):
         """Count number of unviewed choices/requests and user messages."""
         return self.choice_count() + self.unread_message_count()
 
+    def token(self):
+        """Use this to match with the token sent from iOS app."""
+        try:
+            oauth = self.user.oauth_set.all()[0]
+            at    = oauth.access_token
+            if at:
+                return at[4] + at[8] + at[12] + at[21] + at[24]
+        except IndexError:
+            return
+
     def unread_message_count(self):
         """Count number of received messages that are unviewed."""
         unread_messages = self.user.received_messages.filter(viewed=False)
         unread_messages_set = set([msg.sender for msg in unread_messages])
         return len(unread_messages_set)
 
-def create_profile(sender, instance, **kwargs):
+def update_profile(sender, instance, **kwargs):
     try:
         profile = Profile.objects.get(user=instance)
         profile.slug = slugify(instance.username)
-        profile.save()
     except Profile.DoesNotExist:
-        Profile.objects.create(slug=slugify(instance.username), user=instance)
+        profile = Profile.objects.create(slug=slugify(instance.username), 
+            user=instance)
+    profile.in_count += 1
+    profile.save()
 
 # Create signals
-post_save.connect(create_profile, sender=User)
+post_save.connect(update_profile, sender=User)
 
 # Enable user.profile() method
 User.profile = property(lambda u: u.profile_set.all()[0])

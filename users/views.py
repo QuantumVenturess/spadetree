@@ -10,6 +10,7 @@ from django.template import loader, RequestContext
 from choices.models import Choice
 from cities.models import City
 from reviews.models import Review
+from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
 from states.models import State
 from users.forms import ProfileForm
@@ -48,7 +49,7 @@ def choose(request, slug):
     return HttpResponseRedirect(reverse('users.views.detail', 
         args=[profile.slug]))
 
-@login_required
+@sign_in_required
 def detail(request, slug):
     """User detail page."""
     profile = get_object_or_404(Profile, slug=slug)

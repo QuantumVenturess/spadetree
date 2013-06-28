@@ -1,4 +1,5 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -13,6 +14,7 @@ def join(request):
     }
     return render(request, 'sessions/join.html', d)
 
+@login_required
 def sign_out(request):
     """Sign out."""
     auth.logout(request)

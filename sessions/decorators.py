@@ -20,6 +20,30 @@ def already_logged_in():
         return wraps(func)(inner_decorator)
     return decorator
 
+def sign_in_required(function):
+    def wrapper(request, *args, **kwargs):
+        token = None
+        if request.method == 'GET':
+            token = request.GET.get('spadetree_token')
+        elif request.method == 'POST':
+            token = request.POST.get('spadetree_token')
+        if token and len(token.split('00000')) == 2:
+            pk, token = token.split('00000')
+            try:
+                user = User.objects.get(pk=pk)
+                if user.profile.token() != token:
+                    user = None
+            except User.DoesNotExist:
+                user = None
+        else:
+            user = request.user
+        if user and user.id:
+            request.user = user
+            return function(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('sessions.views.join'))
+    return wrapper
+
 def staff_user():
     def decorator(func):
         def inner_decorator(request, *args, **kwargs):
