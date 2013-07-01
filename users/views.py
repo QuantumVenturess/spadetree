@@ -223,6 +223,9 @@ def new_review(request, slug, format=None):
 @login_required
 def pick(request):
     """If user has not picked if they are a tutee or tutor."""
+    if request.user.profile.tutee or request.user.profile.tutor:
+        return HttpResponseRedirect(reverse('users.views.detail',
+            args=[request.user.profile.slug]))
     if request.method == 'POST':
         profile = request.user.profile
         message = ''
