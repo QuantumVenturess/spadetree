@@ -6,11 +6,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 
+from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf
 from usermessages.forms import ReplyMessageForm
 
 import json
 
+@sign_in_required
 def detail(request, pk):
     """Detail view for messages from one user."""
     sender = get_object_or_404(User, pk=pk)
@@ -41,6 +43,7 @@ def detail(request, pk):
     messages.warning(request, 'You have no messages from that user')
     return HttpResponseRedirect(reverse('usermessages.views.list'))
 
+@sign_in_required
 def list(request):
     """Display most recent message from all senders."""
     user_messages = request.user.profile.recent_messages()
@@ -50,6 +53,7 @@ def list(request):
     }
     return render(request, 'usermessages/list.html', d)
 
+@sign_in_required
 def new(request, pk):
     """Create new message."""
     receiver = get_object_or_404(User, pk=pk)

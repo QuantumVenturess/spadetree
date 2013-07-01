@@ -220,7 +220,7 @@ def new_review(request, slug, format=None):
     return HttpResponseRedirect(reverse('users.views.detail',
         args=[profile.slug]))
 
-@sign_in_required
+@login_required
 def pick(request):
     """If user has not picked if they are a tutee or tutor."""
     if request.method == 'POST':

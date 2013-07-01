@@ -1,18 +1,18 @@
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 
 from choices.models import Choice
+from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
 
 import json
 import pytz
 
-@login_required
+@sign_in_required
 def action(request, pk):
     """Accept, deny, or complete choice."""
     choice = get_object_or_404(Choice, pk=pk)
@@ -66,7 +66,7 @@ def action(request, pk):
                 messages.success(request, 'Request completed')
     return HttpResponseRedirect(reverse('choices.views.requests'))
 
-@login_required
+@sign_in_required
 def requests(request):
     """Show all choices for tutee or tutor."""
     if request.user.profile.tutor:
