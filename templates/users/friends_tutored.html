@@ -1,0 +1,25 @@
+{% if friends %}
+  <div class='review friendsTutored'>
+    {% load common_tags %}
+    <h1>Friends that {{ userd.profile.full_name }} has tutored</h1>
+    {% for friend, choices in friends %}
+      <div class='friendTutored'>
+        <div class='image'>
+          <img class='lazy' data-original='{{ friend.profile.image_small }}' src='{% lazy_image %}'>
+        </div>
+        <div class='info'>
+          <p>{{ friend.first_name }} {{ friend.last_name }}</p>
+          <div class='interests'>
+            {% for choice in choices %}
+              {% if forloop.counter != 1 %},{% endif %}
+              <a href='{% url interests.views.detail choice.interest.slug %}'>
+                {{ choice.interest.name.title }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+        <div class='clear'></div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

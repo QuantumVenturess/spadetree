@@ -38,12 +38,15 @@
     <div class='clear'></div>
   </div>
   <div class='tutorReviews'>
-    {% if user != userd and user.profile.tutee %}
+    {% if userd != user and user.profile.tutee %}
       <div class='review'>
         <div class='newReviewForm'>
           {% include 'reviews/new_review_form.html' %}
         </div>
       </div>
+    {% endif %}
+    {% if userd.profile.tutor and user.profile.tutee %}
+      <span class='friends'></span>
     {% endif %}
     <span class='prepend'>
       {% include 'reviews/reviews.html' %}
@@ -58,4 +61,28 @@
 <span class='endlessPagination'>
   {% include 'pagination.html' %}
 </span>
+{% endblock %}
+{% block head %}
+{% if userd.profile.tutor and user.profile.tutee %}
+<script>
+$(document).ready(function() {
+  $.ajax({
+    type: 'GET',
+    url: '{% url users.views.friends_tutored userd.profile.slug %}',
+    success: function(response) {
+      var reviewsCount = $('.tutorReviews .prepend .review').length;
+      var firstReview = $('.tutorReviews .prepend .review').first();
+      $('.tutorReviews .friends').html(response.friends_tutored);
+      // Masonry
+      $('.tutorReviews').masonry('reload');
+      // Lazy
+      $('.lazy').lazyload({
+        event: 'load',
+        failure_limit: 50
+      });
+    }
+  });
+});
+</script>
+{% endif %}
 {% endblock %}

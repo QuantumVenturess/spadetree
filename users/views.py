@@ -1,14 +1,17 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 
 from choices.models import Choice
 from cities.models import City
+from oauth.models import Oauth
 from reviews.models import Review
 from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
@@ -19,8 +22,9 @@ from users.models import Profile
 import json
 import os
 import socket
+import urllib2
 
-@login_required
+@sign_in_required
 def choose(request, slug):
     """Tutee chooses tutor."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -81,7 +85,7 @@ def detail(request, slug):
             mimetype='application/json')
     return render(request, 'users/detail.html', d)
 
-@login_required
+@sign_in_required
 def edit(request, slug):
     """Edit user page."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -132,7 +136,46 @@ def edit(request, slug):
     }
     return render(request, 'users/edit.html', add_csrf(request, d))
 
-@login_required
+@sign_in_required
+def friends_tutored(request, slug):
+    """Get a list of friends that this tutor has tutored."""
+    profile = get_object_or_404(Profile, slug=slug)
+    user    = profile.user
+    oauth   = request.user.oauth
+    if oauth:
+        # Fetch Facebook friends
+        url = 'https://graph.facebook.com/%s/friends/?access_token=%s' % (
+            oauth.facebook_id, oauth.access_token)
+        req         = urllib2.Request(url)
+        response    = urllib2.urlopen(req)
+        json_string = response.read()
+        # Convert json string into dictionary
+        json_dict = json.loads(json_string)
+        # Get the value for key 'data', which is an array of user names and ids
+        data_list = json_dict.get('data')
+        # Create a list of Facebook ids
+        facebook_ids = [d.get('id') for d in data_list]
+        oauths       = Oauth.objects.filter(facebook_id__in=facebook_ids)
+        users        = [oauth.user for oauth in oauths]
+        # Create friend and choices tuple; (User, [choice1, choice2])
+        friends = []
+        for u in users:
+            choices = u.tutee_choices.filter(Q(accepted=True, tutor=user) | 
+                Q(completed=True, tutor=user))
+            choices = sorted(list(choices), key=lambda x: x.interest.name)
+            friends.append((u, choices))
+        d = {
+            'friends': friends,
+            'userd': profile.user,
+        }
+        t = loader.get_template('users/friends_tutored.html')
+        context = RequestContext(request, d)
+        data = {
+            'friends_tutored': t.render(context),
+        }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
+
+@sign_in_required
 def new_review(request, slug, format=None):
     """Create new review for tutor."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -176,7 +219,7 @@ def new_review(request, slug, format=None):
     return HttpResponseRedirect(reverse('users.views.detail',
         args=[profile.slug]))
 
-@login_required
+@sign_in_required
 def pick(request):
     """If user has not picked if they are a tutee or tutor."""
     if request.method == 'POST':

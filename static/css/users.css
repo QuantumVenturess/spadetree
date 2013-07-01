@@ -46,15 +46,15 @@
     .userDetail .top .name h1 {
       font-size: 36px;
       font-weight: 300;
-      line-height: 52px;
-      margin: 6px 0 0 0; }
+      line-height: 54px;
+      margin: 0; }
     .userDetail .top .name p {
       background-image: url("../img/location.png");
       background-repeat: no-repeat;
       background-size: 18px 18px;
       font-size: 18px;
       line-height: 18px;
-      margin: 10px 0 0 0;
+      margin: 20px 0 0 0;
       padding: 0 0 0 23px; }
   .userDetail .top .chooseTutor {
     background: #73ca24;
@@ -110,6 +110,33 @@
     .userDetail .bottom .section p {
       font-size: 14px;
       line-height: 27px; }
+.userDetail .friendsTutored h1 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  margin: 0; }
+.userDetail .friendsTutored .friendTutored {
+  margin: 10px 0 0 0; }
+  .userDetail .friendsTutored .friendTutored .image {
+    float: left;
+    height: 35px;
+    overflow: hidden;
+    width: 35px; }
+    .userDetail .friendsTutored .friendTutored .image img {
+      max-height: 35px; }
+  .userDetail .friendsTutored .friendTutored .info {
+    margin: 0 0 0 45px;
+    overflow: hidden; }
+    .userDetail .friendsTutored .friendTutored .info p {
+      font-size: 13px;
+      line-height: 19px; }
+    .userDetail .friendsTutored .friendTutored .info .interests {
+      height: 16px; }
+      .userDetail .friendsTutored .friendTutored .info .interests a {
+        color: #299a0b;
+        font-size: 13px; }
+        .userDetail .friendsTutored .friendTutored .info .interests a:hover {
+          text-decoration: underline; }
 
 /* Edit */
 .userEdit {

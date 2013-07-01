@@ -148,4 +148,5 @@ def update_profile(sender, instance, **kwargs):
 post_save.connect(update_profile, sender=User)
 
 # Enable user.profile() method
+User.oauth   = property(lambda u: u.oauth_set.all()[0])
 User.profile = property(lambda u: u.profile_set.all()[0])

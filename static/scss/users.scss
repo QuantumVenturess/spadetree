@@ -59,8 +59,8 @@
       h1 {
         font-size: 36px;
         font-weight: 300;
-        line-height: 52px;
-        margin: 6px 0 0 0;
+        line-height: 54px;
+        margin: 0;
       }
       p {
         background-image: url('../img/location.png');
@@ -68,7 +68,7 @@
         background-size: 18px 18px;
         font-size: 18px;
         line-height: 18px;
-        margin: 10px 0 0 0;
+        margin: 20px 0 0 0;
         padding: 0 0 0 23px;
       }
     }
@@ -138,6 +138,44 @@
       p {
         font-size: 14px;
         line-height: 27px;
+      }
+    }
+  }
+  .friendsTutored {
+    h1 {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 21px;
+      margin: 0;
+    }
+    .friendTutored {
+      margin: 10px 0 0 0;
+      .image {
+        float: left;
+        height: 35px;
+        overflow: hidden;
+        width: 35px;
+        img {
+          max-height: 35px;
+        }
+      }
+      .info {
+        margin: 0 0 0 45px;
+        overflow: hidden;
+        p {
+          font-size: 13px;
+          line-height: 19px;
+        }
+        .interests {
+          height: 16px;
+          a {
+            color: rgb(41, 154, 11);
+            font-size: 13px;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
       }
     }
   }
