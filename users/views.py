@@ -156,14 +156,15 @@ def friends_tutored(request, slug):
         # Create a list of Facebook ids
         facebook_ids = [d.get('id') for d in data_list]
         oauths       = Oauth.objects.filter(facebook_id__in=facebook_ids)
-        users        = [oauth.user for oauth in oauths]
+        users        = [oauth.user for oauth in oauths if oauth.user != user]
         # Create friend and choices tuple; (User, [choice1, choice2])
         friends = []
         for u in users:
             choices = u.tutee_choices.filter(Q(accepted=True, tutor=user) | 
                 Q(completed=True, tutor=user))
-            choices = sorted(list(choices), key=lambda x: x.interest.name)
-            friends.append((u, choices))
+            if choices:
+                choices = sorted(list(choices), key=lambda x: x.interest.name)
+                friends.append((u, choices))
         d = {
             'friends': friends,
             'userd': profile.user,
