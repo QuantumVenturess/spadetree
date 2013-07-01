@@ -41,6 +41,11 @@
         .interestList .results .group ul li .interestNameLink:hover {
           background: #f0f0f0;
           color: #73ca24; }
+        .interestList .results .group ul li .interestNameLink .browseSpinner {
+          float: right;
+          position: relative;
+          right: 10px;
+          top: 10px; }
 
 /* Detail */
 .interestDetail {

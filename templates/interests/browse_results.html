@@ -6,6 +6,7 @@
         <li id='interest_{{ interest.pk }}'>
           <a class='interestNameLink' href='{% url interests.views.detail interest.slug %}'>
             {{ interest.name.title }}
+            <span class='browseSpinner'></span>
           </a>
           <div class='tutorsInsert'></div>
         </li>

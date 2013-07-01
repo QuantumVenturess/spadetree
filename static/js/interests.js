@@ -37,6 +37,11 @@ $(document).ready(function() {
       tutorsInsert.show();
       // If there is nothing
       if (tutorsInsert.children().length == 0) {
+        // Add spinner
+        var browseSpinner = $(this).children('.browseSpinner');
+        var spinner = new Spinner().spin();
+        browseSpinner.prepend(spinner.el);
+        // Ajax tutors into interest
         $.ajax({
           type: 'GET',
           url: $(this).attr('href'),
@@ -44,6 +49,8 @@ $(document).ready(function() {
             var pk = response.pk;
             $('.interestList #interest_' + pk + ' .tutorsInsert').html(
               response.tutors);
+            // Remove spinner
+            browseSpinner.remove();
             // Lazy load
             $('.lazy').lazyload({
               event: 'load',

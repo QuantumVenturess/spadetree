@@ -53,6 +53,12 @@
               background: rgb(240, 240, 240);
               color: rgb(115, 202, 36);
             }
+            .browseSpinner {
+              float: right;
+              position: relative;
+              right: 10px;
+              top: 10px;
+            }
           }
         }
       }
