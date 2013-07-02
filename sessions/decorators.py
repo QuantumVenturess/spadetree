@@ -40,8 +40,8 @@ def sign_in_required(function):
         if user and user.id:
             if token:
                 request.user = user
-            if not user.profile.tutee and not user.profile.tutor:
-                return HttpResponseRedirect(reverse('users.views.pick'))
+            # if not user.profile.tutee and not user.profile.tutor:
+            #     return HttpResponseRedirect(reverse('users.views.pick'))
             return function(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('sessions.views.join'))

@@ -76,6 +76,10 @@ def choose(request, slug):
 def detail(request, slug):
     """User detail page."""
     profile = get_object_or_404(Profile, slug=slug)
+    # If user has not picked to be a tutee or tutor
+    if not profile.has_chosen():
+        return HttpResponseRedirect(reverse('users.views.pick'))
+    # You cannot view a tutee's page
     if not profile.tutor and request.user != profile.user:
         messages.warning(request, 'You can only view tutors')
         return HttpResponseRedirect(reverse('users.views.detail', 
