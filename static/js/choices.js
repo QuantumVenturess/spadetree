@@ -6,11 +6,49 @@ $(document).ready(function() {
   })
   // When clicking on an interest for the form, select it
   $(document).on('click', '.newChoiceForm .skillChoices a', function() {
+    $('.skillToLearn h1').removeClass('invalid');
     $('.newChoiceForm .skillChoices a').removeClass('selected');
     $(this).addClass('selected');
     $('.newChoiceForm .skillPk').val($(this).data('value'));
-    $('.newChoiceForm .message textarea').focus();
     return false;
+  });
+  // When clicking on a day for the new choice form, select it
+  $(document).on('click', '.newChoiceForm .dayChoices a', function() {
+    $('.dayOfWeek h1').removeClass('invalid');
+    $('.newChoiceForm .dayChoices a').removeClass('selected');
+    $(this).addClass('selected');
+    $('.newChoiceForm .dayFreePk').val($(this).data('value'));
+    return false;
+  });
+  // When clicking on a hour for the new choice form, select it
+  $(document).on('click', '.newChoiceForm .hourChoices a', function() {
+    $('.hourOfDay h1').removeClass('invalid');
+    $('.newChoiceForm .hourChoices a').removeClass('selected');
+    $(this).addClass('selected');
+    $('.newChoiceForm .hourFreePk').val($(this).data('value'));
+    return false;
+  });
+  // Do not submit choice form if no skill, day, and hour selected
+  $(document).on('submit', '.newChoiceForm form', function() {
+    var skillVal    = $('.newChoiceForm .skillPk').val().length;
+    var dayFreeVal  = $('.newChoiceForm .dayFreePk').val().length;
+    var hourFreeVal = $('.newChoiceForm .hourFreePk').val().length;
+    var messageVal  = $('.newChoiceForm .message textarea').last().val().length;
+    if (!skillVal) {
+      $('.skillToLearn h1').addClass('invalid');
+    }
+    if (!dayFreeVal) {
+      $('.dayOfWeek h1').addClass('invalid');
+    }
+    if (!hourFreeVal) {
+      $('.hourOfDay h1').addClass('invalid');
+    }
+    if (skillVal && dayFreeVal && hourFreeVal && !messageVal) {
+      $('.newChoiceForm .message textarea').last().focus();
+    }
+    if (!skillVal || !dayFreeVal || !hourFreeVal || !messageVal) {
+      return false
+    }
   });
   // Clicking cancel on the new choice form hides it
   $(document).on('click', '.newChoiceForm .action a', function() {

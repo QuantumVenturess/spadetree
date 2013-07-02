@@ -16,15 +16,19 @@
     position: absolute;
     top: 100px;
     width: 100%;
-    .skillToLearn {
+    .chooseChoice {
+      margin: 0 0 20px 0;
       h1 {
         color: rgb(255, 255, 255);
         font-size: 27px;
         font-weight: 300;
         line-height: 27px;
         margin: 0;
+        &.invalid {
+          color: rgb(255, 26, 0);
+        }
       }
-      .skillChoices {
+      .choices {
         background: rgb(255, 255, 255);
         font-size: 14px;
         margin: 20px 0 0 0;
@@ -44,9 +48,20 @@
           }
         }
       }
+      .hourChoices {
+        p {
+          float: left;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 16px;
+          padding: 10px 20px;
+        }
+        a {
+          width: 16px;
+        }
+      }
     }
     .message {
-      margin: 20px 0 0 0;
       textarea {
         height: 64px;
         width: 100%;
@@ -114,12 +129,23 @@
       }
     }
     .choiceActionForm {
-      float: left;
+      a {
+        background: rgb(115, 202, 36);
+        color: rgb(255, 255, 255);
+        display: block;
+        float: left;
+        font-size: 14px;
+        line-height: 16px;
+        margin: 10px 10px 0 0;
+        padding: 10px 20px;
+      }
       .action {
+        float: left;
         button {
-          margin: 10px 0 0 0;
+          float: left;
+          margin: 10px 10px 0 0;
         }
-        .deny {
+        .deny, .complete {
           background: rgb(50, 50, 50);
           color: rgb(255, 255, 255);
         }
@@ -135,6 +161,73 @@
         span {
           color: rgb(50, 50, 50);
         }
+      }
+    }
+  }
+}
+/* Choice detail */
+.choiceDetail {
+  padding: 40px 0;
+  h1 {
+    font-size: 36px;
+    font-weight: 300;
+    margin: 0;
+  }
+  section {
+    margin: 40px 0 0 0;
+    &.date {
+      h5 {
+        background-image: url('../img/days.png');
+      }
+      input {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    &.place {
+      h5 {
+        background-image: url('../img/location.png');
+      }
+      .field {
+        margin: 10px 0 0 0;
+        width: 55%;
+        &:first-child {
+          margin: 0;
+        }
+        &.address {
+          input {
+            width: 100%;
+          }
+        }
+        &.cityState {
+          input {
+            float: left;
+            margin: 0 10px 0 0;
+            width: 45%;
+          }
+        }
+      }
+    }
+    p {
+      font-size: 14px;
+      margin: 0 0 10px 35px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .action {
+    margin: 40px 0 0 0;
+  }
+  .contactInfo {
+    font-size: 14px;
+    margin: 40px 0 0 0;
+    text-align: center;
+    a {
+      color: rgb(41, 154, 11);
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

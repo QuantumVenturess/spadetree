@@ -1,15 +1,53 @@
 <form action='{% url users.views.choose userd.profile.slug %}' method='POST'>
   {% csrf_token %}
-  <input class='skillPk' name='skill_pk' type='hidden'>
-  <div class='skillToLearn'>
-    <h1>Click on the skill you want to learn</h1>
-    <div class='skillChoices'>
+  <div>
+    <input class='skillPk' name='skill_pk' type='hidden'>
+    <input class='dayFreePk' name='day_free_pk' type='hidden'>
+    <input class='hourFreePk' name='hour_free_pk' type='hidden'>
+  </div>
+  <div class='chooseChoice skillToLearn'>
+    <h1>Choose the skill you want to learn</h1>
+    <div class='choices skillChoices'>
       {% for skill in skills %}
         <a href='#' data-value='{{ skill.pk }}'>
           {{ skill.interest.name.title }}
         </a>
       {% endfor %}
       <div class='clear'></div>
+    </div>
+  </div>
+  <div class='chooseChoice dayOfWeek'>
+    <h1>Select a day of the week that works for you</h1>
+    <div class='choices dayChoices'>
+      {% for day_free in days_free %}
+        <a href='#' data-value='{{ day_free.pk }}'>
+          {{ day_free.day.name.title }}
+        </a>
+      {% endfor %}
+      <div class='clear'></div>
+    </div>
+  </div>
+  <div class='chooseChoice hourOfDay'>
+    <h1>Select a time that works for you</h1>
+    <div class='choices hourChoices'>
+      <div class='am'>
+        <p>AM</p>
+        {% for hour_free in hours_free_am %}
+          <a href='#' data-value='{{ hour_free.pk }}'>
+            {{ hour_free.hour.hour_of_day }}
+          </a>
+        {% endfor %}
+        <div class='clear'></div>
+      </div>
+      <div class='pm'>
+        <p>PM</p>
+        {% for hour_free in hours_free_pm %}
+          <a href='#' data-value='{{ hour_free.pk }}'>
+            {{ hour_free.hour.hour_of_day }}
+          </a>
+        {% endfor %}
+        <div class='clear'></div>
+      </div>
     </div>
   </div>
   <div class='message'>

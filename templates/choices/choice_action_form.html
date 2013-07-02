@@ -1,4 +1,17 @@
 {% if not choice.completed %}
+  {% if choice.accepted %}
+    {% if user.profile.tutor and choice.ready %}
+      <a href='{% url choices.views.detail choice.pk %}'>View request</a>
+    {% elif user.profile.tutee %}
+      <a href='{% url choices.views.detail choice.pk %}'>
+        {% if choice.ready %}
+          View
+        {% else %}
+          Set date and place
+        {% endif %}
+      </a>
+    {% endif %}
+  {% endif %}
   <form action='{% url choices.views.action choice.pk %}' method='POST'>
     {% csrf_token %}
     <div class='action'>
@@ -12,7 +25,7 @@
         {% endif %}
       {% elif user.profile.tutee and choice.accepted %}
         <button class='complete' name='action' value='complete'>
-          Complete
+          Click when tutoring complete
         </button>
       {% endif %}
     </div>

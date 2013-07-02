@@ -15,6 +15,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # Choices
     url(r'^c/', include('choices.urls')),
+    # Days
+    url(r'^d/', include('days.urls')),
+    # Hours
+    url(r'^h/', include('hours.urls')),
     # Interests
     url(r'^i/', include('interests.urls')),
     # OAuth

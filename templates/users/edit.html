@@ -16,6 +16,33 @@
       {% include 'skills/skill_add_form.html' %}
     </div>
   </div>
+  {% if user.profile.tutor %}
+    <div class='section days'>
+      <h1>Days of the week that work for you</h1>
+      <div class='dayHourBox'>
+        {% for day, button_class in days %}
+          {% include 'days/day_form.html' %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class='section hours'>
+      <h1>Hours of the day that work for you</h1>
+      <div class='dayHourBox'>
+        <div class='hourAm'>
+          {% for hour, button_class in hours_am %}
+            {% include 'hours/hour_form.html' %}
+          {% endfor %}
+          <p>AM</p>
+        </div>
+        <div class='hourPm'>
+          {% for hour, button_class in hours_pm %}
+            {% include 'hours/hour_form.html' %}
+          {% endfor %}
+          <p>PM</p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
   <form action='' method='POST'>
     {% csrf_token %}
     <div class='section about'>

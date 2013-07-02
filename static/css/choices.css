@@ -12,33 +12,43 @@
   position: absolute;
   top: 100px;
   width: 100%; }
-  .userDetail .newChoiceForm .skillToLearn h1 {
-    color: white;
-    font-size: 27px;
-    font-weight: 300;
-    line-height: 27px;
-    margin: 0; }
-  .userDetail .newChoiceForm .skillToLearn .skillChoices {
-    background: white;
-    font-size: 14px;
-    margin: 20px 0 0 0;
-    padding: 10px; }
-    .userDetail .newChoiceForm .skillToLearn .skillChoices a {
-      color: #323232;
-      display: block;
+  .userDetail .newChoiceForm .chooseChoice {
+    margin: 0 0 20px 0; }
+    .userDetail .newChoiceForm .chooseChoice h1 {
+      color: white;
+      font-size: 27px;
+      font-weight: 300;
+      line-height: 27px;
+      margin: 0; }
+      .userDetail .newChoiceForm .chooseChoice h1.invalid {
+        color: #ff1a00; }
+    .userDetail .newChoiceForm .chooseChoice .choices {
+      background: white;
+      font-size: 14px;
+      margin: 20px 0 0 0;
+      padding: 10px; }
+      .userDetail .newChoiceForm .chooseChoice .choices a {
+        color: #323232;
+        display: block;
+        float: left;
+        padding: 10px 20px;
+        text-align: center; }
+        .userDetail .newChoiceForm .chooseChoice .choices a:hover {
+          background: gainsboro; }
+        .userDetail .newChoiceForm .chooseChoice .choices a.selected {
+          color: white;
+          background: #73ca24; }
+    .userDetail .newChoiceForm .chooseChoice .hourChoices p {
       float: left;
-      padding: 10px 20px;
-      text-align: center; }
-      .userDetail .newChoiceForm .skillToLearn .skillChoices a:hover {
-        background: gainsboro; }
-      .userDetail .newChoiceForm .skillToLearn .skillChoices a.selected {
-        color: white;
-        background: #73ca24; }
-  .userDetail .newChoiceForm .message {
-    margin: 20px 0 0 0; }
-    .userDetail .newChoiceForm .message textarea {
-      height: 64px;
-      width: 100%; }
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      padding: 10px 20px; }
+    .userDetail .newChoiceForm .chooseChoice .hourChoices a {
+      width: 16px; }
+  .userDetail .newChoiceForm .message textarea {
+    height: 64px;
+    width: 100%; }
   .userDetail .newChoiceForm .action {
     margin: 20px 0 0 0;
     float: right; }
@@ -84,11 +94,21 @@
       .choices .choice .bottom p {
         font-size: 13px;
         line-height: 20px; }
-    .choices .choice .choiceActionForm {
+    .choices .choice .choiceActionForm a {
+      background: #73ca24;
+      color: white;
+      display: block;
+      float: left;
+      font-size: 14px;
+      line-height: 16px;
+      margin: 10px 10px 0 0;
+      padding: 10px 20px; }
+    .choices .choice .choiceActionForm .action {
       float: left; }
       .choices .choice .choiceActionForm .action button {
-        margin: 10px 0 0 0; }
-      .choices .choice .choiceActionForm .action .deny {
+        float: left;
+        margin: 10px 10px 0 0; }
+      .choices .choice .choiceActionForm .action .deny, .choices .choice .choiceActionForm .action .complete {
         background: #323232;
         color: white; }
     .choices .choice .contactNumber {
@@ -100,3 +120,45 @@
         margin: 10px 0 0 0; }
         .choices .choice .contactNumber p span {
           color: #323232; }
+
+/* Choice detail */
+.choiceDetail {
+  padding: 40px 0; }
+  .choiceDetail h1 {
+    font-size: 36px;
+    font-weight: 300;
+    margin: 0; }
+  .choiceDetail section {
+    margin: 40px 0 0 0; }
+    .choiceDetail section.date h5 {
+      background-image: url("../img/days.png"); }
+    .choiceDetail section.date input:hover {
+      cursor: pointer; }
+    .choiceDetail section.place h5 {
+      background-image: url("../img/location.png"); }
+    .choiceDetail section.place .field {
+      margin: 10px 0 0 0;
+      width: 55%; }
+      .choiceDetail section.place .field:first-child {
+        margin: 0; }
+      .choiceDetail section.place .field.address input {
+        width: 100%; }
+      .choiceDetail section.place .field.cityState input {
+        float: left;
+        margin: 0 10px 0 0;
+        width: 45%; }
+    .choiceDetail section p {
+      font-size: 14px;
+      margin: 0 0 10px 35px; }
+      .choiceDetail section p:last-child {
+        margin-bottom: 0; }
+  .choiceDetail .action {
+    margin: 40px 0 0 0; }
+  .choiceDetail .contactInfo {
+    font-size: 14px;
+    margin: 40px 0 0 0;
+    text-align: center; }
+    .choiceDetail .contactInfo a {
+      color: #299a0b; }
+      .choiceDetail .contactInfo a:hover {
+        text-decoration: underline; }

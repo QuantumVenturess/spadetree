@@ -1,0 +1,8 @@
+<div class='selectForm' id='daySelectForm_{{ day.pk }}'>
+  <form action='{% url days.views.free day.pk %}' method='POST'>
+    {% csrf_token %}
+    <button class='{{ button_class }}'>
+      {{ day.name.title }}
+    </button>
+  </form>
+</div>

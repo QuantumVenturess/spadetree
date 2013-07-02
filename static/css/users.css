@@ -190,6 +190,39 @@
         line-height: 20px;
         margin: 10px 0 0 0;
         text-align: center; }
+    .userEdit .section.days .dayHourBox, .userEdit .section.hours .dayHourBox {
+      background: #f0f0f0;
+      min-height: 36px;
+      padding: 10px; }
+      .userEdit .section.days .dayHourBox .selectForm:first-child button, .userEdit .section.hours .dayHourBox .selectForm:first-child button {
+        margin: 0; }
+      .userEdit .section.days .dayHourBox .selectForm button, .userEdit .section.hours .dayHourBox .selectForm button {
+        background: none;
+        color: #323232;
+        float: left;
+        margin: 0 0 0 10px;
+        padding: 10px; }
+        .userEdit .section.days .dayHourBox .selectForm button:hover, .userEdit .section.hours .dayHourBox .selectForm button:hover {
+          background: gainsboro; }
+        .userEdit .section.days .dayHourBox .selectForm button.selected, .userEdit .section.hours .dayHourBox .selectForm button.selected {
+          background: #323232;
+          color: white; }
+    .userEdit .section.days h1 {
+      background-image: url("../img/days.png"); }
+    .userEdit .section.hours h1 {
+      background-image: url("../img/hours.png"); }
+    .userEdit .section.hours .dayHourBox .hourAm, .userEdit .section.hours .dayHourBox .hourPm {
+      height: 36px; }
+      .userEdit .section.hours .dayHourBox .hourAm p, .userEdit .section.hours .dayHourBox .hourPm p {
+        float: left;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+        padding: 10px 20px; }
+      .userEdit .section.hours .dayHourBox .hourAm .selectForm button, .userEdit .section.hours .dayHourBox .hourPm .selectForm button {
+        padding: 10px 20px; }
+    .userEdit .section.hours .dayHourBox .hourPm {
+      margin: 10px 0 0 0; }
     .userEdit .section h1 {
       background-repeat: no-repeat;
       background-size: 25px 25px;

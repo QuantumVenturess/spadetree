@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='choiceDetail'>
+  <h1>
+    {{ choice.interest.name.title }}
+    {% if user.profile.tutee %}
+      on {{ choice.day.name.title }}
+      at {{ choice.hour.time_string }}
+    {% endif %}
+  </h1>
+  {% if user.profile.tutee %}
+  <form action='' method='POST'>
+  {% endif %}
+    {% csrf_token %}
+    <section class='date'>
+      <h5>
+        {% if user.profile.tutee %}
+          Set a date on 
+        {% endif %}
+        {{ choice.day.name.title }}
+        {% if user.profile.tutor %}
+          at {{ choice.hour.time_string }}
+        {% endif %}
+      </h5>
+      {% if user.profile.tutor %}
+        <p>{{ choice.date_string_long }}</p>
+      {% elif user.profile.tutee %}
+        <div class='field'>
+          <input autocomplete='off' name='date' type='text' placeholder='Choose a date' readonly='readonly' value='{{ choice.datepicker_string }}'>
+        </div>
+      {% endif %}
+    </section>
+    <section class='place'>
+      <h5>
+        {% if user.profile.tutor %}
+          Place to meet
+        {% elif user.profile.tutee %}
+          Set a place to meet - tutor is near 
+          {{ choice.tutor.profile.city.name.title }}, 
+          {{ choice.tutor.profile.city.state.name.title }}
+        {% endif %}
+      </h5>
+      {% if user.profile.tutor %}
+        <p>{{ choice.address.title }}</p>
+        <p>{{ choice.city.name.title }}, {{ choice.city.state.name.title }}</p>
+      {% elif user.profile.tutee %}
+        <div class='field address'>
+          <input autocomplete='off' name='address' type='text' placeholder='Address' value='{{ choice.address.title }}'>
+        </div>
+        <div class='field cityState'>
+          <input autocomplete='off' name='city_name' type='text' placeholder='City' value='{{ choice.city.name.title }}'>
+          <input autocomplete='off' name='state_name' type='text' placeholder='State' value='{{ choice.city.state.name.title }}'>
+        </div>
+        <div class='clear'></div>
+      {% endif %}
+    </section>
+    {% if user.profile.tutee %}
+      <div class='action'>
+        <button>Set date and place</button>
+      </div>
+    {% endif %}
+  {% if user.profile.tutee %}
+  </form>
+  {% endif %}
+  <div class='contactInfo'>
+    Feel free to contact
+    {% if user.profile.tutor %}
+      {{ choice.tutee.profile.full_name }}'s parent at 
+      {{ choice.tutee.profile.phone_string }}
+    {% elif user.profile.tutee %}
+      <a href='{% url users.views.detail choice.tutor.profile.slug %}'>
+        {{ choice.tutor.profile.full_name }}</a> at
+      {{ choice.tutor.profile.phone_string }}
+    {% endif %}
+    for more details
+  </div>
+</div>
+{% endblock %}

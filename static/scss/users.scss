@@ -236,7 +236,7 @@
       float: right;
       width: 40%;
       h1 {
-        background-image: url('../img/phone.png')
+        background-image: url('../img/phone.png');
       }
       .contactNote {
         color: rgb(150, 150, 150);
@@ -244,6 +244,64 @@
         line-height: 20px;
         margin: 10px 0 0 0;
         text-align: center;
+      }
+    }
+    &.days, &.hours {
+      .dayHourBox {
+        background: rgb(240, 240, 240);
+        min-height: 36px;
+        padding: 10px;
+        .selectForm {
+          &:first-child {
+            button {
+              margin: 0;
+            }
+          }
+          button {
+            background: none;
+            color: rgb(50, 50, 50);
+            float: left;
+            margin: 0 0 0 10px;
+            padding: 10px;
+            &:hover {
+              background: rgb(220, 220, 220);
+            }
+            &.selected {
+              background: rgb(50, 50, 50);
+              color: rgb(255, 255, 255);
+            }
+          }
+        }
+      }
+    }
+    &.days {
+      h1 {
+        background-image: url('../img/days.png');
+      }
+    }
+    &.hours {
+      h1 {
+        background-image: url('../img/hours.png');
+      }
+      .dayHourBox {
+        .hourAm, .hourPm {
+          height: 36px;
+          p {
+            float: left;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 16px;
+            padding: 10px 20px;
+          }
+          .selectForm {
+            button {
+              padding: 10px 20px;
+            }
+          }
+        }
+        .hourPm {
+          margin: 10px 0 0 0;
+        }
       }
     }
     h1 {

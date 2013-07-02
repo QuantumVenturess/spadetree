@@ -11,6 +11,8 @@ from django.template import loader, RequestContext
 
 from choices.models import Choice
 from cities.models import City
+from days.models import Day, DayFree
+from hours.models import Hour, HourFree
 from oauth.models import Oauth
 from reviews.models import Review
 from sessions.decorators import sign_in_required
@@ -31,25 +33,42 @@ def choose(request, slug):
     if (request.method == 'POST' and profile.tutor and 
         request.user.profile.tutee):
     
-        if request.POST.get('skill_pk'):
+        skill_pk     = request.POST.get('skill_pk')
+        day_free_pk  = request.POST.get('day_free_pk')
+        hour_free_pk = request.POST.get('hour_free_pk')
+        content      = request.POST.get('content')
+        if skill_pk and day_free_pk and hour_free_pk and content:
             user = profile.user
             try:
-                skill = user.skill_set.all().get(pk=int(
-                    request.POST.get('skill_pk')))
-                content = request.POST.get('content')
-                choice = Choice(content=content, interest=skill.interest, 
-                    tutee=request.user, tutor=user)
+                skill = user.skill_set.get(pk=skill_pk)
+            except Skill.DoesNotExist:
+                skill = None
+            try:
+                day_free = user.dayfree_set.get(pk=day_free_pk)
+            except DayFree.DoesNotExist:
+                day_free = None
+            try:
+                hour_free = user.hourfree_set.get(pk=hour_free_pk)
+            except HourFree.DoesNotExist:
+                hour_free = None
+            if skill and day_free and hour_free:
+                choice = Choice()
+                choice.content  = content
+                choice.day      = day_free.day
+                choice.hour     = hour_free.hour
+                choice.interest = skill.interest
+                choice.tutee    = request.user
+                choice.tutor    = user
                 choice.save()
                 if choice:
                     # Create user message
                     request.user.sent_messages.create(content=content,
                         recipient=user)
-                messages.success(request, 
-                    '%s has been sent your request to learn' % user.first_name)
-                return HttpResponseRedirect(reverse('choices.views.requests'))
-            except ObjectDoesNotExist:
-                messages.error(request, 
-                    '%s does not have that skill' % user.first_name)
+                    messages.success(request, 
+                        '%s has been sent your request to learn' % (
+                            user.first_name))
+                    return HttpResponseRedirect(reverse(
+                        'choices.views.requests'))
     return HttpResponseRedirect(reverse('users.views.detail', 
         args=[profile.slug]))
 
@@ -65,7 +84,20 @@ def detail(request, slug):
     reviews = user.tutor_reviews.all().order_by('-created')
     show_choice_button = (profile.tutor and request.user.profile.tutee and 
         profile.user != request.user)
+    days_free     = []
+    hours_free_am = []
+    hours_free_pm = []
+    if show_choice_button:
+        days_free     = user.dayfree_set.all().order_by('day__value')
+        hours_free    = user.hourfree_set.all()
+        hours_free_am = hours_free.filter(hour__value__gte=0, 
+            hour__value__lte=11).order_by('hour__value')
+        hours_free_pm = hours_free.filter(hour__value__gte=12,
+            hour__value__lte=23).order_by('hour__value')
     d = {
+        'days_free': days_free,
+        'hours_free_am': hours_free_am,
+        'hours_free_pm': hours_free_pm,
         'objects': page(request, reviews),
         'show_choice_button': show_choice_button,
         'skills': profile.skills(),
@@ -127,9 +159,33 @@ def edit(request, slug):
         messages.success(request, 'Profile updated')
         return HttpResponseRedirect(reverse('users.views.detail',
             args=[profile.slug]))
+    days     = []
+    day_ids  = [dayfree.day.pk for dayfree in user.dayfree_set.all()]
+    hours_am = []
+    hours_pm = []
+    hour_ids = [hourfree.hour.pk for hourfree in user.hourfree_set.all()]
+    if profile.tutor:
+        for day in Day.objects.filter(value__gte=0, value__lte=6):
+            button_class = ''
+            if day.pk in day_ids:
+                button_class = 'selected'
+            days.append((day, button_class))
+        for hour in Hour.objects.filter(value__gte=0, value__lte=23):
+            button_class = ''
+            if hour.pk in hour_ids:
+                button_class = 'selected'
+            if hour.value >= 0 and hour.value <= 11:
+                hours_am.append((hour, button_class))
+            elif hour.value >= 12 and hour.value <= 23:
+                hours_pm.append((hour, button_class))
+        hours_am.sort(key=lambda (x, c): x.value)
+        hours_pm.sort(key=lambda (x, c): x.value)
     profile_form = ProfileForm(instance=profile)
     skills = [skill for skill in user.skill_set.all()]
     d = {
+        'days': days,
+        'hours_am': hours_am,
+        'hours_pm': hours_pm,
         'profile_form': profile_form,
         'skills': sorted(skills, key=lambda x: x.interest.name),
         'title': 'Edit',
@@ -227,22 +283,24 @@ def pick(request):
         return HttpResponseRedirect(reverse('users.views.detail',
             args=[request.user.profile.slug]))
     if request.method == 'POST':
-        profile = request.user.profile
-        message = ''
-        if request.POST.get('tutee'):
-            # If user chooses to be a tutee
-            profile.tutee = True
-            profile.tutor = False
-            message       = 'Start learning new skills'
-        elif request.POST.get('tutor'):
+        profile  = request.user.profile
+        message  = ''
+        redirect = reverse('root_path')
+        if request.POST.get('tutor'):
             # If user chooses to be a tutor
             profile.tutee = False
             profile.tutor = True
-            message       = 'Share your knowledge'
+            message       = 'Add your skills and update your info'
+            redirect      = reverse('users.views.edit', args=[profile.slug])
+        elif request.POST.get('tutee'):
+            # If user chooses to be a tutee
+            profile.tutee = True
+            profile.tutor = False
+            message       = 'Search for your interests and learn new skills'
+            redirect      = reverse('interests.views.browse')
         profile.save()
         messages.success(request, message)
-        return HttpResponseRedirect(reverse('users.views.detail',
-            args=[request.user.profile.slug]))
+        return HttpResponseRedirect(redirect)
     d = {
         'title': 'Tutee or Tutor',
     }

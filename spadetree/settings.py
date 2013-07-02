@@ -236,6 +236,8 @@ INSTALLED_APPS += (
 INSTALLED_APPS += (
     'choices',
     'cities',
+    'days',
+    'hours',
     'globaltags',
     'interests',
     'oauth',

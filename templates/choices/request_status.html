@@ -9,7 +9,15 @@
     {% elif choice.denied %}
       <span class='red'>Denied</span>
     {% else %}
-      <span class='gray150'>Pending</span>
+      <span class='gray150'>
+        Waiting for
+        {% if user.profile.tutor %}
+          your
+        {% elif user.profile.tutee %}
+          {{ choice.tutor.first_name }}'s
+        {% endif %}
+        acceptance
+      </span>
     {% endif %}
   {% endif %}
 </p>

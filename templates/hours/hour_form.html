@@ -1,0 +1,8 @@
+<div class='selectForm' id='hourSelectForm_{{ hour.pk }}'>
+  <form action='{% url hours.views.free hour.pk %}' method='POST'>
+    {% csrf_token %}
+    <button class='{{ button_class }}'>
+      {{ hour.hour_of_day }}
+    </button>
+  </form>
+</div>

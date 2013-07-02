@@ -91,6 +91,8 @@ class Profile(models.Model):
         n = str(self.phone)
         if len(n) >= 10:
             return '(%s) %s-%s' % (n[0:3], n[3:6], n[6:10])
+        else:
+            return 'N/A'
 
     def recent_messages(self):
         """Return a list of the most recent messages."""

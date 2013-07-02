@@ -5,9 +5,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 
+from cities.models import City
 from choices.models import Choice
 from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
+from states.models import State
 
 import json
 import pytz
@@ -67,6 +69,60 @@ def action(request, pk):
     return HttpResponseRedirect(reverse('choices.views.requests'))
 
 @sign_in_required
+def detail(request, pk):
+    """Detail page for choice/request."""
+    choice = get_object_or_404(Choice, pk=pk)
+    if not request.user in [choice.tutee, choice.tutor] or not choice.accepted:
+        return HttpResponseRedirect(reverse('choices.views.requests'))
+    if request.user.profile.tutor:
+        choice.tutor_viewed = True
+        choice.save()
+    if request.method == 'POST' and request.user.profile.tutee:
+        date       = request.POST.get('date')
+        address    = request.POST.get('address')
+        city_name  = request.POST.get('city_name')
+        state_name = request.POST.get('state_name')
+        try:
+            month, day, year = date.split('/')
+        except ValueError:
+            date = None
+        if date and address and city_name and state_name:
+            date = datetime(int(year), int(month), int(day))
+            address    = address.lower()
+            city_name  = city_name.lower()
+            state_name = state_name.lower()
+            try:
+                state = State.objects.get(name=state_name)
+            except State.DoesNotExist:
+                state = State(name=state_name)
+                state.save()
+            try:
+                city = state.city_set.get(name=city_name)
+            except City.DoesNotExist:
+                city = City(name=city_name, state=state)
+                city.save()
+            choice.address = address
+            choice.city    = city
+            choice.state   = state
+            if choice.day.value == int(date.strftime('%w')):
+                choice.date = date
+                messages.success(request, 
+                    'Tutor has been notified of your date and place')
+            else:
+                messages.error(request, 
+                    'Date must be a %s' % choice.day.name.title())
+            if choice.date:
+                choice.tutee_viewed = True
+                choice.tutor_viewed = False
+            choice.save()
+    d = {
+        'choice': choice,
+        'title': '%s on %s at %s' % (choice.interest.name.title(),
+            choice.day.name.title(), choice.hour.time_string()),
+    }
+    return render(request, 'choices/detail.html', add_csrf(request, d))
+
+@sign_in_required
 def requests(request):
     """Show all choices for tutee or tutor."""
     if request.user.profile.tutor:
@@ -74,7 +130,7 @@ def requests(request):
     else:
         choices = request.user.tutee_choices.all().order_by('-created')
         # Mark all unviewed requests for tutee as viewed
-        for choice in choices.filter(tutee_viewed=False):
+        for choice in choices.filter(denied=True, tutee_viewed=False):
             choice.tutee_viewed = True
             choice.save()
     d = {
