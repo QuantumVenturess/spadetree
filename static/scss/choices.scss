@@ -130,14 +130,18 @@
     }
     .choiceActionForm {
       a {
-        background: rgb(115, 202, 36);
-        color: rgb(255, 255, 255);
+        background: rgb(200, 200, 200);
+        color: rgb(50, 50, 50);
         display: block;
         float: left;
         font-size: 14px;
         line-height: 16px;
         margin: 10px 10px 0 0;
         padding: 10px 20px;
+        &.setDatePlace {
+          background: rgb(115, 202, 36);
+          color: rgb(255, 255, 255);
+        }
       }
       .action {
         float: left;

@@ -72,11 +72,9 @@ def action(request, pk):
 def detail(request, pk):
     """Detail page for choice/request."""
     choice = get_object_or_404(Choice, pk=pk)
-    if not request.user in [choice.tutee, choice.tutor] or not choice.accepted:
+    if not request.user in [choice.tutee, choice.tutor]:
+        messages.error(request, 'This is not your request')
         return HttpResponseRedirect(reverse('choices.views.requests'))
-    if request.user.profile.tutor:
-        choice.tutor_viewed = True
-        choice.save()
     if request.method == 'POST' and request.user.profile.tutee:
         date       = request.POST.get('date')
         address    = request.POST.get('address')
@@ -111,9 +109,6 @@ def detail(request, pk):
             else:
                 messages.error(request, 
                     'Date must be a %s' % choice.day.name.title())
-            if choice.date:
-                choice.tutee_viewed = True
-                choice.tutor_viewed = False
             choice.save()
     d = {
         'choice': choice,
@@ -130,7 +125,7 @@ def requests(request):
     else:
         choices = request.user.tutee_choices.all().order_by('-created')
         # Mark all unviewed requests for tutee as viewed
-        for choice in choices.filter(denied=True, tutee_viewed=False):
+        for choice in choices.filter(tutee_viewed=False):
             choice.tutee_viewed = True
             choice.save()
     d = {

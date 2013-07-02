@@ -65,10 +65,9 @@ def choose(request, slug):
                     request.user.sent_messages.create(content=content,
                         recipient=user)
                     messages.success(request, 
-                        '%s has been sent your request to learn' % (
-                            user.first_name))
+                        'Set a date and place to begin learning')
                     return HttpResponseRedirect(reverse(
-                        'choices.views.requests'))
+                        'choices.views.detail', args=[choice.pk]))
     return HttpResponseRedirect(reverse('users.views.detail', 
         args=[profile.slug]))
 

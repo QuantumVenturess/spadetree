@@ -57,7 +57,13 @@
     </section>
     {% if user.profile.tutee %}
       <div class='action'>
-        <button>Set date and place</button>
+        <button>
+          {% if choice.address and choice.city and choice.date %}
+            Update
+          {% else %}
+            Set date and place
+          {% endif %}
+        </button>
       </div>
     {% endif %}
   {% if user.profile.tutee %}

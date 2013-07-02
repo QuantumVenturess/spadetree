@@ -95,14 +95,17 @@
         font-size: 13px;
         line-height: 20px; }
     .choices .choice .choiceActionForm a {
-      background: #73ca24;
-      color: white;
+      background: #c8c8c8;
+      color: #323232;
       display: block;
       float: left;
       font-size: 14px;
       line-height: 16px;
       margin: 10px 10px 0 0;
       padding: 10px 20px; }
+      .choices .choice .choiceActionForm a.setDatePlace {
+        background: #73ca24;
+        color: white; }
     .choices .choice .choiceActionForm .action {
       float: left; }
       .choices .choice .choiceActionForm .action button {

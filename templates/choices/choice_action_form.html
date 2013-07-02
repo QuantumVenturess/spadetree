@@ -1,15 +1,17 @@
 {% if not choice.completed %}
-  {% if choice.accepted %}
-    {% if user.profile.tutor and choice.ready %}
+  {% if not choice.denied %}
+    {% if user.profile.tutor and choice.accepted and choice.ready %}
       <a href='{% url choices.views.detail choice.pk %}'>View request</a>
     {% elif user.profile.tutee %}
-      <a href='{% url choices.views.detail choice.pk %}'>
-        {% if choice.ready %}
-          View
-        {% else %}
+      {% if choice.ready %}
+        <a href='{% url choices.views.detail choice.pk %}'>
+          View request
+        </a>
+      {% else %}
+        <a class='setDatePlace' href='{% url choices.views.detail choice.pk %}'>
           Set date and place
-        {% endif %}
-      </a>
+        </a>
+      {% endif %}
     {% endif %}
   {% endif %}
   <form action='{% url choices.views.action choice.pk %}' method='POST'>
