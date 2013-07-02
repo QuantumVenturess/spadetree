@@ -81,5 +81,16 @@
     {% endif %}
     for more details
   </div>
+  <section class='choiceNotes'>
+    <h5>Notes</h5>
+    <div class='notes'>
+      {% for choice_note in choice_notes %}
+        {% include 'choices/choice_note.html' %}
+      {% endfor %}
+    </div>
+    <div class='choiceNoteForm'>
+      {% include 'choices/choice_note_form.html' %}
+    </div>
+  </div>
 </div>
 {% endblock %}

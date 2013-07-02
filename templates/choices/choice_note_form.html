@@ -1,0 +1,9 @@
+<form action='{% url choices.views.new_note choice.pk %}' method='POST'>
+  {% csrf_token %}
+  <div class='field'>
+    <textarea name='content' placeholder='Type your note here'></textarea>
+  </div>
+  <div class='action'>
+    <button>Add note</button>
+  </div>
+</form>

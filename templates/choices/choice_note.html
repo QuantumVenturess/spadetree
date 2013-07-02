@@ -1,0 +1,21 @@
+<div class='choiceNote'>
+  {% load common_tags %}
+  <div class='image'>
+    <img class='lazy' data-original='{{ choice_note.user.profile.image_small }}' src='{% lazy_image %}'>
+  </div>
+  <div class='name'>
+    <p>
+      {% if choice_note.user.profile.tutor %}
+      <a href='{% url users.views.detail choice_note.user.profile.slug %}'>
+      {% endif %}
+      {{ choice_note.user.profile.full_name }}
+      {% if choice_note.user.profile.tutor %}
+      </a>
+      {% endif %}
+    </p>
+    <p><span class='gray150'>{{ choice_note.date_time }}</span></p>
+  </div>
+  <div class='choiceNoteContent'>
+    {{ choice_note.content|urlize|target_blank|linebreaks }}
+  </div>
+</div>

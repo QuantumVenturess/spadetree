@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 
 from cities.models import City
-from choices.models import Choice
+from choices.models import Choice, ChoiceNote
 from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
 from states.models import State
@@ -112,10 +112,41 @@ def detail(request, pk):
             choice.save()
     d = {
         'choice': choice,
+        'choice_notes': choice.choicenote_set.all().order_by('-created'),
         'title': '%s on %s at %s' % (choice.interest.name.title(),
             choice.day.name.title(), choice.hour.time_string()),
     }
     return render(request, 'choices/detail.html', add_csrf(request, d))
+
+@sign_in_required
+def new_note(request, pk):
+    """Create a new note for choice."""
+    choice = get_object_or_404(Choice, pk=pk)
+    if request.user not in [choice.tutee, choice.tutor]:
+        return HttpResponseRedirect(reverse('choices.views.requests'))
+    if request.method == 'POST' and request.POST.get('content'):
+        choice_note = ChoiceNote(choice=choice, 
+            content=request.POST.get('content'), user=request.user)
+        choice_note.save()
+        if request.is_ajax():
+            d = {
+                'choice': choice,
+                'choice_note': choice_note,
+            }
+            choice_note_template = loader.get_template(
+                'choices/choice_note.html')
+            choice_note_form = loader.get_template(
+                'choices/choice_note_form.html')
+            context = RequestContext(request, add_csrf(request, d))
+            data = {
+                'choice_note_template': choice_note_template.render(
+                    context),
+                'choice_note_form': choice_note_form.render(context)
+            }
+            return HttpResponse(json.dumps(data),
+                mimetype='application/json')
+    return HttpResponseRedirect(reverse('choices.views.detail',
+        args=[choice.pk]))
 
 @sign_in_required
 def requests(request):

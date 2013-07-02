@@ -150,6 +150,8 @@
         float: left;
         margin: 0 10px 0 0;
         width: 45%; }
+    .choiceDetail section.choiceNotes h5 {
+      background-image: url("../img/notes.png"); }
     .choiceDetail section p {
       font-size: 14px;
       margin: 0 0 10px 35px; }
@@ -165,3 +167,42 @@
       color: #299a0b; }
       .choiceDetail .contactInfo a:hover {
         text-decoration: underline; }
+
+/* Choice notes */
+.choiceNotes .notes .choiceNote {
+  background: #f0f0f0;
+  margin: 10px 0 0 0;
+  padding: 10px; }
+  .choiceNotes .notes .choiceNote:first-child {
+    margin: 0; }
+  .choiceNotes .notes .choiceNote .image {
+    float: left;
+    height: 40px;
+    overflow: hidden;
+    width: 40px; }
+    .choiceNotes .notes .choiceNote .image img {
+      max-height: 40px; }
+  .choiceNotes .notes .choiceNote .name p, .choiceNotes .notes .choiceNote .choiceNoteContent p {
+    font-size: 14px;
+    margin: 0; }
+  .choiceNotes .notes .choiceNote .name {
+    margin: 0 0 0 50px; }
+    .choiceNotes .notes .choiceNote .name p {
+      line-height: 20px; }
+      .choiceNotes .notes .choiceNote .name p a {
+        color: #323232; }
+        .choiceNotes .notes .choiceNote .name p a:hover {
+          text-decoration: underline; }
+  .choiceNotes .notes .choiceNote .choiceNoteContent {
+    margin: 5px 0 0 0; }
+    .choiceNotes .notes .choiceNote .choiceNoteContent p {
+      line-height: 21px; }
+    .choiceNotes .notes .choiceNote .choiceNoteContent a:hover {
+      text-decoration: underline; }
+.choiceNotes .choiceNoteForm {
+  margin: 10px 0 0 0; }
+  .choiceNotes .choiceNoteForm textarea {
+    width: 100%; }
+  .choiceNotes .choiceNoteForm .action {
+    margin: 10px 0 0 0;
+    text-align: right; }

@@ -15,7 +15,10 @@ class Review(models.Model):
 
     def date_string(self):
         """Jun 20, 2013"""
-        return self.created.strftime('%b %d, %Y')
+        day   = self.created.strftime('%d').lstrip('0')
+        month = self.created.strftime('%b')
+        year  = self.created.strftime('%y')
+        return '%s %s, %s' % (month, day, year)
 
     def image_thumb(self):
         """Return thumbs up or thumbs down image."""

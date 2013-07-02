@@ -33,7 +33,10 @@ class Choice(models.Model):
 
     def created_date_string(self):
         """Jun 20, 2013"""
-        return self.created.strftime('%b %d, %Y')
+        day   = self.created.strftime('%d').lstrip('0')
+        month = self.created.strftime('%b')
+        year  = self.created.strftime('%y')
+        return '%s %s, %s' % (month, day, year)
 
     def date_completed_string(self):
         """Jun 20, 2013 for date_complete."""
@@ -60,3 +63,31 @@ class Choice(models.Model):
 
     def state(self):
         return self.city.state.name.title()
+
+class ChoiceNote(models.Model):
+    choice  = models.ForeignKey(Choice)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    user    = models.ForeignKey(User)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __unicode__(self):
+        return '%s: %s' % (self.user, self.content)
+
+    def created_date_string(self):
+        """Jun 20, 13"""
+        day   = self.created.strftime('%d').lstrip('0')
+        month = self.created.strftime('%b')
+        year  = self.created.strftime('%y')
+        return '%s %s, %s' % (month, day, year)
+
+    def date_time(self):
+        """Jun 2, 13 at 7:00 am"""
+        return '%s at %s' % (self.created_date_string(), self.time())
+
+    def time(self):
+        time  = self.created.strftime('%I:%M').lstrip('0')
+        am_pm = self.created.strftime('%p').lower()
+        return time + am_pm

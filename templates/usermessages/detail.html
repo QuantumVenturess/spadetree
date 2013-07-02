@@ -13,7 +13,7 @@
     </a>
   </div>
   <div class='sender'>
-    <a class='messageUser' href='{% if sender.profile.tutor %}{% url users.views.detail sender.profile.slug %}{% else %}#{% endif %}'>
+    <a class='messageUser' href='{% if sender.profile.tutor %}{% url users.views.detail sender.profile.slug %}{% else %}{% url users.views.detail user.profile.slug %}{% endif %}'>
       <div class='image'>
         <img class='lazy' data-original='{{ sender.profile.image_big }}' src='{% lazy_image %}'>
       </div>

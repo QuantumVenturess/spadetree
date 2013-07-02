@@ -213,6 +213,11 @@
         }
       }
     }
+    &.choiceNotes {
+      h5 {
+        background-image: url('../img/notes.png');
+      }
+    }
     p {
       font-size: 14px;
       margin: 0 0 10px 35px;
@@ -233,6 +238,67 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+}
+/* Choice notes */
+.choiceNotes {
+  .notes {
+    .choiceNote {
+      background: rgb(240, 240, 240);
+      margin: 10px 0 0 0;
+      padding: 10px;
+      &:first-child {
+        margin: 0;
+      }
+      .image {
+        float: left;
+        height: 40px;
+        overflow: hidden;
+        width: 40px;
+        img {
+          max-height: 40px;
+        }
+      }
+      .name, .choiceNoteContent {
+        p {
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+      .name {
+        margin: 0 0 0 50px;
+        p {
+          line-height: 20px;
+          a {
+            color: rgb(50, 50, 50);
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+      .choiceNoteContent {
+        margin: 5px 0 0 0;
+        p {
+          line-height: 21px;
+        }
+        a {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .choiceNoteForm {
+    margin: 10px 0 0 0;
+    textarea {
+      width: 100%;
+    }
+    .action {
+      margin: 10px 0 0 0;
+      text-align: right;
     }
   }
 }

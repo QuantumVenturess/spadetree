@@ -93,4 +93,30 @@ $(document).ready(function() {
     });
     return false;
   });
+  // Choice notes
+  $(document).on('submit', '.choiceNotes .choiceNoteForm form', function() {
+    var textarea = $(this).find('textarea').last()
+    var content  = textarea.val();
+    if (content.length > 0) {
+      $.ajax({
+        data: $(this).serialize(),
+        type: $(this).attr('method'),
+        url: $(this).attr('action'),
+        success: function(response) {
+          $('.choiceNotes .notes').prepend(response.choice_note_template);
+          $('.choiceNotes .choiceNoteForm').html(response.choice_note_form);
+          // Lazy
+          $('.lazy').lazyload({
+            event: 'load',
+            failure_limit: 50,
+            skip_invisible: false
+          });
+        }
+      });
+    }
+    else {
+      textarea.focus();
+    }
+    return false;
+  });
 });
