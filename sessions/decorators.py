@@ -22,24 +22,25 @@ def already_logged_in():
 
 def sign_in_required(function):
     def wrapper(request, *args, **kwargs):
-        token = None
-        if request.method == 'GET':
-            token = request.GET.get('spadetree_token')
-        elif request.method == 'POST':
-            token = request.POST.get('spadetree_token')
-        if token and len(token.split('00000')) == 2:
-            pk, token = token.split('00000')
-            try:
-                user = User.objects.get(pk=pk)
-                if user.profile.token() != token:
-                    user = None
-            except User.DoesNotExist:
-                user = None
-        else:
-            user = request.user
+        # token = None
+        # if request.method == 'GET':
+        #     token = request.GET.get('spadetree_token')
+        # elif request.method == 'POST':
+        #     token = request.POST.get('spadetree_token')
+        # if token and len(token.split('00000')) == 2:
+        #     pk, token = token.split('00000')
+        #     try:
+        #         user = User.objects.get(pk=pk)
+        #         if user.profile.token() != token:
+        #             user = None
+        #     except User.DoesNotExist:
+        #         user = None
+        # else:
+        #     user = request.user
+        user = request.user
         if user and user.id:
-            if token:
-                request.user = user
+            # if token:
+            #     request.user = user
             # if not user.profile.tutee and not user.profile.tutor:
             #     return HttpResponseRedirect(reverse('users.views.pick'))
             return function(request, *args, **kwargs)
