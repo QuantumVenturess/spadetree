@@ -86,6 +86,15 @@ class Profile(models.Model):
             Q(recipient=sender, sender=self.user))
         return user_messages
 
+    def notifications(self):
+        """Return notifications for user."""
+        user = self.user
+        notifications = []
+        for subscription in user.subscription_set.all():
+            notifications += subscription.channel.notification_set.filter(
+                created__gte=subscription.created).exclude(user=user)
+        return notifications
+
     def phone_string(self):
         """Return (408) 123-4567."""
         n = str(self.phone)
@@ -118,7 +127,8 @@ class Profile(models.Model):
 
     def title_count(self):
         """Count number of unviewed choices/requests and user messages."""
-        return self.choice_count() + self.unread_message_count()
+        return (self.choice_count() + self.unread_message_count() + 
+            self.unviewed_notification_count())
 
     def token(self):
         """Use this to match with the token sent from iOS app."""
@@ -135,6 +145,15 @@ class Profile(models.Model):
         unread_messages = self.user.received_messages.filter(viewed=False)
         unread_messages_set = set([msg.sender for msg in unread_messages])
         return len(unread_messages_set)
+
+    def unviewed_notification_count(self):
+        """Count the number of notifications that are not viewed."""
+        user = self.user
+        unviewed_count = 0
+        for notification in self.notifications():
+            if not notification.viewed(user):
+                unviewed_count += 1
+        return unviewed_count
 
 def update_profile(sender, instance, **kwargs):
     try:

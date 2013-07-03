@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class='notificationList'>
+  {% for day, notifications in days %}
+    <div class='day'>
+      <h1>{{ day }}</h1>
+      <div class='notifications'>
+        {% for notification in notifications %}
+          <div class='notification'>
+            {% if notification.user.profile.tutor %}
+              <a href='{% url users.views.detail notification.user.profile.slug %}'>
+                {{ notification.user.profile.full_name }}
+              </a>
+            {% else %}
+              {{ notification.user.profile.full_name }}
+            {% endif %}
+            {% autoescape off %}
+              {{ notification.message }}
+            {% endautoescape %}
+            <span>{{ notification.time }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

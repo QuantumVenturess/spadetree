@@ -32,15 +32,18 @@ class Choice(models.Model):
             self.tutee.username, self.interest.name.title())
 
     def created_date_string(self):
-        """Jun 20, 2013"""
+        """Jun 2, 13"""
         day   = self.created.strftime('%d').lstrip('0')
         month = self.created.strftime('%b')
         year  = self.created.strftime('%y')
         return '%s %s, %s' % (month, day, year)
 
     def date_completed_string(self):
-        """Jun 20, 2013 for date_complete."""
-        return self.date_completed.strftime('%b %d, %Y')
+        """Jun 2, 13"""
+        day   = self.date_completed.strftime('%d').lstrip('0')
+        month = self.date_completed.strftime('%b')
+        year  = self.date_completed.strftime('%y')
+        return '%s %s, %s' % (month, day, year)
 
     def date_string_long(self):
         """July 13, 2013"""

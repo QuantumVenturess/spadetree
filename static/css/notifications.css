@@ -1,0 +1,23 @@
+/* List */
+.notificationList {
+  padding: 40px 0; }
+  .notificationList .day {
+    margin: 10px 0 0 0; }
+    .notificationList .day:first-child {
+      margin: 0; }
+    .notificationList .day h1 {
+      border-bottom: 1px solid #c8c8c8;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      margin: 0 0 5px 0;
+      padding: 0 10px 5px 10px; }
+    .notificationList .day .notifications .notification {
+      font-size: 13px;
+      line-height: 20px;
+      padding: 5px 10px; }
+      .notificationList .day .notifications .notification a:hover {
+        text-decoration: underline; }
+      .notificationList .day .notifications .notification span {
+        color: #969696;
+        float: right; }

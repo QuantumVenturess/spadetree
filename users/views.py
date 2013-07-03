@@ -61,6 +61,10 @@ def choose(request, slug):
                 choice.tutor    = user
                 choice.save()
                 if choice:
+                    # Create channel for this choice
+                    channel = choice.channel_set.create()
+                    # Subscribe tutee to newly created channel
+                    request.user.subscription_set.create(channel=channel)
                     # Create user message
                     request.user.sent_messages.create(content=content,
                         recipient=user)

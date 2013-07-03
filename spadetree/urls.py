@@ -21,6 +21,8 @@ urlpatterns = patterns('',
     url(r'^h/', include('hours.urls')),
     # Interests
     url(r'^i/', include('interests.urls')),
+    # Notifications
+    url(r'^n/', include('notifications.urls')),
     # OAuth
     url(r'^oauth/', include('oauth.urls')),
     # Sessions

@@ -6,8 +6,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 
+from channels.models import Channel
 from cities.models import City
 from choices.models import Choice, ChoiceNote
+from notifications.models import Notification
 from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
 from states.models import State
@@ -26,11 +28,27 @@ def action(request, pk):
             if action == 'accept':
                 choice.accepted = True
                 choice.denied   = False
+                try:
+                    channel = Channel.objects.get(choice=choice)
+                    # Subscribe user to channel with this choice
+                    channel.subscribe(request.user)
+                    # Create notification for this channel
+                    channel.create_notification(request.user, 'accept')
+                except Channel.DoesNotExist:
+                    pass
             elif action == 'deny':
                 choice.accepted = False
                 choice.denied   = True
+                try:
+                    channel = Channel.objects.get(choice=choice)
+                    # Unsubscribe user from channel with this choice
+                    channel.unsubscribe(request.user)
+                    # Create notification for this channel
+                    channel.create_notification(request.user, 'deny')
+                except Channel.DoesNotExist:
+                    pass
             # Change viewed status of choice
-            choice.tutee_viewed = False # Mark tutee's request unviewed
+            # choice.tutee_viewed = False # Mark tutee's request unviewed
             choice.tutor_viewed = True
         # User is the tutee
         elif request.user == choice.tutee:
@@ -40,6 +58,12 @@ def action(request, pk):
                 # Mark request viewed for both tutee and tutor
                 choice.tutee_viewed = True
                 choice.tutor_viewed = True
+                try:
+                    channel = Channel.objects.get(choice=choice)
+                    # Create notification for this channel
+                    channel.create_notification(request.user, 'complete')
+                except Channel.DoesNotExist:
+                    pass
         choice.save()
         if request.is_ajax():
             d = {
@@ -107,6 +131,12 @@ def detail(request, pk):
                 choice.date = date
                 messages.success(request, 
                     'Tutor has been notified of your date and place')
+                # Create notification for channel with this choice
+                try:
+                    channel = Channel.objects.get(choice=choice)
+                    channel.create_notification(request.user, 'update')
+                except Channel.DoesNotExist:
+                    pass
             else:
                 messages.error(request, 
                     'Date must be a %s' % choice.day.name.title())
@@ -129,6 +159,18 @@ def new_note(request, pk):
         choice_note = ChoiceNote(choice=choice, 
             content=request.POST.get('content'), user=request.user)
         choice_note.save()
+        try:
+            channel = Channel.objects.get(choice=choice)
+            # Create notification for this channel
+            notification = Notification()
+            notification.action      = 'new'
+            notification.channel     = channel
+            notification.choice_note = choice_note
+            notification.model       = 'choice_note'
+            notification.user        = request.user
+            notification.save()
+        except Channel.DoesNotExist:
+            pass
         if request.is_ajax():
             d = {
                 'choice': choice,

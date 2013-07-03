@@ -29,6 +29,15 @@
       <nav id='menu'>
         <ul>
           <li>
+            <a href='{% url notifications.views.list %}'>
+              Notifications
+              <span class='notificationCount'>
+                {% if user.profile.unviewed_notification_count %}
+                  {{ user.profile.unviewed_notification_count }}
+                {% endif %}
+              </span>
+            </a>
+          <li>
             <a href='{% url choices.views.requests %}'>
               Requests
               <span class='choiceCount'>

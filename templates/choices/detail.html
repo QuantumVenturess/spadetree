@@ -3,6 +3,9 @@
 {% block content %}
 <div class='choiceDetail'>
   <h1>
+    {% if choice.denied %}
+      <span class='red'>Denied</span>
+    {% endif %}
     {{ choice.interest.name.title }}
     {% if user.profile.tutee %}
       on {{ choice.day.name.title }}

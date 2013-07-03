@@ -234,18 +234,21 @@ INSTALLED_APPS += (
 )
 # project apps
 INSTALLED_APPS += (
+    'channels',
     'choices',
     'cities',
     'days',
     'hours',
     'globaltags',
     'interests',
+    'notifications',
     'oauth',
     'pages',
     'reviews',
     'sessions',
     'skills',
     'states',
+    'subscriptions',
     'usermessages',
     'users',
 )
