@@ -23,13 +23,12 @@
     background: rgb(115, 202, 36);
     @include browser(border-radius, 2px);
     color: rgb(255, 255, 255);
-    display: block;
     font-size: 18px;
     height: 20px;
     line-height: 20px;
-    margin: 40px auto;
     padding: 20px;
-    width: 200px;
+    position: relative;
+    top: 60px;
     &:hover {
       background: rgb(125, 212, 46);
     }
