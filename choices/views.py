@@ -203,7 +203,7 @@ def requests(request):
             choice.tutee_viewed = True
             choice.save()
     d = {
-        'objects': page(request, choices),
+        'objects': page(request, choices, 5),
         'title': 'Requests',
     }
     return render(request, 'choices/requests.html', add_csrf(request, d))
