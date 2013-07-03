@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,7 +13,7 @@ from usermessages.forms import ReplyMessageForm
 
 import json
 
-@sign_in_required
+@login_required
 def detail(request, pk):
     """Detail view for messages from one user."""
     sender = get_object_or_404(User, pk=pk)
@@ -43,7 +44,7 @@ def detail(request, pk):
     messages.warning(request, 'You have no messages from that user')
     return HttpResponseRedirect(reverse('usermessages.views.list'))
 
-@sign_in_required
+@login_required
 def list(request):
     """Display most recent message from all senders."""
     user_messages = request.user.profile.recent_messages()
@@ -53,7 +54,7 @@ def list(request):
     }
     return render(request, 'usermessages/list.html', d)
 
-@sign_in_required
+@login_required
 def new(request, pk):
     """Create new message."""
     receiver = get_object_or_404(User, pk=pk)

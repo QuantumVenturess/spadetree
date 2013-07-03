@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -14,7 +15,7 @@ from states.models import State
 import json
 import pytz
 
-@sign_in_required
+@login_required
 def action(request, pk):
     """Accept, deny, or complete choice."""
     choice = get_object_or_404(Choice, pk=pk)
@@ -68,7 +69,7 @@ def action(request, pk):
                 messages.success(request, 'Request completed')
     return HttpResponseRedirect(reverse('choices.views.requests'))
 
-@sign_in_required
+@login_required
 def detail(request, pk):
     """Detail page for choice/request."""
     choice = get_object_or_404(Choice, pk=pk)
@@ -118,7 +119,7 @@ def detail(request, pk):
     }
     return render(request, 'choices/detail.html', add_csrf(request, d))
 
-@sign_in_required
+@login_required
 def new_note(request, pk):
     """Create a new note for choice."""
     choice = get_object_or_404(Choice, pk=pk)
@@ -148,7 +149,7 @@ def new_note(request, pk):
     return HttpResponseRedirect(reverse('choices.views.detail',
         args=[choice.pk]))
 
-@sign_in_required
+@login_required
 def requests(request):
     """Show all choices for tutee or tutor."""
     if request.user.profile.tutor:

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,7 +14,7 @@ from spadetree.utils import add_csrf
 
 import json
 
-@sign_in_required
+@login_required
 def delete(request, pk, format=None):
     """Delete skill with pk for user."""
     skill = get_object_or_404(Skill, pk=pk)
@@ -32,7 +33,7 @@ def delete(request, pk, format=None):
     return HttpResponseRedirect(reverse('users.views.edit',
         args=[request.user.profile.slug]))
 
-@sign_in_required
+@login_required
 def new(request, format=None):
     """Create a new skill using a new or existing interest."""
     if request.method == 'POST' and request.POST.get('interest_name'):

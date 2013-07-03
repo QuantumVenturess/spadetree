@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
 from hours.models import Hour, HourFree
 
+@login_required
 def free(request, pk):
     """Set free hour for user."""
     hour = get_object_or_404(Hour, pk=pk)
