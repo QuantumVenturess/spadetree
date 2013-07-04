@@ -26,7 +26,7 @@ import os
 import socket
 import urllib2
 
-@login_required
+@sign_in_required
 def choose(request, slug):
     """Tutee chooses tutor."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -75,7 +75,7 @@ def choose(request, slug):
     return HttpResponseRedirect(reverse('users.views.detail', 
         args=[profile.slug]))
 
-@login_required
+@sign_in_required
 def detail(request, slug):
     """User detail page."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -124,7 +124,7 @@ def detail(request, slug):
             mimetype='application/json')
     return render(request, 'users/detail.html', d)
 
-@login_required
+@sign_in_required
 def edit(request, slug):
     """Edit user page."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -199,7 +199,7 @@ def edit(request, slug):
     }
     return render(request, 'users/edit.html', add_csrf(request, d))
 
-@login_required
+@sign_in_required
 def friends_tutored(request, slug):
     """Get a list of friends that this tutor has tutored."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -239,7 +239,7 @@ def friends_tutored(request, slug):
         }
     return HttpResponse(json.dumps(data), mimetype='application/json')
 
-@login_required
+@sign_in_required
 def new_review(request, slug, format=None):
     """Create new review for tutor."""
     profile = get_object_or_404(Profile, slug=slug)
@@ -283,7 +283,7 @@ def new_review(request, slug, format=None):
     return HttpResponseRedirect(reverse('users.views.detail',
         args=[profile.slug]))
 
-@login_required
+@sign_in_required
 def pick(request):
     """If user has not picked if they are a tutee or tutor."""
     if request.user.profile.tutee or request.user.profile.tutor:

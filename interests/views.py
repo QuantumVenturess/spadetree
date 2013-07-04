@@ -14,7 +14,7 @@ from spadetree.utils import add_csrf, page
 import json
 import operator
 
-@login_required
+@sign_in_required
 def browse(request):
     """List of all interests grouped by letter for browsing."""
     interests = Interest.objects.all().order_by('name')
@@ -38,7 +38,7 @@ def browse(request):
             mimetype='application/json')
     return render(request, 'interests/browse.html', add_csrf(request, d))
 
-@login_required
+@sign_in_required
 def browse_search(request, format=None):
     """Return search results for browse."""
     query = request.GET.get('q')
@@ -63,7 +63,7 @@ def browse_search(request, format=None):
     else:
         return HttpResponseRedirect(reverse('interests.views.browse'))
 
-@login_required
+@sign_in_required
 def detail(request, slug):
     """Detail page for interest."""
     interest = get_object_or_404(Interest, slug=slug)
@@ -88,7 +88,7 @@ def detail(request, slug):
             mimetype='application/json')
     return render(request, 'interests/detail.html', d)
 
-@login_required
+@sign_in_required
 def search(request, format=None):
     """Return search results for interests."""
     query = request.GET.get('q')

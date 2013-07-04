@@ -1,6 +1,9 @@
 from datetime import datetime
 from django.shortcuts import render
 
+from sessions.decorators import sign_in_required
+
+@sign_in_required
 def list(request):
     """Display all notifications."""
     user = request.user

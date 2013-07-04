@@ -14,7 +14,7 @@ from spadetree.utils import add_csrf
 
 import json
 
-@login_required
+@sign_in_required
 def delete(request, pk, format=None):
     """Delete skill with pk for user."""
     skill = get_object_or_404(Skill, pk=pk)
@@ -33,7 +33,7 @@ def delete(request, pk, format=None):
     return HttpResponseRedirect(reverse('users.views.edit',
         args=[request.user.profile.slug]))
 
-@login_required
+@sign_in_required
 def new(request, format=None):
     """Create a new skill using a new or existing interest."""
     if request.method == 'POST' and request.POST.get('interest_name'):

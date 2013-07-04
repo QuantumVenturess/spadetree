@@ -3,6 +3,6 @@ from django.shortcuts import render
 def about(request):
     """About page."""
     d = {
-        'title': request.user.username,
+        'title': 'About SpadeTree',
     }
     return render(request, 'pages/about.html', d)

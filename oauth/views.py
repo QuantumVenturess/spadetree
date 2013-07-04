@@ -9,6 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from cities.models import City
 from oauth.models import Oauth
 from oauth.utils import facebook_url
+from sessions.decorators import already_signed_in
 from states.models import State
 
 import json
@@ -17,6 +18,7 @@ import random
 import re
 import urllib2
 
+@already_signed_in
 def authenticate_app(request):
     if request.method == 'POST':
         access_token = request.POST.get('access_token')

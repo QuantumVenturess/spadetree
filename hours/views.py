@@ -4,8 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
 from hours.models import Hour, HourFree
+from sessions.decorators import sign_in_required
 
-@login_required
+@sign_in_required
 def free(request, pk):
     """Set free hour for user."""
     hour = get_object_or_404(Hour, pk=pk)
