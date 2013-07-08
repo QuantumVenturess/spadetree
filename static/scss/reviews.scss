@@ -48,6 +48,12 @@
       h1 {
         color: rgb(50, 50, 50);
         margin: 0;
+        a {
+          color: rgb(50, 50, 50);
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
       p {
         color: rgb(150, 150, 150);

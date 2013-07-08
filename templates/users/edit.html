@@ -54,10 +54,10 @@
     <div class='section location'>
       <h1>Location</h1>
       <div class='field'>
-        <input autocomplete='off' name='city_name' type='text' placeholder='City' value='{{ user.profile.city.name.title }}'>
+        <input autocomplete='off' class='stateName' data-autocomplete-source='{% url states.views.state_list %}' name='state_name' type='text' placeholder='State' value='{{ user.profile.city.state.name.title }}'>
       </div>
       <div class='field'>
-        <input autocomplete='off' name='state_name' type='text' placeholder='State' value='{{ user.profile.city.state.name.title }}'>
+        <input autocomplete='off' class='cityName' data-autocomplete-source='{{ city_autocomplete_source }}'  data-original-source='{% url cities.views.city_list %}' name='city_name' type='text' placeholder='City' value='{{ user.profile.city.name.title }}'>
       </div>
       <div class='clear'></div>
     </div>
@@ -82,7 +82,6 @@
     <div class='clear'></div>
     <div class='action'>
       <button>Update</button>
-      <a href='{% url users.views.detail user.profile.slug %}'>Cancel</a>
     </div>
   </form>
 </div>

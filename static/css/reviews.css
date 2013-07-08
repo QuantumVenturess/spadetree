@@ -39,6 +39,10 @@
     .review .info .name h1 {
       color: #323232;
       margin: 0; }
+      .review .info .name h1 a {
+        color: #323232; }
+        .review .info .name h1 a:hover {
+          text-decoration: underline; }
     .review .info .name p {
       color: #969696; }
   .review .reviewContent {

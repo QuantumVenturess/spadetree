@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # Choices
     url(r'^c/', include('choices.urls')),
+    # Cities
+    url(r'^cities/', include('cities.urls')),
     # Days
     url(r'^d/', include('days.urls')),
     # Hours
@@ -30,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^sessions/', include('sessions.urls')),
     # Skills
     url(r'^skills/', include('skills.urls')),
+    # States
+    url(r'^states/', include('states.urls')),
     # User Messages
     url(r'^m/', include('usermessages.urls')),
     # Users

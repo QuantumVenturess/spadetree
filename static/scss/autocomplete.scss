@@ -1,0 +1,23 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+#spadetree {
+  .ui-autocomplete {
+    padding: 0;
+    .ui-menu-item {
+      a {
+        padding: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+        &.ui-state-focus {
+          background: rgb(240, 240, 240);
+        }
+      }
+    }
+  }
+}

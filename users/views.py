@@ -191,7 +191,15 @@ def edit(request, slug):
         hours_pm.sort(key=lambda (x, c): x.value)
     profile_form = ProfileForm(instance=profile)
     skills = [skill for skill in user.skill_set.all()]
+    # Autocomplete source for city name
+    if profile.city.state:
+        state_slug = profile.city.state.name.replace(' ', '-')
+        city_autocomplete_source = reverse('cities.views.city_list',
+            args=[state_slug])
+    else:
+        city_autocomplete_source = reverse('cities.views.city_list')
     d = {
+        'city_autocomplete_source': city_autocomplete_source,
         'days': days,
         'hours_am': hours_am,
         'hours_pm': hours_pm,

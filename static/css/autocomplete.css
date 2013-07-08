@@ -1,0 +1,8 @@
+#spadetree .ui-autocomplete {
+  padding: 0; }
+  #spadetree .ui-autocomplete .ui-menu-item a {
+    padding: 10px; }
+    #spadetree .ui-autocomplete .ui-menu-item a:hover {
+      cursor: pointer; }
+    #spadetree .ui-autocomplete .ui-menu-item a.ui-state-focus {
+      background: #f0f0f0; }

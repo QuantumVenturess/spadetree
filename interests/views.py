@@ -50,7 +50,7 @@ def browse_search(request, format=None):
     if query:
         queries = [word for word in query.split(' ') if word]
         qs = [(Q(name=q) | Q(name__icontains=q)) for q in queries]
-        results = Interest.objects.all().filter(reduce(operator.and_, 
+        results = Interest.objects.filter(reduce(operator.and_, 
             qs)).order_by('name')
     else:
         results = Interest.objects.all().order_by('name')

@@ -8,7 +8,11 @@
       <img src='{{ review.image_thumb }}'>
     </div>
     <div class='name'>
-      <h1>{{ review.tutee.profile.full_name }}</h1>
+      <h1>
+        <a href='{% url users.views.detail review.tutee.profile.slug %}'>
+          {{ review.tutee.profile.full_name }}
+        </a>
+      </h1>
       <p>{{ review.date_string }}</p>
     </div>
   </div>
