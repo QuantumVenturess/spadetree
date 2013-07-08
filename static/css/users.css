@@ -44,10 +44,17 @@
   .userDetail .top .name {
     float: left; }
     .userDetail .top .name h1 {
+      float: left;
       font-size: 36px;
       font-weight: 300;
       line-height: 54px;
       margin: 0; }
+    .userDetail .top .name a {
+      float: right;
+      font-size: 13px;
+      left: 20px;
+      position: relative;
+      top: 19px; }
     .userDetail .top .name p {
       background-image: url("../img/location.png");
       background-repeat: no-repeat;

@@ -8,16 +8,9 @@
       <div class='notifications'>
         {% for notification in notifications %}
           <div class='notification'>
-            {% if notification.user.profile.tutor %}
-              <a href='{% url users.views.detail notification.user.profile.slug %}'>
-                {{ notification.user.profile.full_name }}
-              </a>
-            {% else %}
-              {{ notification.user.profile.full_name }}
-            {% endif %}
-            {% autoescape off %}
-              {{ notification.message }}
-            {% endautoescape %}
+            <a href='{% url users.views.detail notification.user.profile.slug %}'>
+              {{ notification.user.profile.full_name }}</a>
+              {% autoescape off %}{{ notification.message }}{% endautoescape %}
             <span>{{ notification.time }}</span>
           </div>
         {% endfor %}

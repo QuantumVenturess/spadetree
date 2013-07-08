@@ -8,7 +8,15 @@
       <img class='lazy' data-original='{{ userd.profile.image_big }}' src='{% lazy_image %}'>
     </div>
     <div class='name'>
-      <h1>{{ userd.first_name }} {{ userd.last_name }}</h1>
+      <div>
+        <h1>{{ userd.profile.full_name }}</h1>
+        {% if userd.oauth.facebook_link and user_is_tutor %}
+          <a href='{{ userd.oauth.facebook_link }}' target='_blank'>
+            view Facebook profile
+          </a>
+        {% endif %}
+      </div>
+      <div class='clear'></div>
       <p>{{ userd.profile.location.title }}</p>
     </div>
     {% if show_choice_button %}
@@ -45,7 +53,7 @@
         </div>
       </div>
     {% endif %}
-    {% if userd.profile.tutor and user.profile.tutee %}
+    {% if user_is_tutor and user.profile.tutee %}
       <span class='friends'></span>
     {% endif %}
     <span class='prepend'>
@@ -63,7 +71,7 @@
 </span>
 {% endblock %}
 {% block head %}
-{% if userd.profile.tutor and user.profile.tutee %}
+{% if user_is_tutor and user.profile.tutee %}
 <script>
 $(document).ready(function() {
   $.ajax({

@@ -67,7 +67,7 @@ def choose(request, slug):
                     request.user.subscription_set.create(channel=channel)
                     # Create user message
                     request.user.sent_messages.create(content=content,
-                        recipient=user)
+                        recipient=user, viewed=True)
                     messages.success(request, 
                         'Set a date and place to begin learning')
                     return HttpResponseRedirect(reverse(
@@ -83,10 +83,10 @@ def detail(request, slug):
     if not profile.has_chosen():
         return HttpResponseRedirect(reverse('users.views.pick'))
     # You cannot view a tutee's page
-    if not profile.tutor and request.user != profile.user:
-        messages.warning(request, 'You can only view tutors')
-        return HttpResponseRedirect(reverse('users.views.detail', 
-            args=[request.user.profile.slug]))
+    # if not profile.tutor and request.user != profile.user:
+    #     messages.warning(request, 'You can only view tutors')
+    #     return HttpResponseRedirect(reverse('users.views.detail', 
+    #         args=[request.user.profile.slug]))
     user = profile.user
     reviews = user.tutor_reviews.all().order_by('-created')
     show_choice_button = (profile.tutor and request.user.profile.tutee and 
@@ -101,6 +101,7 @@ def detail(request, slug):
             hour__value__lte=11).order_by('hour__value')
         hours_free_pm = hours_free.filter(hour__value__gte=12,
             hour__value__lte=23).order_by('hour__value')
+    user_is_tutor = profile.tutor
     d = {
         'days_free': days_free,
         'hours_free_am': hours_free_am,
@@ -109,6 +110,7 @@ def detail(request, slug):
         'show_choice_button': show_choice_button,
         'skills': profile.skills(),
         'title': '%s %s' % (user.first_name, user.last_name),
+        'user_is_tutor': user_is_tutor,
         'userd': user,
     }
     if request.is_ajax():

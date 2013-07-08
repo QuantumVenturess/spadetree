@@ -8,19 +8,15 @@
       <div class='image'>
         <img class='lazy' data-original='{{ user.profile.image_big }}' src='{% lazy_image %}'>
       </div>
-      <p>{{ user.first_name }}</p>
-      <p>{{ user.last_name }}</p>
+      <p>{{ user.profile.full_name }}</p>
     </a>
   </div>
   <div class='sender'>
-    <a class='messageUser' href='{% if sender.profile.tutor %}{% url users.views.detail sender.profile.slug %}{% else %}{% url users.views.detail user.profile.slug %}{% endif %}'>
+    <a class='messageUser' href='{% url users.views.detail sender.profile.slug %}'>
       <div class='image'>
         <img class='lazy' data-original='{{ sender.profile.image_big }}' src='{% lazy_image %}'>
       </div>
-      <p>{{ sender.first_name }}</p>
-      {% if sender.profile.tutor %}
-        <p>{{ sender.last_name }}</p>
-      {% endif %}
+      <p>{{ sender.profile.full_name }}</p>
     </a>
   </div>
   <div class='userMessages'>

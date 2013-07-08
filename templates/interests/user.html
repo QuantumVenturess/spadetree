@@ -1,0 +1,10 @@
+{% load common_tags %}
+<a class='tutor' href='{% url users.views.detail object.profile.slug %}'>
+  <div class='image'>
+    <img class='lazy' data-original='{{ object.profile.image_small }}' src='{% lazy_image %}'>
+  </div>
+  <div class='name'>
+    <h2>{{ object.profile.full_name }}</h2>
+    <p>{{ object.profile.location.title }}</p>
+  </div>
+</a>

@@ -140,6 +140,7 @@ def facebook_authenticate(request):
         facebook_id = data.get('id')
         first_name  = data.get('first_name')
         last_name   = data.get('last_name')
+        link        = data.get('link')
         location    = data.get('location')
         username    = ' '.join([first_name, last_name])
         # If user is not signed in
@@ -148,7 +149,8 @@ def facebook_authenticate(request):
             try:
                 oauth = Oauth.objects.get(facebook_id=facebook_id)
                 # Update access token
-                oauth.access_token = access_token
+                oauth.access_token  = access_token
+                oauth.facebook_link = link
                 oauth.save()
                 user = oauth.user
             # If oauth does not exist with that facebook id, create one
@@ -196,7 +198,8 @@ def facebook_authenticate(request):
                     profile.save()
                 # Create oauth for user
                 user.oauth_set.create(access_token=access_token, 
-                    facebook_id=facebook_id, provider='facebook')
+                    facebook_id=facebook_id, facebook_link=link, 
+                        provider='facebook')
             # Sign in user
             auth.login(request, auth.authenticate(email=user.email))
         # If user is signed in

@@ -34,10 +34,11 @@ class Profile(models.Model):
 
     def full_name(self):
         """Return full name if tutor or first name if tutee"""
-        if self.tutor:
-            return '%s %s' % (self.user.first_name, self.user.last_name)
-        else:
-            return self.user.first_name
+        return '%s %s' % (self.user.first_name, self.user.last_name[0])
+        # if self.tutor:
+        #     return '%s %s' % (self.user.first_name, self.user.last_name)
+        # else:
+        #     return self.user.first_name
 
     def has_chosen(self):
         if self.tutee or self.tutor:
@@ -74,9 +75,15 @@ class Profile(models.Model):
         location = 'The World'
         if self.city:
             if self.city.state:
-                location = '%s, %s' % (self.city, self.city.state)
+                if self.tutor:
+                    location = '%s, %s' % (self.city.name, self.city.state.name)
+                else:
+                    location = self.city.state.name
             else:
-                location = self.city
+                if self.tutor:
+                    location = self.city.name
+                else:
+                    location = 'The World'
         return location
 
     def messages(self, sender):
@@ -156,12 +163,15 @@ class Profile(models.Model):
         return unviewed_count
 
 def update_profile(sender, instance, **kwargs):
+    slug = '%s-%s' % (instance.first_name.lower(), instance.pk)
     try:
-        profile = Profile.objects.get(user=instance)
-        profile.slug = slugify(instance.username)
+        profile      = Profile.objects.get(user=instance)
+        profile.slug = slug
+        # profile.slug = slugify(instance.username)
     except Profile.DoesNotExist:
-        profile = Profile.objects.create(slug=slugify(instance.username), 
-            user=instance)
+        profile = Profile.objects.create(slug=slug)
+        # profile = Profile.objects.create(slug=slugify(instance.username), 
+        #     user=instance)
     profile.in_count += 1
     profile.save()
 

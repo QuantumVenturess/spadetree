@@ -20,9 +20,14 @@ def browse(request):
     interests = Interest.objects.all().order_by('name')
     paged     = page(request, interests, 20)
     groups    = group_interests_by_letter(paged)
+    if request.user.profile.tutor:
+        placeholder = 'What are you passionate about?'
+    else:
+        placeholder = 'What are you interested in?'
     d = {
         'groups': groups,
         'objects': paged,
+        'placeholder': placeholder,
         'title': 'Browse',
     }
     if request.is_ajax():
@@ -68,21 +73,31 @@ def detail(request, slug):
     """Detail page for interest."""
     interest = get_object_or_404(Interest, slug=slug)
     skills   = Skill.objects.filter(interest=interest)
-    users    = [skill.user for skill in skills if skill.user.profile.tutor]
-    users.sort(key=lambda x: x.first_name)
+    tutees   = []
+    tutors   = []
+    for skill in skills:
+        user = skill.user
+        if user.profile.tutor:
+            tutors.append(user)
+        elif user.profile.tutee:
+            tutees.append(user)
+    tutees.sort(key=lambda x: x.first_name)
+    tutors.sort(key=lambda x: x.first_name)
     d = {
         'interest': interest,
-        'objects': page(request, users, 20),
         'title': interest.name.title(),
+        'tutees': tutees,
+        'tutors': tutors,
     }
     if request.is_ajax():
-        tutors  = loader.get_template('interests/tutors.html')
+        users   = loader.get_template('interests/users.html')
         context = RequestContext(request, {
-            'objects': users,
+            'tutees': tutees,
+            'tutors': tutors,
         });
         data = {
             'pk': interest.pk,
-            'tutors': tutors.render(context),
+            'users': users.render(context),
         }
         return HttpResponse(json.dumps(data),
             mimetype='application/json')

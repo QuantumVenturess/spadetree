@@ -5,7 +5,7 @@
   <div class='search'>
     <form action='{% url interests.views.browse_search %}' method='GET'>
       <div class='field'>
-        <input autocomplete='off' name='q' placeholder='What are you interested in?' type='text'>
+        <input autocomplete='off' name='q' placeholder='{{ placeholder }}' type='text'>
       </div>
       <div class='action'>
         <button>Search</button>

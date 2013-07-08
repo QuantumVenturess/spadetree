@@ -41,30 +41,58 @@
         .interestList .results .group ul li .interestNameLink:hover {
           background: #f0f0f0;
           color: #73ca24; }
+        .interestList .results .group ul li .interestNameLink.show {
+          font-weight: 700; }
+          .interestList .results .group ul li .interestNameLink.show:hover {
+            color: #323232; }
         .interestList .results .group ul li .interestNameLink .browseSpinner {
           float: right;
           position: relative;
           right: 10px;
           top: 10px; }
+      .interestList .results .group ul li .tutorsInsert {
+        margin: 0 0 0 10px; }
+        .interestList .results .group ul li .tutorsInsert .label .line {
+          border-top: 1px solid #c8c8c8;
+          position: relative;
+          top: 20px;
+          width: 90%; }
+          .interestList .results .group ul li .tutorsInsert .label .line.left {
+            float: left; }
+          .interestList .results .group ul li .tutorsInsert .label .line.right {
+            float: right; }
+        .interestList .results .group ul li .tutorsInsert .label p {
+          color: #969696;
+          font-size: 14px;
+          line-height: 21px;
+          padding: 10px; }
 
 /* Detail */
 .interestDetail {
   padding: 40px 0; }
-  .interestDetail .label {
-    padding: 0 10px; }
-    .interestDetail .label h1 {
-      background-image: url("../img/tutors.png");
-      background-repeat: no-repeat;
-      background-size: 25px 25px;
-      font-size: 27px;
-      font-weight: 300;
-      line-height: 27px;
+  .interestDetail section {
+    margin: 40px 0 0 0; }
+    .interestDetail section:first-child {
+      margin: 0; }
+    .interestDetail section.tutors h1 {
+      background-image: url("../img/tutors.png"); }
+    .interestDetail section.tutees h1 {
+      background-image: url("../img/tutees.png"); }
+    .interestDetail section .label {
       margin: 0 0 20px 0;
-      padding: 0 0 0 35px; }
-  .interestDetail .tutor {
-    background: #f0f0f0; }
-    .interestDetail .tutor:hover {
-      background: #e6e6e6; }
+      padding: 0 10px; }
+      .interestDetail section .label h1 {
+        background-repeat: no-repeat;
+        background-size: 25px 25px;
+        font-size: 27px;
+        font-weight: 300;
+        line-height: 27px;
+        margin: 0;
+        padding: 0 0 0 35px; }
+    .interestDetail section .tutor {
+      background: #f0f0f0; }
+      .interestDetail section .tutor:hover {
+        background: #e6e6e6; }
 
 .interestList .tutor {
   background: #fafafa; }
@@ -74,7 +102,7 @@
       color: #73ca24; }
 
 .interestDetail h3, .interestList h3 {
-  background: #f0f0f0;
+  background: #fafafa;
   color: #969696;
   font-size: 14px;
   font-style: italic;
@@ -99,7 +127,7 @@
       line-height: 20px; }
     .interestDetail .tutor .name h2, .interestList .tutor .name h2 {
       color: #323232;
-      font-weight: 700;
+      font-weight: 300;
       margin: 0; }
     .interestDetail .tutor .name p, .interestList .tutor .name p {
       color: #969696; }

@@ -19,16 +19,15 @@
     <div class='name'>
       <h1>
         {% if user.profile.tutor %}
-          {{ choice.tutee.profile.full_name }}
+          From:
+          <a href='{% url users.views.detail choice.tutee.profile.slug %}'>
+            {{ choice.tutee.profile.full_name }}
+          </a>
         {% elif user.profile.tutee %}
           To:
-          {% if choice.tutor.profile.tutor %}
-            <a href='{% url users.views.detail choice.tutor.profile.slug %}'>
-              {{ choice.tutor.profile.full_name }}
-            </a>
-          {% else %}
+          <a href='{% url users.views.detail choice.tutor.profile.slug %}'>
             {{ choice.tutor.profile.full_name }}
-          {% endif %}
+          </a>
         {% endif %}
       </h1>
       <p>

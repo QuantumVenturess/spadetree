@@ -2,10 +2,29 @@
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
 <div class='interestDetail'>
-  <div class='label'>
-    <h1>{{ interest.name.title }} Tutors</h1>
-  </div>
-  {% include 'interests/tutors.html' %}
+  <section class='tutors'>
+    <div class='label'>
+      <h1>{{ interest.name.title }} Tutors</h1>
+    </div>
+    {% if tutors %}
+      {% for object in tutors %}
+        {% include 'interests/user.html' %}
+      {% endfor %}
+    {% else %}
+      <h3>Sorry, no tutors yet</h3>
+    {% endif %}
+  </section>
+  <section class='tutees'>
+    <div class='label'>
+      <h1>Tutees interested in {{ interest.name.title }}</h1>
+    </div>
+    {% if tutees %}
+      {% for object in tutees %}
+        {% include 'interests/user.html' %}
+      {% endfor %}
+    {% else %}
+      <h3>Sorry, no tutees yet</h3>
+    {% endif %}
+  </section>
 </div>
-{% include 'pagination.html' %}
 {% endblock %}

@@ -1,0 +1,20 @@
+<div class='label'>
+  <p>Tutors</p>
+</div>
+{% if tutors %}
+  {% for object in tutors %}
+    {% include 'interests/user.html' %}
+  {% endfor %}
+{% else %}
+  <h3>Sorry, no tutors yet</h3>
+{% endif %}
+<div class='label'>
+  <p>Tutees</p>
+</div>
+{% if tutees %}
+  {% for object in tutees %}
+    {% include 'interests/user.html' %}
+  {% endfor %}
+{% else %}
+  <h3>Sorry, no tutees yet</h3>
+{% endif %}

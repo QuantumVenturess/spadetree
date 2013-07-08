@@ -48,7 +48,7 @@ $(document).ready(function() {
           success: function(response) {
             var pk = response.pk;
             $('.interestList #interest_' + pk + ' .tutorsInsert').html(
-              response.tutors);
+              response.users);
             // Remove spinner
             browseSpinner.remove();
             // Lazy load
