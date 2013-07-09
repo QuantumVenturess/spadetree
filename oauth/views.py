@@ -164,7 +164,7 @@ def facebook_authenticate(request):
                 oauth = Oauth.objects.get(facebook_id=facebook_id)
                 # Update access token
                 oauth.access_token  = access_token
-                oauth.facebook_link = link
+                oauth.facebook_link = facebook_link
                 oauth.save()
                 user = oauth.user
             # If oauth does not exist with that facebook id, create one

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
@@ -15,33 +16,52 @@ import json
 import operator
 
 @sign_in_required
-def browse(request):
+def browse(request, format=None):
     """List of all interests grouped by letter for browsing."""
     interests = Interest.objects.all().order_by('name')
     paged     = page(request, interests, 20)
-    groups    = group_interests_by_letter(paged)
-    if request.user.profile.tutor:
-        placeholder = 'What are you passionate about?'
-    else:
-        placeholder = 'What are you interested in?'
-    d = {
-        'groups': groups,
-        'objects': paged,
-        'placeholder': placeholder,
-        'title': 'Browse',
-    }
-    if request.is_ajax():
-        t = loader.get_template('interests/browse_results.html')
-        p = loader.get_template('pagination.html')
-        context = RequestContext(request, d)
+    objects   = defaultdict(list)
+    json_dict = defaultdict(list)
+    for interest in paged:
+        letter = interest.name[0]
+        if objects.get(letter):
+            objects[letter].append(interest)
+        else:
+            objects[letter] = [interest]
+        if json_dict.get(letter):
+            json_dict[letter].append(interest.to_json())
+        else:
+            json_dict[letter] = [interest.to_json()]
+    if format and format == '.json':
         data = {
-            'pagination': p.render(context),
-            'results': t.render(context),
-            'selector': '.interestList .results',
+            'objects': json_dict,
+            'pages': paged.paginator.num_pages,
         }
-        return HttpResponse(json.dumps(data),
-            mimetype='application/json')
-    return render(request, 'interests/browse.html', add_csrf(request, d))
+        return HttpResponse(json.dumps(data), mimetype='application/json')
+    else:
+        if request.user.profile.tutor:
+            placeholder = 'What are you passionate about?'
+        else:
+            placeholder = 'What are you interested in?'
+        groups = sorted(objects.items(), key=lambda (letter, interests): letter)
+        d = {
+            'groups': groups,
+            'objects': paged,
+            'placeholder': placeholder,
+            'title': 'Browse',
+        }
+        if request.is_ajax():
+            t = loader.get_template('interests/browse_results.html')
+            p = loader.get_template('pagination.html')
+            context = RequestContext(request, d)
+            data = {
+                'pagination': p.render(context),
+                'results': t.render(context),
+                'selector': '.interestList .results',
+            }
+            return HttpResponse(json.dumps(data),
+                mimetype='application/json')
+        return render(request, 'interests/browse.html', add_csrf(request, d))
 
 @sign_in_required
 def browse_search(request, format=None):

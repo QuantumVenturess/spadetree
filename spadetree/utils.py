@@ -7,6 +7,9 @@ def add_csrf(request, dictionary):
     dictionary.update(csrf(request))
     return dictionary
 
+def nsdate_format(date):
+    return date.strftime('%Y-%m-%d %H:%M:%S %z')
+
 def page(request, objects, per_page=None):
     """Create paginator object and return it."""
     # [leading block] [current page] [trailing block]
