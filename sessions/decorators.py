@@ -75,8 +75,8 @@ def user_passes_test_custom(test_func, login_url=None,
                     token = request.GET.get('spadetree_token')
                 elif request.method == 'POST':
                     token = request.POST.get('spadetree_token')
-                if token and len(token.split('00000')) == 2:
-                    pk, token = token.split('00000')
+                if token and len(token.split('x00000x')) == 2:
+                    pk, token = token.split('x00000x')
                     try:
                         user = User.objects.get(pk=pk)
                         if user.profile.token() == token:

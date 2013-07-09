@@ -192,7 +192,7 @@ def edit(request, slug):
     profile_form = ProfileForm(instance=profile)
     skills = [skill for skill in user.skill_set.all()]
     # Autocomplete source for city name
-    if profile.city.state:
+    if profile.city and profile.city.state:
         state_slug = profile.city.state.name.replace(' ', '-')
         city_autocomplete_source = reverse('cities.views.city_list',
             args=[state_slug])

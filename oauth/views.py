@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
 from cities.models import City
 from oauth.models import Oauth
@@ -19,6 +20,7 @@ import re
 import urllib2
 
 @already_signed_in
+@csrf_exempt
 def authenticate_app(request, format):
     if format == '.json':
         if request.method == 'GET':
@@ -98,7 +100,8 @@ def authenticate_app(request, format):
                     facebook_id=facebook_id, facebook_link=facebook_link, 
                         provider='facebook')
             if user:
-                spadetree_token = '%s00000%s' % (user.pk, user.profile.token())
+                spadetree_token = '%sx00000x%s' % (user.pk, 
+                    user.profile.token())
             else:
                 spadetree_token = 'User did not save'
         else:
