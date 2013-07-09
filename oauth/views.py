@@ -34,7 +34,9 @@ def authenticate_app(request, format):
         partial = 'CAAHhPEhKJfcBA' if not settings.DEV else 'CAACDp4ZA8AYsB'
         pattern = re.compile(partial)
         match   = re.search(pattern, access_token)
+        print request.POST
         if match:
+            print match
             # Check to see if oauth with facebook id exists
             try:
                 oauth = Oauth.objects.get(facebook_id=facebook_id)
