@@ -19,7 +19,6 @@ import random
 import re
 import urllib2
 
-@already_signed_in
 @csrf_exempt
 def authenticate_app(request, format):
     if format == '.json':
