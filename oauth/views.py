@@ -33,7 +33,10 @@ def authenticate_app(request, format):
         first_name    = data.get('first_name')
         last_name     = data.get('last_name')
         location      = data.get('location')
-        username      = ' '.join([first_name, last_name])
+        if first_name and last_name:
+            username = ' '.join([first_name, last_name])
+        else:
+            username = ''
         # Verification
         partial = 'CAAHhPEhKJfcBA' if not settings.DEV else 'CAACDp4ZA8AYsB'
         pattern = re.compile(partial)
@@ -44,7 +47,7 @@ def authenticate_app(request, format):
                 oauth = Oauth.objects.get(facebook_id=facebook_id)
                 # Update access token
                 oauth.access_token  = access_token
-                oauth.facebook_link = link
+                oauth.facebook_link = facebook_link
                 oauth.save()
                 user = oauth.user
             # If oauth does not exist with that facebook id, create one
@@ -92,10 +95,10 @@ def authenticate_app(request, format):
                     profile.save()
                 # Create oauth for user
                 user.oauth_set.create(access_token=access_token, 
-                    facebook_id=facebook_id, facebook_link=link, 
+                    facebook_id=facebook_id, facebook_link=facebook_link, 
                         provider='facebook')
             if user:
-                spadetree_token = '%s00000%s' % (user.pk, user.profile.token)
+                spadetree_token = '%s00000%s' % (user.pk, user.profile.token())
             else:
                 spadetree_token = 'User did not save'
         else:
@@ -103,12 +106,12 @@ def authenticate_app(request, format):
         data = {
             'id': user.pk,
             'spadetree_token': spadetree_token,
-            'tutee': 1 if profile.tutee else 0,
-            'tutor': 1 if profile.tutor else 0,
+            'tutee': 1 if user.profile.tutee else 0,
+            'tutor': 1 if user.profile.tutor else 0,
         }
         return HttpResponse(json.dumps(data), 
             mimetype='application/json')
-    # return HttpResponseRedirect(reverse('root_path'))
+    return HttpResponseRedirect(reverse('root_path'))
 
 def facebook(request):
     return HttpResponseRedirect(facebook_url())
@@ -143,15 +146,15 @@ def facebook_authenticate(request):
         graph = 'https://graph.facebook.com/me?access_token=%s' % access_token
         api_call = urllib2.urlopen(graph).read()
         # Extract data from json
-        data        = json.loads(api_call)
-        bio         = data.get('bio')
-        email       = data.get('email')
-        facebook_id = data.get('id')
-        first_name  = data.get('first_name')
-        last_name   = data.get('last_name')
-        link        = data.get('link')
-        location    = data.get('location')
-        username    = ' '.join([first_name, last_name])
+        data          = json.loads(api_call)
+        bio           = data.get('bio')
+        email         = data.get('email')
+        facebook_id   = data.get('id')
+        facebook_link = data.get('link')
+        first_name    = data.get('first_name')
+        last_name     = data.get('last_name')
+        location      = data.get('location')
+        username      = ' '.join([first_name, last_name])
         # If user is not signed in
         if request.user.is_anonymous():
             # Check to see if oauth with facebook id exists
@@ -207,7 +210,7 @@ def facebook_authenticate(request):
                     profile.save()
                 # Create oauth for user
                 user.oauth_set.create(access_token=access_token, 
-                    facebook_id=facebook_id, facebook_link=link, 
+                    facebook_id=facebook_id, facebook_link=facebook_link, 
                         provider='facebook')
             # Sign in user
             auth.login(request, auth.authenticate(email=user.email))

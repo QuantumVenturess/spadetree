@@ -10,7 +10,7 @@ from cities.models import City
 from usermessages.models import UserMessage
 
 class Profile(models.Model):
-    about    = models.TextField()
+    about    = models.TextField(blank=True, null=True)
     city     = models.ForeignKey(City, blank=True, null=True)
     created  = models.DateTimeField(auto_now_add=True)
     image    = models.ImageField(blank=True, null=True, 
@@ -169,7 +169,7 @@ def update_profile(sender, instance, **kwargs):
         profile.slug = slug
         # profile.slug = slugify(instance.username)
     except Profile.DoesNotExist:
-        profile = Profile.objects.create(slug=slug)
+        profile = Profile.objects.create(slug=slug, user=instance)
         # profile = Profile.objects.create(slug=slugify(instance.username), 
         #     user=instance)
     profile.in_count += 1
