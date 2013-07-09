@@ -21,20 +21,17 @@ def browse(request, format=None):
     interests = Interest.objects.all().order_by('name')
     paged     = page(request, interests, 20)
     objects   = defaultdict(list)
-    json_dict = defaultdict(list)
+    json_list = []
     for interest in paged:
         letter = interest.name[0]
         if objects.get(letter):
             objects[letter].append(interest)
         else:
             objects[letter] = [interest]
-        if json_dict.get(letter):
-            json_dict[letter].append(interest.to_json())
-        else:
-            json_dict[letter] = [interest.to_json()]
+        json_list.append(interest.to_json())
     if format and format == '.json':
         data = {
-            'objects': json_dict,
+            'interests': json_list,
             'pages': paged.paginator.num_pages,
         }
         return HttpResponse(json.dumps(data), mimetype='application/json')
