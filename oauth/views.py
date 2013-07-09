@@ -20,28 +20,30 @@ import urllib2
 
 @already_signed_in
 def authenticate_app(request, format):
-    if request.method == 'POST' and format == '.json':
-        access_token  = request.POST.get('access_token')
-        bio           = request.POST.get('bio')
-        email         = request.POST.get('email')
-        facebook_id   = request.POST.get('facebook_id')
-        facebook_link = request.POST.get('facebook_link')
-        first_name    = request.POST.get('first_name')
-        last_name     = request.POST.get('last_name')
-        location      = request.POST.get('location')
+    if format == '.json':
+        if request.method == 'GET':
+            data = request.GET
+        elif request.method == 'POST':
+            data = request.POST
+        access_token  = data.get('access_token')
+        bio           = data.get('bio')
+        email         = data.get('email')
+        facebook_id   = data.get('facebook_id')
+        facebook_link = data.get('facebook_link')
+        first_name    = data.get('first_name')
+        last_name     = data.get('last_name')
+        location      = data.get('location')
         username      = ' '.join([first_name, last_name])
         # Verification
         partial = 'CAAHhPEhKJfcBA' if not settings.DEV else 'CAACDp4ZA8AYsB'
         pattern = re.compile(partial)
         match   = re.search(pattern, access_token)
-        print request.POST
         if match:
-            print match
             # Check to see if oauth with facebook id exists
             try:
                 oauth = Oauth.objects.get(facebook_id=facebook_id)
                 # Update access token
-                oauth.access_token = access_token
+                oauth.access_token  = access_token
                 oauth.facebook_link = link
                 oauth.save()
                 user = oauth.user
@@ -106,7 +108,7 @@ def authenticate_app(request, format):
         }
         return HttpResponse(json.dumps(data), 
             mimetype='application/json')
-    return HttpResponseRedirect(reverse('root_path'))
+    # return HttpResponseRedirect(reverse('root_path'))
 
 def facebook(request):
     return HttpResponseRedirect(facebook_url())
