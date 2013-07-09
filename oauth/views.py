@@ -19,16 +19,17 @@ import re
 import urllib2
 
 @already_signed_in
-def authenticate_app(request):
-    if request.method == 'POST':
-        access_token = request.POST.get('access_token')
-        bio          = request.POST.get('bio')
-        email        = request.POST.get('email')
-        facebook_id  = request.POST.get('facebook_id')
-        first_name   = request.POST.get('first_name')
-        last_name    = request.POST.get('last_name')
-        location     = request.POST.get('location')
-        username     = ' '.join([first_name, last_name])
+def authenticate_app(request, format):
+    if request.method == 'POST' and format == '.json':
+        access_token  = request.POST.get('access_token')
+        bio           = request.POST.get('bio')
+        email         = request.POST.get('email')
+        facebook_id   = request.POST.get('facebook_id')
+        facebook_link = request.POST.get('facebook_link')
+        first_name    = request.POST.get('first_name')
+        last_name     = request.POST.get('last_name')
+        location      = request.POST.get('location')
+        username      = ' '.join([first_name, last_name])
         # Verification
         partial = 'CAAHhPEhKJfcBA' if not settings.DEV else 'CAACDp4ZA8AYsB'
         pattern = re.compile(partial)
@@ -39,6 +40,7 @@ def authenticate_app(request):
                 oauth = Oauth.objects.get(facebook_id=facebook_id)
                 # Update access token
                 oauth.access_token = access_token
+                oauth.facebook_link = link
                 oauth.save()
                 user = oauth.user
             # If oauth does not exist with that facebook id, create one
@@ -86,7 +88,8 @@ def authenticate_app(request):
                     profile.save()
                 # Create oauth for user
                 user.oauth_set.create(access_token=access_token, 
-                    facebook_id=facebook_id, provider='facebook')
+                    facebook_id=facebook_id, facebook_link=link, 
+                        provider='facebook')
             if user:
                 spadetree_token = '%s00000%s' % (user.pk, user.profile.token)
             else:
@@ -96,6 +99,8 @@ def authenticate_app(request):
         data = {
             'id': user.pk,
             'spadetree_token': spadetree_token,
+            'tutee': 1 if profile.tutee else 0,
+            'tutor': 1 if profile.tutor else 0,
         }
         return HttpResponse(json.dumps(data), 
             mimetype='application/json')
