@@ -31,7 +31,7 @@
     margin: 40px 0 0 0;
     .group {
       h1 {
-        border-bottom: 1px solid rgb(200, 200, 200);
+        border-bottom: 1px solid rgb(0, 0, 0);
         font-size: 27px;
         font-weight: 300;
         line-height: 40px;
@@ -44,13 +44,14 @@
         padding: 0;
         li {
           .interestNameLink {
+            border-right: 1px solid transparent;
             color: rgb(50, 50, 50);
             display: block;
             font-size: 14px;
-            line-height: 21px;
-            padding: 10px;
+            line-height: 20px;
+            padding: 20px 10px;
             &:hover {
-              background: rgb(240, 240, 240);
+              border-right: 1px solid rgb(0, 0, 0);
               color: rgb(115, 202, 36);
             }
             &.show {
@@ -67,7 +68,8 @@
             }
           }
           .tutorsInsert {
-            margin: 0 0 0 10px;
+            border-left: 1px solid rgb(0, 0, 0);
+            margin: 0 0 0 20px;
             .label {
               .line {
                 border-top: 1px solid rgb(200, 200, 200);
@@ -124,41 +126,25 @@
         padding: 0 0 0 35px;
       }
     }
-    .tutor {
-      background: rgb(240, 240, 240);
-      &:hover {
-        background: rgb(230, 230, 230);
-      }
-    }
-  }
-}
-.interestList {
-  .tutor {
-    background: rgb(250, 250, 250);
-    &:hover {
-      background: rgb(240, 240, 240);
-      .name {
-        h2 {
-          color: rgb(115, 202, 36);
-        }
-      }
-    }
   }
 }
 .interestDetail, .interestList {
   h3 {
-    background: rgb(250, 250, 250);
     color: rgb(150, 150, 150);
     font-size: 14px;
     font-style: italic;
     font-weight: 300;
-    line-height: 21px;
+    line-height: 20px;
     margin: 0;
-    padding: 10px;
+    padding: 20px 10px;
   }
   .tutor {
+    border-right: 1px solid transparent;
     display: block;
     padding: 10px;
+    &:hover {
+      border-right: 1px solid rgb(0, 0, 0);
+    }
     .image {
       float: left;
       height: 40px;

@@ -2,7 +2,7 @@
 .messageList {
   padding: 40px 0; }
   .messageList .recentMessage {
-    border-left: 3px solid transparent;
+    border-left: 1px solid transparent;
     color: #323232;
     display: block;
     margin: 10px 0 0 0;
@@ -10,9 +10,9 @@
     .messageList .recentMessage:first-child {
       margin: 0; }
     .messageList .recentMessage.unviewed {
-      background: #f0f0f0; }
+      border-left: 1px solid #ff1a00; }
     .messageList .recentMessage:hover {
-      border-left: 3px solid #73ca24; }
+      border-left: 1px solid black; }
     .messageList .recentMessage .image {
       float: left;
       height: 40px;

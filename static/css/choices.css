@@ -170,7 +170,6 @@
 
 /* Choice notes */
 .choiceNotes .notes .choiceNote {
-  background: #f0f0f0;
   margin: 10px 0 0 0;
   padding: 10px; }
   .choiceNotes .notes .choiceNote:first-child {

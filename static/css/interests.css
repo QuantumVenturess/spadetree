@@ -22,7 +22,7 @@
   .interestList .results {
     margin: 40px 0 0 0; }
     .interestList .results .group h1 {
-      border-bottom: 1px solid #c8c8c8;
+      border-bottom: 1px solid black;
       font-size: 27px;
       font-weight: 300;
       line-height: 40px;
@@ -33,13 +33,14 @@
       margin: 0;
       padding: 0; }
       .interestList .results .group ul li .interestNameLink {
+        border-right: 1px solid transparent;
         color: #323232;
         display: block;
         font-size: 14px;
-        line-height: 21px;
-        padding: 10px; }
+        line-height: 20px;
+        padding: 20px 10px; }
         .interestList .results .group ul li .interestNameLink:hover {
-          background: #f0f0f0;
+          border-right: 1px solid black;
           color: #73ca24; }
         .interestList .results .group ul li .interestNameLink.show {
           font-weight: 700; }
@@ -51,7 +52,8 @@
           right: 10px;
           top: 10px; }
       .interestList .results .group ul li .tutorsInsert {
-        margin: 0 0 0 10px; }
+        border-left: 1px solid black;
+        margin: 0 0 0 20px; }
         .interestList .results .group ul li .tutorsInsert .label .line {
           border-top: 1px solid #c8c8c8;
           position: relative;
@@ -88,30 +90,21 @@
         line-height: 27px;
         margin: 0;
         padding: 0 0 0 35px; }
-    .interestDetail section .tutor {
-      background: #f0f0f0; }
-      .interestDetail section .tutor:hover {
-        background: #e6e6e6; }
-
-.interestList .tutor {
-  background: #fafafa; }
-  .interestList .tutor:hover {
-    background: #f0f0f0; }
-    .interestList .tutor:hover .name h2 {
-      color: #73ca24; }
 
 .interestDetail h3, .interestList h3 {
-  background: #fafafa;
   color: #969696;
   font-size: 14px;
   font-style: italic;
   font-weight: 300;
-  line-height: 21px;
+  line-height: 20px;
   margin: 0;
-  padding: 10px; }
+  padding: 20px 10px; }
 .interestDetail .tutor, .interestList .tutor {
+  border-right: 1px solid transparent;
   display: block;
   padding: 10px; }
+  .interestDetail .tutor:hover, .interestList .tutor:hover {
+    border-right: 1px solid black; }
   .interestDetail .tutor .image, .interestList .tutor .image {
     float: left;
     height: 40px;

@@ -2,7 +2,7 @@
 .messageList {
   padding: 40px 0;
   .recentMessage {
-    border-left: 3px solid transparent;
+    border-left: 1px solid transparent;
     color: rgb(50, 50, 50);
     display: block;
     margin: 10px 0 0 0;
@@ -11,10 +11,10 @@
       margin: 0;
     }
     &.unviewed {
-      background: rgb(240, 240, 240);
+      border-left: 1px solid rgb(255, 26, 0);
     }
     &:hover {
-      border-left: 3px solid rgb(115, 202, 36);
+      border-left: 1px solid rgb(0, 0, 0);
     }
     .image {
       float: left;

@@ -1,5 +1,5 @@
 header {
-  background: #323232;
+  background: black;
   height: 44px;
   width: 100%; }
   header .header {
@@ -45,7 +45,7 @@ header {
             header .header nav ul li a.menu:hover {
               background: #646464; }
             header .header nav ul li a.menuShow {
-              background: #464646;
+              background: #323232;
               color: #969696; }
               header .header nav ul li a.menuShow:hover {
                 color: white; }
@@ -62,7 +62,7 @@ header {
         display: none;
         position: relative; }
         header .header nav #menu ul {
-          background: #464646;
+          background: #323232;
           position: absolute;
           right: 0;
           top: 44px;

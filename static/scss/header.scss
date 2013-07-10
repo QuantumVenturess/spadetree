@@ -6,7 +6,7 @@
 }
 
 header {
-  background: rgb(50, 50, 50);
+  background: rgb(0, 0, 0);
   height: 44px;
   width: 100%;
   .header {
@@ -57,7 +57,7 @@ header {
               }
             }
             &.menuShow {
-              background: rgb(70, 70, 70);
+              background: rgb(50, 50, 50);
               color: rgb(150, 150, 150);
               &:hover {
                 color: rgb(255, 255, 255);
@@ -81,7 +81,7 @@ header {
         display: none;
         position: relative;
         ul {
-          background: rgb(70, 70, 70);
+          background: rgb(50, 50, 50);
           position: absolute;
           right: 0;
           top: 44px;

@@ -6,7 +6,7 @@
     .notificationList .day:first-child {
       margin: 0; }
     .notificationList .day h1 {
-      border-bottom: 1px solid #c8c8c8;
+      border-bottom: 1px solid black;
       font-size: 13px;
       font-weight: 700;
       line-height: 20px;
