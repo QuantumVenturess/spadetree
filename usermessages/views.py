@@ -14,6 +14,12 @@ from usermessages.forms import ReplyMessageForm
 import json
 
 @sign_in_required
+def count(request):
+    """Return unread message count."""
+    n = request.user.profile.unread_message_count()
+    return HttpResponse(json.dumps(n), mimetype='application/json')
+
+@sign_in_required
 def detail(request, pk):
     """Detail view for messages from one user."""
     sender = get_object_or_404(User, pk=pk)

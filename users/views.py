@@ -322,3 +322,13 @@ def pick(request):
         'title': 'Tutee or Tutor',
     }
     return render(request, 'users/pick.html', add_csrf(request, d))
+
+@sign_in_required
+def title_count(request):
+    """Return total count of notifications, requests, and messages."""
+    profile = request.user.profile
+    n = profile.unviewed_notification_count()
+    r = profile.choice_count()
+    m = profile.unread_message_count()
+    t = n + r + m
+    return HttpResponse(json.dumps(t), mimetype='application/json')

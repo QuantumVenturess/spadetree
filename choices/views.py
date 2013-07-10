@@ -94,6 +94,12 @@ def action(request, pk):
     return HttpResponseRedirect(reverse('choices.views.requests'))
 
 @sign_in_required
+def count(request):
+    """Return request count."""
+    n = request.user.profile.choice_count()
+    return HttpResponse(json.dumps(n), mimetype='application/json')
+
+@sign_in_required
 def detail(request, pk):
     """Detail page for choice/request."""
     choice = get_object_or_404(Choice, pk=pk)

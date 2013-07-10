@@ -18,9 +18,7 @@
         <li>
           <a href='{% url users.views.detail user.profile.slug %}' class='menu'>
             <div><img src='{{ user.profile.image_small }}'></div>
-            <span class='{% if user.profile.title_count %}red{% endif %}'>
-              {{ user.first_name }}
-            </span>
+            <span>{{ user.first_name }}</span>
           </a>
         </li>
       {% endif %}
@@ -31,30 +29,18 @@
           <li>
             <a href='{% url notifications.views.list %}'>
               Notifications
-              <span class='notificationCount'>
-                {% if user.profile.unviewed_notification_count %}
-                  {{ user.profile.unviewed_notification_count }}
-                {% endif %}
-              </span>
+              <span class='notificationCount'></span>
             </a>
           <li>
             <a href='{% url choices.views.requests %}'>
               Requests
-              <span class='choiceCount'>
-                {% if user.profile.choice_count %}
-                  {{ user.profile.choice_count}}
-                {% endif %}
-              </span>
+              <span class='choiceCount'></span>
             </a>
           </li>
           <li>
             <a href='{% url usermessages.views.list %}'>
               Messages
-              <span class='messageCount'>
-                {% if user.profile.unread_message_count %}
-                  {{ user.profile.unread_message_count }}
-                {% endif %}
-              </span>
+              <span class='messageCount'></span>
             </a>
           </li>
           <li>

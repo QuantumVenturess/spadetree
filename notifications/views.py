@@ -1,7 +1,16 @@
 from datetime import datetime
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from sessions.decorators import sign_in_required
+
+import json
+
+@sign_in_required
+def count(request):
+    """Return notification count."""
+    n = request.user.profile.unviewed_notification_count()
+    return HttpResponse(json.dumps(n), mimetype='application/json')
 
 @sign_in_required
 def list(request):
