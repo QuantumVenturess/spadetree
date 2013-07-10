@@ -84,7 +84,7 @@ def browse_search(request, format=None):
             return HttpResponse(json.dumps(data), mimetype='application/json')
         if format == '.json':
             data = {
-                'interest': [interest.to_json() for interest in results],
+                'interests': [interest.to_json() for interest in results],
             }
             return HttpResponse(json.dumps(data), mimetype='application/json')
     else:
