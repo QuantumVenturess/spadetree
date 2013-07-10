@@ -82,6 +82,11 @@ def browse_search(request, format=None):
                 'browse_results': t.render(context),
             }
             return HttpResponse(json.dumps(data), mimetype='application/json')
+        if format == '.json':
+            data = {
+                'interest': [interest.to_json() for interest in results],
+            }
+            return HttpResponse(json.dumps(data), mimetype='application/json')
     else:
         return HttpResponseRedirect(reverse('interests.views.browse'))
 
