@@ -16,3 +16,11 @@ class State(models.Model):
         self.name = self.name.lower()
         self.slug = slugify(self.name)
         super(State, self).save(*args, **kwargs)
+
+    def to_json(self):
+        dictionary = {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+        }
+        return dictionary

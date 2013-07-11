@@ -91,7 +91,7 @@ def browse_search(request, format=None):
         return HttpResponseRedirect(reverse('interests.views.browse'))
 
 @sign_in_required
-def detail(request, slug):
+def detail(request, slug, format=None):
     """Detail page for interest."""
     interest = get_object_or_404(Interest, slug=slug)
     skills   = Skill.objects.filter(interest=interest)
@@ -105,6 +105,12 @@ def detail(request, slug):
             tutees.append(user)
     tutees.sort(key=lambda x: x.first_name)
     tutors.sort(key=lambda x: x.first_name)
+    if format and format == '.json':
+        data = {
+            'tutees': [user.profile.to_json() for user in tutees],
+            'tutors': [user.profile.to_json() for user in tutors],
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
     d = {
         'interest': interest,
         'title': interest.name.title(),

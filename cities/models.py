@@ -20,3 +20,12 @@ class City(models.Model):
         self.name = self.name.lower()
         self.slug = slugify(self.name)
         super(City, self).save(*args, **kwargs)
+
+    def to_json(self):
+        dictionary = {
+            'id': self.pk,
+            'name': self.name,
+            'slug': self.slug,
+            'state': self.state.to_json(),
+        }
+        return dictionary

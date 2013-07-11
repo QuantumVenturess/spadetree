@@ -1,6 +1,6 @@
 {% if not choice.completed %}
   {% if not choice.denied %}
-    {% if user.profile.tutor and choice.accepted and choice.ready %}
+    {% if user.profile.tutor and choice.accepted %}
       <a href='{% url choices.views.detail choice.pk %}'>View request</a>
     {% elif user.profile.tutee %}
       {% if choice.ready %}

@@ -8,4 +8,5 @@ urlpatterns = patterns('interests.views',
     url(r'^search(?P<format>.(js|json))/$', 'search'),
     # Detail
     url(r'^(?P<slug>[-\w]+)/$', 'detail'),
+    url(r'^(?P<slug>[-\w]+)(?P<format>.json)/$', 'detail'),
 )

@@ -137,6 +137,26 @@ class Profile(models.Model):
         return (self.choice_count() + self.unread_message_count() + 
             self.unviewed_notification_count())
 
+    def to_json(self):
+        """Convert model to json serializable."""
+        user  = self.user
+        oauth = user.oauth
+        dictionary = {
+            'about': self.about,
+            'city': self.city.to_json(),
+            'email': user.email,
+            'facebook_id': oauth.facebook_id,
+            'facebook_link': oauth.facebook_link,
+            'first_name': user.first_name,
+            'id': user.pk,
+            'last_name': user.last_name,
+            'phone': self.phone if self.phone else 0,
+            'slug': self.slug,
+            'tutee': 1 if self.tutee else 0,
+            'tutor': 1 if self.tutor else 0,
+        }
+        return dictionary
+
     def token(self):
         """Use this to match with the token sent from iOS app."""
         try:
