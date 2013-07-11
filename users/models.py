@@ -149,7 +149,7 @@ class Profile(models.Model):
             'facebook_link': oauth.facebook_link,
             'first_name': user.first_name,
             'id': user.pk,
-            'last_name': user.last_name,
+            'last_name': user.last_name[0],
             'phone': self.phone if self.phone else 0,
             'slug': self.slug,
             'tutee': 1 if self.tutee else 0,
