@@ -106,10 +106,8 @@ def authenticate_app(request, format):
         else:
             spadetree_token = 'Invalid access token'
         data = {
-            'id': user.pk,
             'spadetree_token': spadetree_token,
-            'tutee': 1 if user.profile.tutee else 0,
-            'tutor': 1 if user.profile.tutor else 0,
+            'user': user.profile.to_json(),
         }
         return HttpResponse(json.dumps(data), 
             mimetype='application/json')
