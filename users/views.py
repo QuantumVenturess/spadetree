@@ -76,7 +76,7 @@ def choose(request, slug):
         args=[profile.slug]))
 
 @sign_in_required
-def detail(request, slug):
+def detail(request, slug, format=None):
     """User detail page."""
     profile = get_object_or_404(Profile, slug=slug)
     # If user has not picked to be a tutee or tutor
@@ -88,6 +88,12 @@ def detail(request, slug):
     #     return HttpResponseRedirect(reverse('users.views.detail', 
     #         args=[request.user.profile.slug]))
     user = profile.user
+    if format and format == '.json':
+        data = {
+            'user': profile.to_json(),
+            'skills': [skill.interest.to_json() for skill in profile.skills()],
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
     reviews = user.tutor_reviews.all().order_by('-created')
     show_choice_button = (profile.tutor and request.user.profile.tutee and 
         profile.user != request.user)
@@ -322,6 +328,18 @@ def pick(request):
         'title': 'Tutee or Tutor',
     }
     return render(request, 'users/pick.html', add_csrf(request, d))
+
+@sign_in_required
+def reviews(request, slug):
+    """Return all reviews for user."""
+    profile = get_object_or_404(Profile, slug=slug)
+    data = {}
+    if profile.tutor:
+        reviews = profile.user.tutor_reviews.all().order_by('-created')
+        data = {
+            'reviews': [review.to_json() for review in reviews],
+        }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
 
 @sign_in_required
 def title_count(request):

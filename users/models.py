@@ -143,18 +143,21 @@ class Profile(models.Model):
         oauth = user.oauth
         dictionary = {
             'about': self.about,
-            'city': self.city.to_json(),
-            'email': user.email,
             'facebook_id': oauth.facebook_id,
-            'facebook_link': oauth.facebook_link,
             'first_name': user.first_name,
             'id': user.pk,
             'last_name': user.last_name[0],
-            'phone': self.phone if self.phone else 0,
             'slug': self.slug,
             'tutee': 1 if self.tutee else 0,
             'tutor': 1 if self.tutor else 0,
         }
+        if self.tutor:
+            dictionary = dict(dictionary, **{
+                'city': self.city.to_json(),
+                'phone': self.phone if self.phone else 0,
+                'email': user.email,
+                'facebook_link': oauth.facebook_link,
+            })
         return dictionary
 
     def token(self):

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
+from spadetree.utils import nsdate_format
 
 class Review(models.Model):
     content  = models.TextField()
@@ -24,3 +25,13 @@ class Review(models.Model):
         """Return thumbs up or thumbs down image."""
         direction = 'up' if self.positive else 'down'
         return '%simg/thumbs_%s.png' % (settings.STATIC_URL, direction)
+
+    def to_json(self):
+        dictionary = {
+            'content': self.content,
+            'created': nsdate_format(self.created),
+            'positive': 1 if self.positive else 0,
+            'tutee': self.tutee.profile.to_json(),
+            'tutor': self.tutor.profile.to_json(),
+        }
+        return dictionary
