@@ -148,7 +148,7 @@ class Profile(models.Model):
             'id': user.pk,
             'last_name': user.last_name[0],
             'slug': self.slug,
-            'state': self.city.state.to_json() if self.city else '',
+            'state': self.city.state.to_json() if self.city else None,
             'tutee': 1 if self.tutee else 0,
             'tutor': 1 if self.tutor else 0,
         }
