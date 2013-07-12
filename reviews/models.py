@@ -30,6 +30,7 @@ class Review(models.Model):
         dictionary = {
             'content': self.content,
             'created': nsdate_format(self.created),
+            'id': self.pk,
             'positive': 1 if self.positive else 0,
             'tutee': self.tutee.profile.to_json(),
             'tutor': self.tutor.profile.to_json(),
