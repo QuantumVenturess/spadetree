@@ -8,6 +8,15 @@ $(document).ready(function() {
     }
     return false;
   });
+  // When pressing enter, submit the form
+  $(document).on('keyup', '.userEdit .addSkillInput', function(event) {
+    var form = $(this).closest('.userEdit .addSkill form');
+    var interestName = $('.userEdit .addSkillInput');
+    if (interestName.val().length > 0 && event.keyCode == 13) {
+      submitAddSkill(form);
+    }
+    return false;
+  });
   // Deleting a skill
   $(document).on('submit', '.userEdit .skillDeleteForm form', function() {
     $.ajax({
@@ -29,7 +38,7 @@ function submitAddSkill(form) {
     type: form.attr('method'),
     url: form.attr('action'),
     success: function(response) {
-      $('.userEdit .skillBox span').append(response.skill_delete_form);
+      $('.userEdit .skillBox span').append(response.skill_delete_forms);
       $('.userEdit .addSkill').html(response.skill_add_form);
       $('.userEdit .addSkillInput').focus();
     }

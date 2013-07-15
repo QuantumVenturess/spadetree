@@ -36,42 +36,47 @@ def delete(request, pk, format=None):
 @sign_in_required
 def new(request, format=None):
     """Create a new skill using a new or existing interest."""
-    if request.method == 'POST' and request.POST.get('interest_name'):
-        interest_name = request.POST.get('interest_name').lower()
-        try:
-            # Check to see if interest exists
-            interest = Interest.objects.get(name=interest_name)
-        except Interest.DoesNotExist:
-            interest = Interest(name=interest_name)
-            interest.save()
-        try:
-            # Check to see if user has this skill
-            skill = request.user.skill_set.get(interest=interest)
-            message = 'You already have this skill'
-        except Skill.DoesNotExist:
-            # If user does not have this skill, create it
-            skill = request.user.skill_set.create(interest=interest)
-            message = 'Skill added'
-            if format:
-                if format == '.js':
-                    d = {
+    if request.method == 'POST' and request.POST.get('names'):
+        names = request.POST.get('names').split(',')
+        names = [name.strip().lower() for name in names]
+        skills = []
+        for name in names:
+            try:
+                # Check to see if interest exists
+                interest = Interest.objects.get(name=name)
+            except Interest.DoesNotExist:
+                interest = Interest(name=name)
+                interest.save()
+            try:
+                # Check to see if user has this skill
+                skill = request.user.skill_set.get(interest=interest)
+                message = 'You already have this skill'
+            except Skill.DoesNotExist:
+                # If user does not have this skill, create it
+                skill = request.user.skill_set.create(interest=interest)
+                message = 'Skill added'
+                skills.append(skill)
+        if format:
+            if format == '.js':
+                skill_add_form = loader.get_template(
+                    'skills/skill_add_form.html')
+                context = RequestContext(request, add_csrf(request, 
+                    { 'static': settings.STATIC_URL }))
+                forms = []
+                for skill in skills:
+                    skill_dict = {
                         'skill': skill,
                         'static': settings.STATIC_URL,
                     }
-                    skill_add_form = loader.get_template(
-                        'skills/skill_add_form.html')
-                    skill_delete_form = loader.get_template(
-                        'skills/skill_delete_form.html')
-                    context = RequestContext(request, add_csrf(request, d))
-                    data = {
-                        'skill_add_form': skill_add_form.render(context),
-                        'skill_delete_form': skill_delete_form.render(context),
-                    }
-                    return HttpResponse(json.dumps(data), 
-                        mimetype='application/json')
-                elif format == '.json':
-                    print 'JSON'
-                    return HttpResponse('json')
+                    form = loader.get_template('skills/skill_delete_form.html')
+                    c = RequestContext(request, add_csrf(request, skill_dict))
+                    forms.append(form.render(c))
+                data = {
+                    'skill_add_form': skill_add_form.render(context),
+                    'skill_delete_forms': ''.join(forms),
+                }
+                return HttpResponse(json.dumps(data), 
+                    mimetype='application/json')
         else:
             messages.success(request, message)
     return HttpResponseRedirect(reverse('users.views.edit',

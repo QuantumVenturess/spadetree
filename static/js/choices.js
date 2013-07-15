@@ -28,6 +28,9 @@ $(document).ready(function() {
     $('.newChoiceForm .hourFreePk').val($(this).data('value'));
     return false;
   });
+  $(document).on('click', '.newChoiceForm .action button', function() {
+    $('.newChoiceForm form').submit();
+  });
   // Do not submit choice form if no skill, day, and hour selected
   $(document).on('submit', '.newChoiceForm form', function() {
     var skillVal    = $('.newChoiceForm .skillPk').val().length;
@@ -54,6 +57,14 @@ $(document).ready(function() {
   $(document).on('click', '.newChoiceForm .action a', function() {
     $('.newChoiceForm').hide();
     return false;
+  });
+  // Clicking on the new choice form will not close it
+  $(document).on('click', '.newChoiceForm', function() {
+    return false;
+  });
+  // Clicking anywhere on the page will close the new choice form
+  $(document).on('click', $(document), function() {
+    $('.newChoiceForm').hide();
   });
   // Requests page, choice partials, choice actions
   // Clicking accept or deny

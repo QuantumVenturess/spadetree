@@ -18,8 +18,8 @@
     {% csrf_token %}
     <section class='date'>
       <h5>
-        {% if user.profile.tutee %}
-          Set a date on 
+        {% if user.profile.tutee and not choice.date %}
+          Set a date on
         {% endif %}
         {{ choice.day.name.title }}
         {% if user.profile.tutor %}
@@ -39,7 +39,12 @@
         {% if user.profile.tutor %}
           Place to meet
         {% elif user.profile.tutee %}
-          Set a place to meet - tutor is near 
+          {% if choice.address and choice.city %}
+            Place to meet
+          {% else %}
+            Set a place to meet
+          {% endif %}
+          - tutor is near 
           {{ choice.tutor.profile.city.name.title }}, 
           {{ choice.tutor.profile.city.state.name.title }}
         {% endif %}

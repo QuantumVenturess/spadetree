@@ -69,7 +69,8 @@ def choose(request, slug):
                     request.user.sent_messages.create(content=content,
                         recipient=user, viewed=True)
                     messages.success(request, 
-                        'Set a date and place to begin learning')
+                        """Set the day you want to start learning
+                        and the place you want to meet""")
                     return HttpResponseRedirect(reverse(
                         'choices.views.detail', args=[choice.pk]))
     return HttpResponseRedirect(reverse('users.views.detail', 

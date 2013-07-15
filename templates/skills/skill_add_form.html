@@ -1,7 +1,7 @@
 <form action='{% url skills.views.new ".js" %}' method='POST'>
   {% csrf_token %}
   <div class='inputBox'>
-    <input autocomplete='off' class='addSkillInput' data-autocomplete-source='{% url interests.views.search ".js" %}' name='interest_name' type='text' placeholder='Type here to add your {{ user.profile.skills_or_interests.lower }}'>
+    <input autocomplete='off' class='addSkillInput' data-autocomplete-source='{% url interests.views.search ".js" %}' name='names' type='text' placeholder="Type your {{ user.profile.skills_or_interests.lower }}, then press 'Enter' or click 'Add Skill' (e.g. Fashion, Surfing, Writing)">
   </div>
   <a class='addSkillButton' href='#'>Add skill</a>
   <div class='clear'></div>
