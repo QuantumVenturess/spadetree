@@ -116,7 +116,7 @@ def detail(request, slug, format=None):
         'objects': page(request, reviews),
         'show_choice_button': show_choice_button,
         'skills': profile.skills(),
-        'title': '%s %s' % (user.first_name, user.last_name),
+        'title': profile.full_name(),
         'user_is_tutor': user_is_tutor,
         'userd': user,
     }
