@@ -64,7 +64,7 @@ def choose(request, slug):
                     # Create channel for this choice
                     channel = choice.channel_set.create()
                     # Subscribe tutee to newly created channel
-                    request.user.subscription_set.create(channel=channel)
+                    channel.subscribe(request.user)
                     # Create user message
                     request.user.sent_messages.create(content=content,
                         recipient=user, viewed=True)

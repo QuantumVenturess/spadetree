@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 
 from spadetree.utils import nsdate_format
@@ -28,3 +29,13 @@ class Interest(models.Model):
             'slug': self.slug,
         }
         return dictionary
+
+def create_channel(sender, instance, **kwargs):
+    from channels.models import Channel
+    try:
+        channel = Channel.objects.get(interest=instance)
+    except Channel.DoesNotExist:
+        Channel.objects.create(interest=instance)
+
+# Create a for each interest after it saves
+post_save.connect(create_channel, sender=Interest)

@@ -50,7 +50,7 @@ class Choice(models.Model):
         if self.date:
             return self.date.strftime('%B %d, %Y')
         else:
-            return 'Not yet specified'
+            return '%s has not specified an exact date' % self.tutee.first_name
 
     def datepicker_string(self):
         """07/01/2013"""

@@ -7,7 +7,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader, RequestContext
 
+from channels.models import Channel
 from interests.models import Interest
+from notifications.models import Notification
 from sessions.decorators import sign_in_required
 from skills.models import Skill
 from spadetree.utils import add_csrf
@@ -19,8 +21,23 @@ def delete(request, pk, format=None):
     """Delete skill with pk for user."""
     skill = get_object_or_404(Skill, pk=pk)
     if request.method == 'POST' and request.user == skill.user:
+        interest = skill.interest
         skill_pk = skill.pk
         skill.delete()
+        # Look for channel for interest
+        try:
+            channel = Channel.objects.get(interest=interest)
+        except Channel.DoesNotExist:
+            # Create the channel if it doesn't exist
+            channel = Channel.objects.create(interest=interest)
+        # Delete the notification for this channel from this user
+        try:
+            notification = channel.notification_set.get(user=request.user)
+            notification.delete()
+        except Notification.DoesNotExist:
+            pass
+        # Unsubscribe from channel
+        channel.unsubscribe(request.user)
         if format:
             if format == '.js':
                 data = {
@@ -45,6 +62,7 @@ def new(request, format=None):
                 # Check to see if interest exists
                 interest = Interest.objects.get(name=name)
             except Interest.DoesNotExist:
+                # If interest does not exist, create one
                 interest = Interest(name=name)
                 interest.save()
             try:
@@ -55,7 +73,18 @@ def new(request, format=None):
                 # If user does not have this skill, create it
                 skill = request.user.skill_set.create(interest=interest)
                 message = 'Skill added'
+                # Add multiple skills
                 skills.append(skill)
+                # Look for channel for interest
+                try:
+                    channel = Channel.objects.get(interest=interest)
+                except Channel.DoesNotExist:
+                    # Create the channel if it doesn't exist
+                    channel = Channel.objects.create(interest=interest)
+                # Post notification for this interest
+                channel.create_notification(request.user, 'new')
+                # Subscribe to channel for this interest
+                channel.subscribe(request.user)
         if format:
             if format == '.js':
                 skill_add_form = loader.get_template(

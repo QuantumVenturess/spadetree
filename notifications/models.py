@@ -17,28 +17,43 @@ class Notification(models.Model):
     class Meta:
         ordering = ('-created',)
 
-    def choice_messages(self, action):
-        profile = self.user.profile
-        if profile.tutor:
-            pronoun = 'your'
-        elif profile.tutee:
-            pronoun = 'the'
-        messages = {
-            'accept': 'accepted',
-            'deny': 'denied',
-            'new': 'added a note to',
-            'update': 'updated',
-        }
-        if self.action == 'complete':
-            return 'marked the %s for %s complete' % (self.model_link(),
-                self.channel.choice.interest.name.title())
-        else:
-            return '%s %s %s for %s' % (messages.get(action), pronoun, 
-                self.model_link(), self.channel.choice.interest.name.title())
+    def choice_messages(self):
+        choice = self.channel.choice
+        if choice:
+            profile = self.user.profile
+            if profile.tutor:
+                pronoun = 'your'
+            elif profile.tutee:
+                pronoun = 'the'
+            messages = {
+                'accept': 'accepted',
+                'deny': 'denied',
+                'new': 'added a note to',
+                'update': 'updated',
+            }
+            if self.action == 'complete':
+                return 'marked the %s for %s complete' % (self.model_link(),
+                    choice.interest.name.title())
+            else:
+                return '%s %s %s for %s' % (messages.get(self.action), pronoun, 
+                    self.model_link(), choice.interest.name.title())
 
     def created_date_string_long(self):
         """January 01, 2013."""
         return self.created.strftime('%B %d, %Y')
+
+    def interest_messages(self):
+        interest = self.channel.interest
+        if interest:
+            profile = self.user.profile
+            if profile.tutor:
+                word = 'a skill'
+            elif profile.tutee:
+                word = 'an interest'
+            messages = {
+                'new': 'added %s as %s' % (self.model_link(), word),
+            }
+            return messages.get(self.action)
 
     def mark_viewed(self, user):
         """Mark notification viewed for user."""
@@ -54,16 +69,23 @@ class Notification(models.Model):
 
     def message(self):
         notification_messages = {
-            'choice': self.choice_messages(self.action),
-            'choice_note': self.choice_messages(self.action),
+            'choice': self.choice_messages(),
+            'choice_note': self.choice_messages(),
+            'interest': self.interest_messages(),
         }
         return notification_messages.get(self.model)
 
     def model_link(self):
+        channel  = self.channel
+        choice   = channel.choice
+        interest = channel.interest
         link = ''
-        if self.model in ['choice', 'choice_note']:
+        if choice:
             link = '<a href="%s">request</a>' % reverse('choices.views.detail',
-                args=[self.channel.choice.pk])
+                args=[choice.pk])
+        elif interest:
+            link = '<a href="%s">%s</a>' % (reverse('interests.views.detail', 
+                args=[interest.slug]), interest.name.title())
         return link
 
     def time(self):
