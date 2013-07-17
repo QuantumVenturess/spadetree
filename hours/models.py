@@ -31,7 +31,7 @@ class Hour(models.Model):
 
     def to_json(self):
         dictionary = {
-            'uid': self.pk,
+            'id': self.pk,
             'value': self.value,
         }
         return dictionary

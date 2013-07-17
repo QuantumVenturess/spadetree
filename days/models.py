@@ -21,8 +21,8 @@ class Day(models.Model):
 
     def to_json(self):
         dictionary = {
+            'id': self.pk,
             'name': self.name,
-            'uid': self.pk,
             'value': self.value,
         }
         return dictionary
