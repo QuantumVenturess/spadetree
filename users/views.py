@@ -89,13 +89,6 @@ def detail(request, slug, format=None):
     #     return HttpResponseRedirect(reverse('users.views.detail', 
     #         args=[request.user.profile.slug]))
     user = profile.user
-    if format and format == '.json':
-        data = {
-            'user': profile.to_json(),
-            'skills': [skill.interest.to_json() for skill in profile.skills()],
-        }
-        return HttpResponse(json.dumps(data), mimetype='application/json')
-    reviews = user.tutor_reviews.all().order_by('-created')
     show_choice_button = (profile.tutor and request.user.profile.tutee and 
         profile.user != request.user)
     days_free     = []
@@ -108,6 +101,16 @@ def detail(request, slug, format=None):
             hour__value__lte=11).order_by('hour__value')
         hours_free_pm = hours_free.filter(hour__value__gte=12,
             hour__value__lte=23).order_by('hour__value')
+    if format and format == '.json':
+        data = {
+            'days_free': [free.day.to_json() for free in days_free],
+            'hours_free_am': [free.hour.to_json() for free in hours_free_am],
+            'hours_free_pm': [free.hour.to_json() for free in hours_free_pm],
+            'skills': [skill.interest.to_json() for skill in profile.skills()],
+            'user': profile.to_json(),
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
+    reviews = user.tutor_reviews.all().order_by('-created')
     user_is_tutor = profile.tutor
     d = {
         'days_free': days_free,

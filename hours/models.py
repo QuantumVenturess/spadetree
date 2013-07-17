@@ -29,6 +29,13 @@ class Hour(models.Model):
     def time_string(self):
         return '%s %s' % (self.hour_of_day(), self.am_pm())
 
+    def to_json(self):
+        dictionary = {
+            'uid': self.pk,
+            'value': self.value,
+        }
+        return dictionary
+
 class HourFree(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     hour    = models.ForeignKey(Hour)

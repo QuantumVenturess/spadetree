@@ -19,6 +19,14 @@ class Day(models.Model):
         self.slug = slugify(self.name)
         super(Day, self).save(*args, **kwargs)
 
+    def to_json(self):
+        dictionary = {
+            'name': self.name,
+            'uid': self.pk,
+            'value': self.value,
+        }
+        return dictionary
+
 class DayFree(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     day     = models.ForeignKey(Day)
