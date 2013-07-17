@@ -5,6 +5,7 @@ urlpatterns = patterns('users.views',
     url(r'^title-count.json/$', 'title_count'),
 
     url(r'^(?P<slug>[-\w]+)/choose/$', 'choose'),
+    url(r'^(?P<slug>[-\w]+)/choose(?P<format>.json)/$', 'choose'),
     url(r'^(?P<slug>[-\w]+)/$', 'detail'),
     url(r'^(?P<slug>[-\w]+)(?P<format>.json)/$', 'detail'),
     url(r'^(?P<slug>[-\w]+)/edit/$', 'edit'),

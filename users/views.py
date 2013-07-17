@@ -27,16 +27,20 @@ import socket
 import urllib2
 
 @sign_in_required
-def choose(request, slug):
+def choose(request, slug, format=None):
     """Tutee chooses tutor."""
     profile = get_object_or_404(Profile, slug=slug)
-    if (request.method == 'POST' and profile.tutor and 
-        request.user.profile.tutee):
-    
-        skill_pk     = request.POST.get('skill_pk')
-        day_free_pk  = request.POST.get('day_free_pk')
-        hour_free_pk = request.POST.get('hour_free_pk')
-        content      = request.POST.get('content')
+    if ((request.method == 'POST' or format) 
+        and profile.tutor and request.user.profile.tutee):
+
+        if request.method == 'POST':
+            request_data = request.POST
+        else:
+            request_data = request.GET
+        skill_pk     = request_data.get('skill_pk')
+        day_free_pk  = request_data.get('day_free_pk')
+        hour_free_pk = request_data.get('hour_free_pk')
+        content      = request_data.get('content')
         if skill_pk and day_free_pk and hour_free_pk and content:
             user = profile.user
             try:
@@ -68,11 +72,18 @@ def choose(request, slug):
                     # Create user message
                     request.user.sent_messages.create(content=content,
                         recipient=user, viewed=True)
-                    messages.success(request, 
-                        """Set the day you want to start learning
-                        and the place you want to meet""")
-                    return HttpResponseRedirect(reverse(
-                        'choices.views.detail', args=[choice.pk]))
+                    if format == '.json':
+                        data = {
+                            'success': 1,
+                        }
+                        return HttpResponse(json.dumps(data),
+                            mimetype='application/json')
+                    else:
+                        messages.success(request, 
+                            """Set the day you want to start learning
+                            and the place you want to meet""")
+                        return HttpResponseRedirect(reverse(
+                            'choices.views.detail', args=[choice.pk]))
     return HttpResponseRedirect(reverse('users.views.detail', 
         args=[profile.slug]))
 
@@ -103,9 +114,9 @@ def detail(request, slug, format=None):
             hour__value__lte=23).order_by('hour__value')
     if format and format == '.json':
         data = {
-            'days_free': [free.day.to_json() for free in days_free],
-            'hours_free_am': [free.hour.to_json() for free in hours_free_am],
-            'hours_free_pm': [free.hour.to_json() for free in hours_free_pm],
+            'days_free': [free.to_json() for free in days_free],
+            'hours_free_am': [free.to_json() for free in hours_free_am],
+            'hours_free_pm': [free.to_json() for free in hours_free_pm],
             'skills': [skill.interest.to_json() for skill in profile.skills()],
             'user': profile.to_json(),
         }

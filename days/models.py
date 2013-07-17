@@ -38,3 +38,10 @@ class DayFree(models.Model):
 
     def __unicode__(self):
         return 'User: %s, Day: %s' % (self.user, self.day)
+
+    def to_json(self):
+        dictionary = {
+            'day': self.day.to_json(),
+            'id': self.pk,
+        }
+        return dictionary

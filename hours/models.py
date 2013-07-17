@@ -47,3 +47,10 @@ class HourFree(models.Model):
 
     def __unicode__(self):
         return 'User: %s, Hour: %s' % (self.user, self.hour)
+
+    def to_json(self):
+        dictionary = {
+            'hour': self.hour.to_json(),
+            'id': self.pk,
+        }
+        return dictionary
