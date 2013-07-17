@@ -37,16 +37,25 @@ def choose(request, slug, format=None):
             request_data = request.POST
         else:
             request_data = request.GET
-        skill_pk     = request_data.get('skill_pk')
+        content      = request_data.get('content')
         day_free_pk  = request_data.get('day_free_pk')
         hour_free_pk = request_data.get('hour_free_pk')
-        content      = request_data.get('content')
-        if skill_pk and day_free_pk and hour_free_pk and content:
+        interest_pk  = request_data.get('interest_pk')
+        skill_pk     = request_data.get('skill_pk')
+        if ((interest_pk or skill_pk) 
+            and day_free_pk and hour_free_pk and content):
+
             user = profile.user
-            try:
-                skill = user.skill_set.get(pk=skill_pk)
-            except Skill.DoesNotExist:
-                skill = None
+            if interest_pk:
+                try:
+                    skill = user.skill_set.get(interest__pk=interest_pk)
+                except Skill.DoesNotExist:
+                    skill = None
+            elif skill_pk:
+                try:
+                    skill = user.skill_set.get(pk=skill_pk)
+                except Skill.DoesNotExist:
+                    skill = None
             try:
                 day_free = user.dayfree_set.get(pk=day_free_pk)
             except DayFree.DoesNotExist:
