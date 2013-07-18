@@ -25,7 +25,7 @@ class Interest(models.Model):
         dictionary = {
             'created': nsdate_format(self.created),
             'name': self.name,
-            'pk': self.pk,
+            'id': self.pk,
             'slug': self.slug,
         }
         return dictionary

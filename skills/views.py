@@ -15,6 +15,7 @@ from skills.models import Skill
 from spadetree.utils import add_csrf
 
 import json
+import re
 
 @sign_in_required
 def delete(request, pk, format=None):
@@ -60,9 +61,10 @@ def new(request, format=None):
         request_data = request.GET
     if request_data and request_data.get('names'):
         names = request_data.get('names').split(',')
-        names = [name.strip().lower() for name in names]
         skills = []
-        for name in names:
+        for raw_name in names:
+            raw_name = raw_name.strip().lower()
+            name = re.sub('[^- \w]', '', raw_name)
             try:
                 # Check to see if interest exists
                 interest = Interest.objects.get(name=name)
