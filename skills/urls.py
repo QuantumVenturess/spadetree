@@ -5,4 +5,7 @@ urlpatterns = patterns('skills.views',
     url(r'^(?P<pk>\d+)/delete(?P<format>.(js|json))/$', 'delete'),
     url(r'^new/$', 'new'),
     url(r'^new(?P<format>.(js|json))/$', 'new'),
+
+    # iOS app
+    url(r'^(?P<pk>\d+)/delete_skill.json/$', 'delete_skill'),
 )

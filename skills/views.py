@@ -52,6 +52,35 @@ def delete(request, pk, format=None):
         args=[request.user.profile.slug]))
 
 @sign_in_required
+def delete_skill(request, pk):
+    """Delete skill based on interest pk from app."""
+    interest = get_object_or_404(Interest, pk=pk)
+    try:
+        skill = request.user.skill_set.get(interest=interest)
+        skill.delete()
+        # Look for channel for interest
+        try:
+            channel = Channel.objects.get(interest=interest)
+        except Channel.DoesNotExist:
+            # Create the channel if it doesn't exist
+            channel = Channel.objects.create(interest=interest)
+        # Delete the notification for this channel from this user
+        try:
+            notification = channel.notification_set.get(user=request.user)
+            notification.delete()
+        except Notification.DoesNotExist:
+            pass
+        # Unsubscribe from channel
+        channel.unsubscribe(request.user)
+        success = 1
+    except Skill.DoesNotExist:
+        success = 0
+    data = {
+        'success': success,
+    }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
+
+@sign_in_required
 def new(request, format=None):
     """Create a new skill using a new or existing interest."""
     request_data = None
