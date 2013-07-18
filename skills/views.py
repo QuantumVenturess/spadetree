@@ -62,6 +62,7 @@ def new(request, format=None):
     if request_data and request_data.get('names'):
         names = request_data.get('names').split(',')
         skills = []
+        json_skill = None
         for raw_name in names:
             raw_name = raw_name.strip().lower()
             name = re.sub('[^- \w]', '', raw_name)
@@ -92,6 +93,7 @@ def new(request, format=None):
                 channel.create_notification(request.user, 'new')
                 # Subscribe to channel for this interest
                 channel.subscribe(request.user)
+            json_skill = skill
         if format:
             if format == '.js':
                 skill_add_form = loader.get_template(
@@ -115,8 +117,8 @@ def new(request, format=None):
                     mimetype='application/json')
             elif format == '.json':
                 data = {}
-                if skills:
-                    data['interest'] = skills[0].interest.to_json()
+                if json_skill:
+                    data['interest'] = json_skill.interest.to_json()
                 return HttpResponse(json.dumps(data),
                     mimetype='application/json')
         else:
