@@ -53,8 +53,13 @@ def delete(request, pk, format=None):
 @sign_in_required
 def new(request, format=None):
     """Create a new skill using a new or existing interest."""
-    if request.method == 'POST' and request.POST.get('names'):
-        names = request.POST.get('names').split(',')
+    request_data = None
+    if request.method == 'POST':
+        request_data = request.POST
+    elif format and format == '.json':
+        request_data = request.GET
+    if request_data and request_data.get('names'):
+        names = request_data.get('names').split(',')
         names = [name.strip().lower() for name in names]
         skills = []
         for name in names:
@@ -105,6 +110,12 @@ def new(request, format=None):
                     'skill_delete_forms': ''.join(forms),
                 }
                 return HttpResponse(json.dumps(data), 
+                    mimetype='application/json')
+            elif format == '.json':
+                data = {}
+                if skills:
+                    data['interest'] = skills[0].interest.to_json()
+                return HttpResponse(json.dumps(data),
                     mimetype='application/json')
         else:
             messages.success(request, message)
