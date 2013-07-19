@@ -66,31 +66,29 @@ def authenticate_app(request, format):
                     # Set user profile attributes
                     profile = user.profile
                     profile.about = bio
-                    if location:
-                        location_split = location.split(',')
-                        if len(location_split) == 2:
-                            city_name, state_name = location_split
-                            city_name  = city_name.strip().lower()
-                            state_name = state_name.strip().lower()
+                    if location and location.get('name'):
+                        city_name, state_name = location.get('name').split(',')
+                        city_name  = city_name.strip().lower()
+                        state_name = state_name.strip().lower()
+                        try:
+                            # Check to see if state exists
+                            state = State.objects.get(name=state_name)
                             try:
-                                # Check to see if state exists
-                                state = State.objects.get(name=state_name)
-                                try:
-                                    # Check to see if city exists in that state
-                                    city = state.city_set.get(name=city_name)
-                                except City.DoesNotExist:
-                                    # If no city in that state exists, 
-                                    # create one in that state
-                                    city = City(name=city_name, state=state)
-                                    city.save()
-                            except State.DoesNotExist:
-                                # If state does not exist, create one
-                                state = State(name=state_name)
-                                state.save()
-                                # Then create a city for that state
+                                # Check to see if city exists in that state
+                                city = state.city_set.get(name=city_name)
+                            except City.DoesNotExist:
+                                # If no city in that state exists, 
+                                # create one in that state
                                 city = City(name=city_name, state=state)
                                 city.save()
-                            profile.city = city
+                        except State.DoesNotExist:
+                            # If state does not exist, create one
+                            state = State(name=state_name)
+                            state.save()
+                            # Then create a city for that state
+                            city = City(name=city_name, state=state)
+                            city.save()
+                        profile.city = city
                     profile.save()
                 # Create oauth for user
                 user.oauth_set.create(access_token=access_token, 
