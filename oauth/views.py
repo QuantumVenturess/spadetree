@@ -102,6 +102,7 @@ def authenticate_app(request, format):
         else:
             spadetree_token = 'Invalid access token'
         data = {
+            'days_free': [free.to_json() for free in user.dayfree_set.all()]
             'spadetree_token': spadetree_token,
             'user': user.profile.to_json(),
         }
