@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from choices.models import Choice
 from cities.models import City
@@ -27,21 +28,18 @@ import socket
 import urllib2
 
 @sign_in_required
+@csrf_exempt
 def choose(request, slug, format=None):
     """Tutee chooses tutor."""
     profile = get_object_or_404(Profile, slug=slug)
-    if ((request.method == 'POST' or format) 
+    if (request.method == 'POST' 
         and profile.tutor and request.user.profile.tutee):
 
-        if request.method == 'POST':
-            request_data = request.POST
-        else:
-            request_data = request.GET
-        content      = request_data.get('content')
-        day_free_pk  = request_data.get('day_free_pk')
-        hour_free_pk = request_data.get('hour_free_pk')
-        interest_pk  = request_data.get('interest_pk')
-        skill_pk     = request_data.get('skill_pk')
+        content      = request.POST.get('content')
+        day_free_pk  = request.POST.get('day_free_pk')
+        hour_free_pk = request.POST.get('hour_free_pk')
+        interest_pk  = request.POST.get('interest_pk')
+        skill_pk     = request.POST.get('skill_pk')
         if ((interest_pk or skill_pk) 
             and day_free_pk and hour_free_pk and content):
 
