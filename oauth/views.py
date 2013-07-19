@@ -65,8 +65,8 @@ def authenticate_app(request, format):
                             password=password, username=username)
                     # Set user profile attributes
                     profile = user.profile
-                    profile.about = bio
-                    if location:
+                    profile.about = location
+                    if location and len(location.split(',')) == 2:
                         city_name, state_name = location.split(',')
                         city_name  = city_name.strip().lower()
                         state_name = state_name.strip().lower()
