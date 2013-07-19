@@ -22,18 +22,14 @@ import urllib2
 @csrf_exempt
 def authenticate_app(request, format):
     if format == '.json':
-        if request.method == 'GET':
-            data = request.GET
-        elif request.method == 'POST':
-            data = request.POST
-        access_token  = data.get('access_token')
-        bio           = data.get('bio')
-        email         = data.get('email')
-        facebook_id   = data.get('facebook_id')
-        facebook_link = data.get('facebook_link')
-        first_name    = data.get('first_name')
-        last_name     = data.get('last_name')
-        location      = data.get('location')
+        access_token  = request.POST.get('access_token')
+        bio           = request.POST.get('bio')
+        email         = request.POST.get('email')
+        facebook_id   = request.POST.get('facebook_id')
+        facebook_link = request.POST.get('facebook_link')
+        first_name    = request.POST.get('first_name')
+        last_name     = request.POST.get('last_name')
+        location      = request.POST.get('location')
         if first_name and last_name:
             username = ' '.join([first_name, last_name])
         else:
