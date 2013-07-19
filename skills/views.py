@@ -6,6 +6,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader, RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from channels.models import Channel
 from interests.models import Interest
@@ -81,15 +82,11 @@ def delete_skill(request, pk):
     return HttpResponse(json.dumps(data), mimetype='application/json')
 
 @sign_in_required
+@csrf_exempt
 def new(request, format=None):
     """Create a new skill using a new or existing interest."""
-    request_data = None
-    if request.method == 'POST':
-        request_data = request.POST
-    elif format and format == '.json':
-        request_data = request.GET
-    if request_data and request_data.get('names'):
-        names = request_data.get('names').split(',')
+    if request.method == 'POST' and request.POST.get('names'):
+        names = request.POST.get('names').split(',')
         skills = []
         json_skill = None
         for raw_name in names:

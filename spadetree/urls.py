@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     # Pages (static)
     url(r'^about/$', 'pages.views.about'),
+    url(r'^test/$', 'pages.views.test'),
 
     # Admin
     url(r'^admin/', include(admin.site.urls)),
