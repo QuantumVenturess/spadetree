@@ -322,7 +322,8 @@ def new_review(request, slug, format=None):
         args=[profile.slug]))
 
 @sign_in_required
-def pick(request):
+@csrf_exempt
+def pick(request, format=None):
     """If user has not picked if they are a tutee or tutor."""
     if request.user.profile.tutee or request.user.profile.tutor:
         return HttpResponseRedirect(reverse('users.views.detail',
@@ -344,6 +345,14 @@ def pick(request):
             message       = 'Search for your interests and learn new skills'
             redirect      = reverse('interests.views.browse')
         profile.save()
+        if format:
+            if format == '.json':
+                data = {
+                    'tutee': 1 if profile.tutee else 0,
+                    'tutor': 1 if profile.tutor else 0,
+                }
+                return HttpResponse(json.dumps(data), 
+                    mimetype='application/json')
         messages.success(request, message)
         return HttpResponseRedirect(redirect)
     d = {
