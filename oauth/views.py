@@ -101,8 +101,16 @@ def authenticate_app(request, format):
                 spadetree_token = 'User did not save'
         else:
             spadetree_token = 'Invalid access token'
+        days_free     = user.dayfree_set.all().order_by('day__value')
+        hours_free    = user.hourfree_set.all()
+        hours_free_am = hours_free.filter(hour__value__gte=0, 
+            hour__value__lte=11).order_by('hour__value')
+        hours_free_pm = hours_free.filter(hour__value__gte=12,
+            hour__value__lte=23).order_by('hour__value')
         data = {
-            'days_free': [free.to_json() for free in user.dayfree_set.all()],
+            'days_free': [free.to_json() for free in days_free],
+            'hours_free_am': [free.to_json() for free in hours_free_am],
+            'hours_free_pm': [free.to_json() for free in hours_free_pm],
             'spadetree_token': spadetree_token,
             'user': user.profile.to_json(),
         }

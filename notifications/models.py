@@ -46,9 +46,8 @@ class Notification(models.Model):
         interest = self.channel.interest
         if interest:
             profile = self.user.profile
-            if profile.tutor:
-                word = 'a skill'
-            elif profile.tutee:
+            word = 'a skill'
+            if profile.tutee:
                 word = 'an interest'
             messages = {
                 'new': 'added %s as %s' % (self.model_link(), word),
