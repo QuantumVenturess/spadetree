@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -238,12 +239,12 @@ def edit(request, slug):
     return render(request, 'users/edit.html', add_csrf(request, d))
 
 @sign_in_required
-def friends_tutored(request, slug):
+def friends_tutored(request, slug, format=None):
     """Get a list of friends that this tutor has tutored."""
     profile = get_object_or_404(Profile, slug=slug)
     user    = profile.user
     oauth   = request.user.oauth
-    if oauth:
+    if oauth and (format or request.is_ajax()):
         # Fetch Facebook friends
         url = 'https://graph.facebook.com/%s/friends/?access_token=%s' % (
             oauth.facebook_id, oauth.access_token)
@@ -260,22 +261,39 @@ def friends_tutored(request, slug):
         users        = [oauth.user for oauth in oauths if oauth.user != user]
         # Create friend and choices tuple; (User, [choice1, choice2])
         friends = []
+        groups  = []
         for u in users:
+            group_dict = {
+                'interests': [],
+                'user'     : u.profile.to_json(),
+            }
             choices = u.tutee_choices.filter(Q(accepted=True, tutor=user) | 
                 Q(completed=True, tutor=user))
             if choices:
-                choices = sorted(list(choices), key=lambda x: x.interest.name)
-                friends.append((u, choices))
-        d = {
-            'friends': friends,
-            'userd': profile.user,
-        }
-        t = loader.get_template('users/friends_tutored.html')
-        context = RequestContext(request, d)
-        data = {
-            'friends_tutored': t.render(context),
-        }
-    return HttpResponse(json.dumps(data), mimetype='application/json')
+                choices   = sorted(list(choices), key=lambda x: x.interest.name)
+                interests = []
+                for choice in choices:
+                    interest = choice.interest
+                    interests.append(interest)
+                    group_dict['interests'].append(interest.to_json())
+                friends.append((u, interests))
+            groups.append(group_dict)
+        if format and format == '.json':
+            data = {
+                'groups': groups,
+            }
+        if request.is_ajax():
+            d = {
+                'friends': friends,
+                'userd': profile.user,
+            }
+            t = loader.get_template('users/friends_tutored.html')
+            context = RequestContext(request, d)
+            data = {
+                'friends_tutored': t.render(context),
+            }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
+    return HttpResponseRedirect(reverse('root_path'))
 
 @sign_in_required
 def new_review(request, slug, format=None):
