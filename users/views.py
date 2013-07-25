@@ -277,7 +277,7 @@ def friends_tutored(request, slug, format=None):
                     interests.append(interest)
                     group_dict['interests'].append(interest.to_json())
                 friends.append((u, interests))
-            groups.append(group_dict)
+                groups.append(group_dict)
         if format and format == '.json':
             data = {
                 'groups': groups,
@@ -285,7 +285,7 @@ def friends_tutored(request, slug, format=None):
         if request.is_ajax():
             d = {
                 'friends': friends,
-                'userd': profile.user,
+                'userd'  : profile.user,
             }
             t = loader.get_template('users/friends_tutored.html')
             context = RequestContext(request, d)
