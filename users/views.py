@@ -308,7 +308,7 @@ def new_review(request, slug, format=None):
                     positive = True
                 else:
                     positive = False
-            review = Review()
+            review          = Review()
             review.content  = content
             review.positive = positive
             review.tutee    = request.user
@@ -330,10 +330,12 @@ def new_review(request, slug, format=None):
                         'new_review_form': new_review_form.render(context),
                         'review_template': review_template.render(context),
                     }
-                    return HttpResponse(json.dumps(data),
-                        mimetype='application/json')
-                if format == '.json':
-                    pass
+                elif format == '.json':
+                    data = {
+                        'review': review.to_json(),
+                    }
+                return HttpResponse(json.dumps(data), 
+                    mimetype='application/json')
             else:
                 messages.success(request, 'Review submitted')
     return HttpResponseRedirect(reverse('users.views.detail',
