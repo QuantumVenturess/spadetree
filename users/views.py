@@ -296,6 +296,7 @@ def friends_tutored(request, slug, format=None):
     return HttpResponseRedirect(reverse('root_path'))
 
 @sign_in_required
+@csrf_exempt
 def new_review(request, slug, format=None):
     """Create new review for tutor."""
     profile = get_object_or_404(Profile, slug=slug)
