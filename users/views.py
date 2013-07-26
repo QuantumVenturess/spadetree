@@ -302,7 +302,7 @@ def new_review(request, slug, format=None):
     profile = get_object_or_404(Profile, slug=slug)
     if request.method == 'POST':
         content = request.POST.get('content')
-        # If current user is tutee and profile user is tutor
+        # If current user is tutee and profile user is tutor and content
         if request.user.profile.tutee and profile.tutor and content:
             if request.POST.get('positive'):
                 if int(request.POST.get('positive')):
