@@ -156,7 +156,7 @@ def detail(request, slug, format=None):
     return render(request, 'users/detail.html', d)
 
 @sign_in_required
-def edit(request, slug):
+def edit(request, slug, format=None):
     """Edit user page."""
     profile = get_object_or_404(Profile, slug=slug)
     user    = profile.user
@@ -194,6 +194,11 @@ def edit(request, slug):
                 city.save()
             profile.city = city
             profile.save()
+        if format and format == '.json':
+            data = {
+                'user': profile.to_json(),
+            }
+            return HttpResponse(json.dumps(data), mimetype='application/json')
         messages.success(request, 'Profile updated')
         return HttpResponseRedirect(reverse('users.views.detail',
             args=[profile.slug]))
