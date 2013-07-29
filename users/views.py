@@ -156,6 +156,7 @@ def detail(request, slug, format=None):
     return render(request, 'users/detail.html', d)
 
 @sign_in_required
+@csrf_exempt
 def edit(request, slug, format=None):
     """Edit user page."""
     profile = get_object_or_404(Profile, slug=slug)
