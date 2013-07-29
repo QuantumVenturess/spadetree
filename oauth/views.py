@@ -34,6 +34,7 @@ def authenticate_app(request, format):
             username = ' '.join([first_name, last_name])
         else:
             username = ''
+        user_dict = {}
         # Verification
         partial = 'CAAHhPEhKJfcBA' if not settings.DEV else 'CAACDp4ZA8AYsB'
         pattern = re.compile(partial)
@@ -95,8 +96,16 @@ def authenticate_app(request, format):
                     facebook_id=facebook_id, facebook_link=facebook_link, 
                         provider='facebook')
             if user:
-                spadetree_token = '%sx00000x%s' % (user.pk, 
-                    user.profile.token())
+                profile = user.profile
+                spadetree_token = '%sx00000x%s' % (user.pk, profile.token())
+                user_dict = profile.to_json()
+                if profile.tutee:
+                    user_dict = dict(user_dict, **{
+                        'city' : profile.city.to_json(),
+                        'phone': profile.phone if profile.phone else 0,
+                        'email': user.email,
+                        'facebook_link': user.oauth.facebook_link, 
+                    })
             else:
                 spadetree_token = 'User did not save'
         else:
@@ -112,7 +121,7 @@ def authenticate_app(request, format):
             'hours_free_am': [free.to_json() for free in hours_free_am],
             'hours_free_pm': [free.to_json() for free in hours_free_pm],
             'spadetree_token': spadetree_token,
-            'user': user.profile.to_json(),
+            'user': user_dict,
         }
         return HttpResponse(json.dumps(data), 
             mimetype='application/json')
