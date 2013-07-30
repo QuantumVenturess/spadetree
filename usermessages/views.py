@@ -23,6 +23,7 @@ def count(request):
 def detail(request, pk, format=None):
     """Detail view for messages from one user."""
     sender = get_object_or_404(User, pk=pk)
+    # Messages sent by user and received by sender
     user_messages = request.user.profile.messages(
         sender=sender).order_by('created')
     received_messages = user_messages.filter(recipient=request.user, 
@@ -34,22 +35,17 @@ def detail(request, pk, format=None):
             msg.save()
     # Group messages by date
     if user_messages:
+        if format and format == '.json':
+            data = {
+                'messages': [msg.to_json() for msg in user_messages],
+            }
+            return HttpResponse(json.dumps(data), mimetype='application/json')
         dates = sorted(set([msg.date() for msg in user_messages]),
             key=lambda x: datetime.strptime(x, '%b %d, %y'))
-        days      = []
-        days_dict = []
+        days = []
         for day in dates:
             msgs = [msg for msg in user_messages if msg.date() == day]
             days.append((day, msgs))
-            days_dict.append({
-                'day': day,
-                'messages': [msg.to_json() for msg in msgs],
-            })
-        if format and format == '.json':
-            data = {
-                'user_messages': days_dict,
-            }
-            return HttpResponse(json.dumps(data), mimetype='application/json')
         d = {
             'days': days,
             'form': ReplyMessageForm(),
