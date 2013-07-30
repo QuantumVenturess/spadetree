@@ -20,7 +20,7 @@ def count(request):
     return HttpResponse(json.dumps(n), mimetype='application/json')
 
 @sign_in_required
-def detail(request, pk):
+def detail(request, pk, format=None):
     """Detail view for messages from one user."""
     sender = get_object_or_404(User, pk=pk)
     user_messages = request.user.profile.messages(
@@ -36,10 +36,20 @@ def detail(request, pk):
     if user_messages:
         dates = sorted(set([msg.date() for msg in user_messages]),
             key=lambda x: datetime.strptime(x, '%b %d, %y'))
-        days = []
+        days      = []
+        days_dict = []
         for day in dates:
             msgs = [msg for msg in user_messages if msg.date() == day]
             days.append((day, msgs))
+            days_dict.append({
+                'day': day,
+                'messages': [msg.to_json() for msg in msgs],
+            })
+        if format and format == '.json':
+            data = {
+                'user_messages': days_dict,
+            }
+            return HttpResponse(json.dumps(data), mimetype='application/json')
         d = {
             'days': days,
             'form': ReplyMessageForm(),
@@ -51,9 +61,14 @@ def detail(request, pk):
     return HttpResponseRedirect(reverse('usermessages.views.list'))
 
 @sign_in_required
-def list(request):
+def list(request, format=None):
     """Display most recent message from all senders."""
     user_messages = request.user.profile.recent_messages()
+    if format and format == '.json':
+        data = {
+            'messages': [msg.to_json() for msg in user_messages],
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
     d = {
         'objects': user_messages,
         'title': 'Messages',

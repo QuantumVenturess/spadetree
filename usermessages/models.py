@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from spadetree.utils import nsdate_format
+
 class UserMessage(models.Model):
     created   = models.DateTimeField(auto_now_add=True)
     content   = models.TextField()
@@ -25,3 +27,13 @@ class UserMessage(models.Model):
         time = self.created.strftime('%I:%M').lstrip('0')
         am_pm = self.created.strftime('%p').lower()
         return time + am_pm
+
+    def to_json(self):
+        dictionary = {
+            'created'  : nsdate_format(self.created),
+            'content'  : self.content,
+            'recipient': self.recipient.profile.to_json(),
+            'sender'   : self.sender.profile.to_json(),
+            'viewed'   : 1 if self.viewed else 0,
+        }
+        return dictionary
