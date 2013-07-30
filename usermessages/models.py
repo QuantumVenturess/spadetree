@@ -32,6 +32,7 @@ class UserMessage(models.Model):
         dictionary = {
             'created'  : nsdate_format(self.created),
             'content'  : self.content,
+            'id'       : self.pk,
             'recipient': self.recipient.profile.to_json(),
             'sender'   : self.sender.profile.to_json(),
             'viewed'   : 1 if self.viewed else 0,
