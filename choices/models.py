@@ -71,7 +71,7 @@ class Choice(models.Model):
     def to_json(self):
         dictionary = {
             'accepted' : 1 if self.accepted else 0,
-            'address'  : self.address,
+            'address'  : self.address if self.address else '',
             'city'     : self.city.to_json() if self.city else None,
             'completed': 1 if self.completed else 0,
             'created'  : nsdate_format(self.created),
