@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf
@@ -72,7 +73,8 @@ def list(request, format=None):
     return render(request, 'usermessages/list.html', d)
 
 @sign_in_required
-def new(request, pk):
+@csrf_exempt
+def new(request, pk, format=None):
     """Create new message."""
     receiver = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
@@ -84,7 +86,11 @@ def new(request, pk):
             message.sender    = request.user
             message.save()
             if message:
-                if request.is_ajax():
+                if format and format == '.json':
+                    data = {
+                        'message': message.to_json(),
+                    }
+                elif request.is_ajax():
                     d = {
                         'form': ReplyMessageForm(),
                         'message': message,
@@ -100,9 +106,9 @@ def new(request, pk):
                         'reply_message_form': reply_message_form.render(
                             context)
                     }
+                if (format and format == '.json') or request.is_ajax():
                     return HttpResponse(json.dumps(data), 
                         mimetype='application/json')
-                else:
-                    messages.success(request, 'Message sent')
+                messages.success(request, 'Message sent')
     return HttpResponseRedirect(reverse('usermessages.views.detail',
         args=[receiver.pk]))

@@ -7,4 +7,5 @@ urlpatterns = patterns('usermessages.views',
     url(r'^messages/$', 'list'),
     url(r'^messages(?P<format>.json)/$', 'list'),
     url(r'^(?P<pk>[\d]+)/new/$', 'new'),
+    url(r'^(?P<pk>[\d]+)/new(?P<format>.json)/$', 'new'),
 )
