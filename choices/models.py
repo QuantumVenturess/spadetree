@@ -82,6 +82,7 @@ class Choice(models.Model):
             'day'         : self.day.to_json(),
             'denied'      : 1 if self.denied else 0,
             'hour'        : self.hour.to_json(),
+            'id'          : self.pk,
             'interest'    : self.interest.to_json(),
             'tutee'       : self.tutee.profile.to_json(),
             'tutee_viewed': 1 if self.tutee_viewed else 0,
