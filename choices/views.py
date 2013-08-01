@@ -198,7 +198,7 @@ def new_note(request, pk):
         args=[choice.pk]))
 
 @sign_in_required
-def requests(request):
+def requests(request, format=None):
     """Show all choices for tutee or tutor."""
     if request.user.profile.tutor:
         choices = request.user.tutor_choices.all().order_by('-created')
@@ -208,8 +208,15 @@ def requests(request):
         for choice in choices.filter(tutee_viewed=False):
             choice.tutee_viewed = True
             choice.save()
+    paged = page(request, choices, 5)
+    if format and format =='.json':
+        data = {
+            'choices': [choice.to_json() for choice in paged],
+            'pages'  : paged.paginator.num_pages,
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
     d = {
-        'objects': page(request, choices, 5),
-        'title': 'Requests',
+        'objects': paged,
+        'title'  : 'Requests',
     }
     return render(request, 'choices/requests.html', add_csrf(request, d))

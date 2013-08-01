@@ -5,6 +5,7 @@ from cities.models import City
 from days.models import Day
 from hours.models import Hour
 from interests.models import Interest
+from spadetree.utils import nsdate_format
 
 class Choice(models.Model):
     accepted       = models.BooleanField(default=False)
@@ -66,6 +67,28 @@ class Choice(models.Model):
 
     def state(self):
         return self.city.state.name.title()
+
+    def to_json(self):
+        dictionary = {
+            'accepted' : 1 if self.accepted else 0,
+            'address'  : self.address,
+            'city'     : self.city.to_json() if self.city else '',
+            'completed': 1 if self.completed else 0,
+            'created'  : nsdate_format(self.created),
+            'content'  : self.content,
+            'date'     : nsdate_format(self.date) if self.date else '',
+            'date_completed': nsdate_format(
+                self.date_completed) if self.date_completed else '',
+            'day'         : self.day.to_json(),
+            'denied'      : 1 if self.denied else 0,
+            'hour'        : self.hour.to_json(),
+            'interest'    : self.interest.to_json(),
+            'tutee'       : self.tutee.profile.to_json(),
+            'tutee_viewed': 1 if self.tutee_viewed else 0,
+            'tutor'       : self.tutor.profile.to_json(),
+            'tutor_viewed': 1 if self.tutor_viewed else 0,
+        }
+        return dictionary
 
 class ChoiceNote(models.Model):
     choice  = models.ForeignKey(Choice)
