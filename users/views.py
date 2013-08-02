@@ -82,7 +82,7 @@ def choose(request, slug, format=None):
                         recipient=user, viewed=True)
                     if format == '.json':
                         data = {
-                            'success': 1,
+                            'choice': choice.to_json(),
                         }
                         return HttpResponse(json.dumps(data),
                             mimetype='application/json')
