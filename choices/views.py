@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from channels.models import Channel
 from cities.models import City
@@ -18,7 +19,8 @@ import json
 import pytz
 
 @sign_in_required
-def action(request, pk):
+@csrf_exempt
+def action(request, pk, format=None):
     """Accept, deny, or complete choice."""
     choice = get_object_or_404(Choice, pk=pk)
     if request.method == 'POST':
@@ -65,7 +67,11 @@ def action(request, pk):
                 except Channel.DoesNotExist:
                     pass
         choice.save()
-        if request.is_ajax():
+        if format and format == '.json':
+            data = {
+                'choice': choice.to_json(),
+            }
+        elif request.is_ajax():
             d = {
                 'choice': choice,
             }
@@ -82,15 +88,15 @@ def action(request, pk):
                 'request_status': request_status.render(context),
                 'title_count': request.user.profile.title_count(),
             }
+        if (format and format == '.json') or request.is_ajax():
             return HttpResponse(json.dumps(data),
                 mimetype='application/json')
-        else:
-            if choice.accepted:
-                messages.success(request, 'Request accepted')
-            elif choice.denied:
-                messages.warning(request, 'Request denied')
-            elif choice.completed:
-                messages.success(request, 'Request completed')
+        if choice.accepted:
+            messages.success(request, 'Request accepted')
+        elif choice.denied:
+            messages.warning(request, 'Request denied')
+        elif choice.completed:
+            messages.success(request, 'Request completed')
     return HttpResponseRedirect(reverse('choices.views.requests'))
 
 @sign_in_required
