@@ -156,7 +156,7 @@ def detail(request, pk, format=None):
             choice.save()
             if format and format == '.json':
                 data = {
-                    'choice': choice.to_json,
+                    'choice': choice.to_json(),
                 }
                 return HttpResponse(json.dumps(data), 
                     mimetype='application/json')
