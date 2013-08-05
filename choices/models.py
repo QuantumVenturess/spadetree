@@ -118,3 +118,12 @@ class ChoiceNote(models.Model):
         time  = self.created.strftime('%I:%M').lstrip('0')
         am_pm = self.created.strftime('%p').lower()
         return time + am_pm
+
+    def to_json(self):
+        dictionary = {
+            'content': self.content,
+            'created': nsdate_format(self.created),
+            'id'     : self.pk,
+            'user'   : self.user.profile.to_json(),
+        }
+        return dictionary

@@ -9,4 +9,5 @@ urlpatterns = patterns('choices.views',
     url(r'^(?P<pk>\d+)/action/$', 'action'),
     url(r'^(?P<pk>\d+)/action(?P<format>.json)/$', 'action'),
     url(r'^(?P<pk>\d+)/new/note/$', 'new_note'),
+    url(r'^(?P<pk>\d+)/notes.json/$', 'notes'),
 )

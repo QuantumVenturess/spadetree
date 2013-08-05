@@ -211,6 +211,16 @@ def new_note(request, pk):
         args=[choice.pk]))
 
 @sign_in_required
+def notes(request, pk):
+    """Return all notes for specific choice/request."""
+    choice = get_object_or_404(Choice, pk=pk)
+    data = {
+        'notes': [n.to_json() for n in choice.choicenote_set.all(
+            ).order_by('-created')],
+    }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
+
+@sign_in_required
 def requests(request, format=None):
     """Show all choices for tutee or tutor."""
     if request.user.profile.tutor:
