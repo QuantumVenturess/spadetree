@@ -169,7 +169,8 @@ def detail(request, pk, format=None):
     return render(request, 'choices/detail.html', add_csrf(request, d))
 
 @sign_in_required
-def new_note(request, pk):
+@csrf_exempt
+def new_note(request, pk, format=None):
     """Create a new note for choice."""
     choice = get_object_or_404(Choice, pk=pk)
     if request.user not in [choice.tutee, choice.tutor]:
@@ -190,7 +191,11 @@ def new_note(request, pk):
             notification.save()
         except Channel.DoesNotExist:
             pass
-        if request.is_ajax():
+        if format and format == '.json':
+            data = {
+                'choice': choice.to_json(),
+            }
+        elif request.is_ajax():
             d = {
                 'choice': choice,
                 'choice_note': choice_note,
@@ -205,6 +210,7 @@ def new_note(request, pk):
                     context),
                 'choice_note_form': choice_note_form.render(context)
             }
+        if (format and format == '.json') or request.is_ajax():
             return HttpResponse(json.dumps(data),
                 mimetype='application/json')
     return HttpResponseRedirect(reverse('choices.views.detail',
