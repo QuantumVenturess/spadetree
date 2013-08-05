@@ -106,7 +106,8 @@ def count(request):
     return HttpResponse(json.dumps(n), mimetype='application/json')
 
 @sign_in_required
-def detail(request, pk):
+@csrf_exempt
+def detail(request, pk, format=None):
     """Detail page for choice/request."""
     choice = get_object_or_404(Choice, pk=pk)
     if not request.user in [choice.tutee, choice.tutor]:
@@ -153,6 +154,12 @@ def detail(request, pk):
                 messages.error(request, 
                     'Date must be a %s' % choice.day.name.title())
             choice.save()
+            if format and format == '.json':
+                data = {
+                    'choice': choice.to_json,
+                }
+                return HttpResponse(json.dumps(data), 
+                    mimetype='application/json')
     d = {
         'choice': choice,
         'choice_notes': choice.choicenote_set.all().order_by('-created'),
