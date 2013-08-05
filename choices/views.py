@@ -193,7 +193,7 @@ def new_note(request, pk, format=None):
             pass
         if format and format == '.json':
             data = {
-                'choice': choice.to_json(),
+                'choice_note': choice_note.to_json(),
             }
         elif request.is_ajax():
             d = {
