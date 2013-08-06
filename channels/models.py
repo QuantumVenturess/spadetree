@@ -32,7 +32,10 @@ class Channel(models.Model):
         return Subscription.objects.filter(channel=self).count()
 
     def subscribe(self, user):
-        self.subscription_set.create(user=user)
+        try:
+            subscription = self.subscription_set.get(user=user)
+        except ObjectDoesNotExist:
+            self.subscription_set.create(user=user)
 
     def unsubscribe(self, user):
         try:
