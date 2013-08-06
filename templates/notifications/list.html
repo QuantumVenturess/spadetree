@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
+{% block head %}
+<script>
+$(document).ready(function() {
+  $.ajax({
+    type: 'GET',
+    url : '{% url notifications.views.notifications %}',
+    success: function(response) {
+      $('.notificationList').html(response.notifications);
+    }
+  });
+});
+</script>
+{% endblock %}
 {% block content %}
 <div class='notificationList'>
-  {% for day, notifications in days %}
-    <div class='day'>
-      <h1>{{ day }}</h1>
-      <div class='notifications'>
-        {% for notification in notifications %}
-          <div class='notification'>
-            <a href='{% url users.views.detail notification.user.profile.slug %}'>
-              {{ notification.user.profile.full_name }}</a>
-              {% autoescape off %}{{ notification.message }}{% endautoescape %}
-            <span>{{ notification.time }}</span>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endfor %}
+  {% include 'notifications/notifications.html' %}
 </div>
 {% endblock %}
