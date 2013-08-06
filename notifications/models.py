@@ -103,6 +103,8 @@ class Notification(models.Model):
         interest = None
         if self.model == 'choice':
             choice = channel.choice.to_json()
+        if self.model == 'choice_note':
+            choice = self.choice_note.choice.to_json()
         if self.model == 'interest':
             interest = channel.interest.to_json()
         dictionary = {
