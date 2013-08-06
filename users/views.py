@@ -407,4 +407,7 @@ def title_count(request):
     r = profile.choice_count()
     m = profile.unread_message_count()
     t = n + r + m
-    return HttpResponse(json.dumps(t), mimetype='application/json')
+    data = {
+        'count': t,
+    }
+    return HttpResponse(json.dumps(data), mimetype='application/json')

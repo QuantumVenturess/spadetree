@@ -103,7 +103,10 @@ def action(request, pk, format=None):
 def count(request):
     """Return request count."""
     n = request.user.profile.choice_count()
-    return HttpResponse(json.dumps(n), mimetype='application/json')
+    data = {
+        'count': n,
+    }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
 
 @sign_in_required
 @csrf_exempt

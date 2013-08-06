@@ -12,7 +12,10 @@ import json
 def count(request):
     """Return notification count."""
     n = request.user.profile.unviewed_notification_count()
-    return HttpResponse(json.dumps(n), mimetype='application/json')
+    data = {
+        'count': n,
+    }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
 
 @sign_in_required
 def list(request):

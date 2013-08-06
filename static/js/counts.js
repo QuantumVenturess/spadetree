@@ -4,8 +4,9 @@ $(document).ready(function() {
     type: 'GET',
     url: '/n/count.json',
     success: function(response) {
-      if (response > 0) {
-        $('.notificationCount').text(response);
+      var count = parseInt(response.count);
+      if (count > 0) {
+        $('.notificationCount').text(count);
       }
     }
   });
@@ -14,8 +15,9 @@ $(document).ready(function() {
     type: 'GET',
     url: '/c/count.json',
     success: function(response) {
-      if (response > 0) {
-        $('.choiceCount').text(response);
+      var count = parseInt(response.count);
+      if (count > 0) {
+        $('.choiceCount').text(count);
       }
     }
   });
@@ -24,8 +26,9 @@ $(document).ready(function() {
     type: 'GET',
     url: '/m/count.json',
     success: function(response) {
-      if (response > 0) {
-        $('.messageCount').text(response);
+      var count = parseInt(response.count);
+      if (count > 0) {
+        $('.messageCount').text(count);
       }
     }
   });
@@ -34,8 +37,9 @@ $(document).ready(function() {
     type: 'GET',
     url: '/u/title-count.json',
     success: function(response) {
-      if (response > 0) {
-        $('title').prepend('(' + response + ') ');
+      var count = parseInt(response.count);
+      if (count > 0) {
+        $('title').prepend('(' + count + ') ');
         $('header .menu span').addClass('red');
       }
     }
