@@ -1,6 +1,10 @@
 /* List */
 .notificationList {
   padding: 40px 0; }
+  .notificationList h2 {
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center; }
   .notificationList .day {
     margin: 10px 0 0 0; }
     .notificationList .day:first-child {
