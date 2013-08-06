@@ -98,24 +98,20 @@ class Notification(models.Model):
         return '%s %s' % (time, am_pm)
 
     def to_json(self):
-        channel     = self.channel
-        choice      = None
-        choice_note = None
-        interest    = None
+        channel  = self.channel
+        choice   = None
+        interest = None
         if self.model == 'choice':
             choice = channel.choice.to_json()
-        elif self.model == 'choice_note':
-            choice_note = self.choice_note.to_json()
-        elif self.model == 'interest':
+        if self.model == 'interest':
             interest = channel.interest.to_json()
         dictionary = {
-            'choice'     : choice,
-            'choice_note': choice_note,
-            'created'    : nsdate_format(self.created),
-            'id'         : self.pk,
-            'interest'   : interest,
-            'message'    : self.message(url_link=False),
-            'user'       : self.user.profile.to_json(),
+            'choice'  : choice,
+            'created' : nsdate_format(self.created),
+            'id'      : self.pk,
+            'interest': interest,
+            'message' : self.message(url_link=False),
+            'user'    : self.user.profile.to_json(),
 
         }
         return dictionary
