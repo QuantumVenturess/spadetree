@@ -85,8 +85,12 @@ class Choice(models.Model):
             'id'          : self.pk,
             'interest'    : self.interest.to_json(),
             'tutee'       : self.tutee.profile.to_json(),
+            'tutee_phone' : self.tutee.profile.phone if (
+                self.tutee.profile.phone) else 0,
             'tutee_viewed': 1 if self.tutee_viewed else 0,
             'tutor'       : self.tutor.profile.to_json(),
+            'tutor_phone' : self.tutor.profile.phone if (
+                self.tutor.profile.phone) else 0,
             'tutor_viewed': 1 if self.tutor_viewed else 0,
         }
         return dictionary
