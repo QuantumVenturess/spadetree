@@ -105,7 +105,6 @@ def authenticate_app(request, format):
                         'email'        : user.email,
                         'facebook_link': user.oauth.facebook_link, 
                         'phone'        : profile.phone if profile.phone else 0,
-                        'read_tutorial': 1 if profile.read_tutorial else 0,
                     })
             else:
                 spadetree_token = 'User did not save'
