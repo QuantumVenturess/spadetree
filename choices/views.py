@@ -172,6 +172,18 @@ def detail(request, pk, format=None):
     return render(request, 'choices/detail.html', add_csrf(request, d))
 
 @sign_in_required
+def info(request, pk):
+    """Return json data of choice."""
+    choice = get_object_or_404(Choice, pk=pk)
+    if not request.user in [choice.tutee, choice.tutor]:
+        messages.error(request, 'This is not your request')
+        return HttpResponseRedirect(reverse('choices.views.requests'))
+    data = {
+        'choice': choice.to_json(),
+    }
+    return HttpResponse(json.dumps(data), mimetype='application/json')
+
+@sign_in_required
 @csrf_exempt
 def new_note(request, pk, format=None):
     """Create a new note for choice."""
