@@ -101,10 +101,11 @@ def authenticate_app(request, format):
                 user_dict = profile.to_json()
                 if profile.tutee:
                     user_dict = dict(user_dict, **{
-                        'city' : profile.city.to_json(),
-                        'phone': profile.phone if profile.phone else 0,
-                        'email': user.email,
+                        'city'         : profile.city.to_json(),
+                        'email'        : user.email,
                         'facebook_link': user.oauth.facebook_link, 
+                        'phone'        : profile.phone if profile.phone else 0,
+                        'read_tutorial': 1 if profile.read_tutorial else 0,
                     })
             else:
                 spadetree_token = 'User did not save'
@@ -117,11 +118,11 @@ def authenticate_app(request, format):
         hours_free_pm = hours_free.filter(hour__value__gte=12,
             hour__value__lte=23).order_by('hour__value')
         data = {
-            'days_free': [free.to_json() for free in days_free],
-            'hours_free_am': [free.to_json() for free in hours_free_am],
-            'hours_free_pm': [free.to_json() for free in hours_free_pm],
+            'days_free'      : [free.to_json() for free in days_free],
+            'hours_free_am'  : [free.to_json() for free in hours_free_am],
+            'hours_free_pm'  : [free.to_json() for free in hours_free_pm],
             'spadetree_token': spadetree_token,
-            'user': user_dict,
+            'user'           : user_dict,
         }
         return HttpResponse(json.dumps(data), 
             mimetype='application/json')

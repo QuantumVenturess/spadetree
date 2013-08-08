@@ -388,6 +388,20 @@ def pick(request, format=None):
     return render(request, 'users/pick.html', add_csrf(request, d))
 
 @sign_in_required
+@csrf_exempt
+def read_tutorial(request):
+    """User has read tutorial."""
+    if request.method == 'POST':
+        profile = request.user.profile
+        profile.read_tutorial = True
+        profile.save()
+        data = {
+            'user': profile.to_json(),
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
+    return HttpResponseRedirect(reverse('root_path'))
+
+@sign_in_required
 def reviews(request, slug):
     """Return all reviews for user."""
     profile = get_object_or_404(Profile, slug=slug)

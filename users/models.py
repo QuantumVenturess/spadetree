@@ -17,6 +17,7 @@ class Profile(models.Model):
                    upload_to=settings.USER_IMAGE_URL)
     in_count = models.IntegerField(default=0)
     phone    = models.BigIntegerField(blank=True, null=True)
+    read_tutorial = models.BooleanField(default=False)
     slug     = models.SlugField(blank=True, null=True, max_length=255)
     tutee    = models.BooleanField(default=False)
     tutor    = models.BooleanField(default=False)
@@ -147,6 +148,7 @@ class Profile(models.Model):
             'first_name': user.first_name,
             'id': user.pk,
             'last_name': user.last_name[0],
+            'read_tutorial': 1 if self.read_tutorial else 0,
             'slug': self.slug,
             'state': self.city.state.to_json() if self.city else None,
             'tutee': 1 if self.tutee else 0,

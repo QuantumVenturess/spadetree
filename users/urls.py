@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('users.views',
     url(r'^pick/$', 'pick'),
     url(r'^pick(?P<format>.json)/$', 'pick'),
+    url(r'^read-tutorial.json/$', 'read_tutorial'),
     url(r'^title-count.json/$', 'title_count'),
 
     url(r'^(?P<slug>[-\w]+)/choose/$', 'choose'),
