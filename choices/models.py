@@ -69,6 +69,46 @@ class Choice(models.Model):
         if self.address and self.date and self.city:
             return True
 
+    def send_push_notification_to_tutee(self):
+        """Send push notification to Parse for Tutee."""
+        message = '%s accepted your request' % (
+            self.tutor.profile.full_name().title())
+        payload = {
+            'channels': ['choice_%s' % self.pk],
+            'data'    : {
+                'alert'    : message,
+                'badge'    : 'Increment',
+                'choice_id': self.pk,
+            },
+        }
+        headers = {
+            'X-Parse-Application-Id': settings.PARSE_APPLICATION_ID,
+            'X-Parse-REST-API-Key'  : settings.PARSE_REST_API_KEY,
+            'Content-Type'          : 'application/json',
+        }
+        r = requests.post(settings.PARSE_API_URL, data=json.dumps(payload),
+            headers=headers)
+
+    def send_push_notification_to_tutor(self):
+        """Send push notification to Parse for Tutor."""
+        message = '%s sent you a request' % (
+            self.tutee.profile.full_name().title())
+        payload = {
+            'channels': ['all_choices_user_%s' % self.tutor.pk],
+            'data'    : {
+                'alert'    : message,
+                'badge'    : 'Increment',
+                'choice_id': self.pk,
+            },
+        }
+        headers = {
+            'X-Parse-Application-Id': settings.PARSE_APPLICATION_ID,
+            'X-Parse-REST-API-Key'  : settings.PARSE_REST_API_KEY,
+            'Content-Type'          : 'application/json',
+        }
+        r = requests.post(settings.PARSE_API_URL, data=json.dumps(payload),
+            headers=headers)
+
     def state(self):
         return self.city.state.name.title()
 
