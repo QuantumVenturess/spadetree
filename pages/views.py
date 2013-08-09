@@ -1,10 +1,14 @@
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from interests.models import Interest
 
 import json
+import requests
+import urllib
+import urllib2
 
 def about(request):
     """About page."""
@@ -15,17 +19,4 @@ def about(request):
 
 @csrf_exempt
 def test(request):
-    method = 'GET'
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        print name
-        if name:
-            method = name
-        else:
-            method = 'POST'
-    data = {
-        'method': method,
-    }
-    print method
-    return HttpResponse(json.dumps(data), 
-        mimetype='application/json')
+    return HttpResponseRedirect(reverse('root_path'))
