@@ -91,7 +91,7 @@ def choose(request, slug, format=None):
                             """Set the day you want to start learning
                             and the place you want to meet""")
                         # Send push notification
-                        choice.send_push_notification_to_tutor()
+                        # choice.send_push_notification_to_tutor()
                         return HttpResponseRedirect(reverse(
                             'choices.views.detail', args=[choice.pk]))
     return HttpResponseRedirect(reverse('users.views.detail', 

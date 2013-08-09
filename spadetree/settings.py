@@ -132,9 +132,9 @@ MIDDLEWARE_CLASSES = (
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Parse
-PARSE_API_URL        = 'https://api.parse.com/1/push'
-PARSE_APPLICATION_ID = 'iRqqfEEivn7v7W8SHTOj4qOzaXuedhJkqCDWYn1m'
-PARSE_REST_API_KEY   = 'm20pVLyyGl3ss3SHt56nCBXG9UYR2OptOF9Ugvxe'
+# PARSE_API_URL        = 'https://api.parse.com/1/push'
+# PARSE_APPLICATION_ID = 'iRqqfEEivn7v7W8SHTOj4qOzaXuedhJkqCDWYn1m'
+# PARSE_REST_API_KEY   = 'm20pVLyyGl3ss3SHt56nCBXG9UYR2OptOF9Ugvxe'
 
 ROOT_URLCONF = 'spadetree.urls'
 

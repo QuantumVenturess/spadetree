@@ -75,7 +75,7 @@ def action(request, pk, format=None):
             # If choice is accepted but not completed
             if choice.accepted and not choice.completed:
                 # Send push notification to tutee
-                choice.send_push_notification_to_tutee()
+                # choice.send_push_notification_to_tutee()
             d = {
                 'choice': choice,
             }
