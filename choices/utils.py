@@ -5,7 +5,9 @@ import requests
 
 def send_push_notification_to_tutee(choice):
     """Send push notification to Parse for Tutee from Tutor."""
-    message = '%s accepted your request' % choice.tutor.first_name.title()
+    name = '%s %s' % (choice.tutor.first_name.title(), 
+        choice.tutor.last_name[0].title())
+    message = '%s accepted your request' % name
     payload = {
         'channels': ['choice_%s' % choice.pk],
         'data'    : {
@@ -24,7 +26,9 @@ def send_push_notification_to_tutee(choice):
 
 def send_push_notification_to_tutor(choice):
     """Send push notification to Parse for Tutor from Tutee."""
-    message = '%s sent you a request' % choice.tutee.first_name.title()
+    name = '%s %s' % (choice.tutee.first_name.title(), 
+        choice.tutee.last_name[0].title())
+    message = '%s sent you a request' % name
     payload = {
         'channels': ['all_choices_user_%s' % choice.tutor.pk],
         'data'    : {
