@@ -14,6 +14,7 @@ from rq import Queue
 from worker import conn
 
 from choices.models import Choice
+from choices.utils import send_push_notification_to_tutor
 from cities.models import City
 from days.models import Day, DayFree
 from hours.models import Hour, HourFree
@@ -89,11 +90,11 @@ def choose(request, slug, format=None):
                         return HttpResponse(json.dumps(data),
                             mimetype='application/json')
                     else:
-                        # Send push notification
+                        # Send push notification to tutor
                         if not settings.DEV:
                             q = Queue(connection=conn)
-                            r = q.enqueue(
-                                choice.send_push_notification_to_tutor())
+                            r = q.enqueue(send_push_notification_to_tutor, 
+                                    choice)
                         messages.success(request, 
                             """Set the day you want to start learning
                             and the place you want to meet""")

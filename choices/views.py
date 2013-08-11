@@ -13,6 +13,7 @@ from worker import conn
 from channels.models import Channel
 from cities.models import City
 from choices.models import Choice, ChoiceNote
+from choices.utils import send_push_notification_to_tutee
 from notifications.models import Notification
 from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
@@ -80,7 +81,7 @@ def action(request, pk, format=None):
                 # Send push notification to tutee
                 if not settings.DEV:
                     q = Queue(connection=conn)
-                    r = q.enqueue(choice.send_push_notification_to_tutee())
+                    r = q.enqueue(send_push_notification_to_tutee, choice)
             d = {
                 'choice': choice,
             }
