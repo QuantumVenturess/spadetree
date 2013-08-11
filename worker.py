@@ -3,8 +3,6 @@ from rq import Connection, Queue, Worker
 import os
 import redis
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'spadetree.settings'
-
 listen = ['default', 'high', 'low']
 
 redis_url = os.getenv('REDISTOGO_URL')
