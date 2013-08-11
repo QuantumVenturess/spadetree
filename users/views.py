@@ -92,7 +92,7 @@ def choose(request, slug, format=None):
                         # Send push notification to tutor
                         if not settings.DEV:
                             django_rq.enqueue(
-                                send_push_notification_to_tutor(choice))
+                                send_push_notification_to_tutor, choice)
                         messages.success(request, 
                             """Set the day you want to start learning
                             and the place you want to meet""")

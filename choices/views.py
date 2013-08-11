@@ -78,7 +78,7 @@ def action(request, pk, format=None):
             # If choice is accepted but not completed
             if choice.accepted and not choice.completed and not settings.DEV:
                 # Send push notification to tutee
-                django_rq.enqueue(send_push_notification_to_tutee(choice))
+                django_rq.enqueue(send_push_notification_to_tutee, choice)
             d = {
                 'choice': choice,
             }
