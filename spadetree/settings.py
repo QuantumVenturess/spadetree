@@ -4,7 +4,7 @@ import os, platform, socket
 # Check environment
 if os.environ.get('MYSITE_PRODUCTION', False):
     # Production
-    DEBUG = TEMPLATE_DEBUG = True
+    DEBUG = TEMPLATE_DEBUG = False
     DEV                    = False
     COMPRESS_ENABLED       = True
 else:

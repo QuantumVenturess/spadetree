@@ -4,8 +4,8 @@ import json
 import requests
 
 def send_push_notification_to_tutee(choice):
-    """Send push notification to Parse for Tutee."""
-    message = '%s accepted your request' % 'Tutor'
+    """Send push notification to Parse for Tutee from Tutor."""
+    message = '%s accepted your request' % choice.tutor.first_name.title()
     payload = {
         'channels': ['choice_%s' % choice.pk],
         'data'    : {
@@ -23,8 +23,8 @@ def send_push_notification_to_tutee(choice):
         headers=headers)
 
 def send_push_notification_to_tutor(choice):
-    """Send push notification to Parse for Tutor."""
-    message = '%s sent you a request' % 'Tutee'
+    """Send push notification to Parse for Tutor from Tutee."""
+    message = '%s sent you a request' % choice.tutee.first_name.title()
     payload = {
         'channels': ['all_choices_user_%s' % choice.tutor.pk],
         'data'    : {
