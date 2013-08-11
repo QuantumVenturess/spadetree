@@ -10,6 +10,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from rq import Queue
+from worker import conn
 
 from choices.models import Choice
 from cities.models import City
@@ -88,7 +90,10 @@ def choose(request, slug, format=None):
                             mimetype='application/json')
                     else:
                         # Send push notification
-                        choice.send_push_notification_to_tutor()
+                        if not settings.DEV:
+                            q = Queue(connection=conn)
+                            r = q.enqueue(
+                                choice.send_push_notification_to_tutor())
                         messages.success(request, 
                             """Set the day you want to start learning
                             and the place you want to meet""")

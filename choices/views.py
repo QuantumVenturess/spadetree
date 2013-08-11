@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -6,6 +7,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from rq import Queue
+from worker import conn
 
 from channels.models import Channel
 from cities.models import City
@@ -75,7 +78,9 @@ def action(request, pk, format=None):
             # If choice is accepted but not completed
             if choice.accepted and not choice.completed:
                 # Send push notification to tutee
-                choice.send_push_notification_to_tutee()
+                if not settings.DEV:
+                    q = Queue(connection=conn)
+                    r = q.enqueue(choice.send_push_notification_to_tutee())
             d = {
                 'choice': choice,
             }
