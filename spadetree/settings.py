@@ -138,6 +138,22 @@ PARSE_REST_API_KEY   = 'm20pVLyyGl3ss3SHt56nCBXG9UYR2OptOF9Ugvxe'
 
 ROOT_URLCONF = 'spadetree.urls'
 
+# Redis Queue
+RQ_QUEUES = {
+    'default': {
+        'URL': os.getenv('REDISTOGO_URL'),
+        'DB' : 0,
+    },
+    'high': {
+        'URL': os.getenv('REDISTOGO_URL'),
+        'DB' : 0,
+    },
+    'low': {
+        'URL': os.getenv('REDISTOGO_URL'),
+        'DB' : 0,
+    },
+}
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '%ahnypdkx!!un2(ss$4co3*3o9(*t-w0$o$gitlvpn@4o#kfd9'
 
@@ -234,6 +250,7 @@ INSTALLED_APPS = (
 # Utility apps
 INSTALLED_APPS += (
     'compressor',
+    'django_rq',
     'south',
     'storages',
 )

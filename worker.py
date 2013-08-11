@@ -5,8 +5,7 @@ import redis
 
 listen = ['default', 'high', 'low']
 
-redis_url = os.getenv('REDISTOGO_URL', 
-  'redis://redistogo:4464813aee83f9bf7bd4a0b288191f1a@dory.redistogo.com:9458')
+redis_url = os.getenv('REDISTOGO_URL')
 
 conn = redis.from_url(redis_url)
 

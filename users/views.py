@@ -10,8 +10,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
-from rq import Queue
-from worker import conn
 
 from choices.models import Choice
 from choices.utils import send_push_notification_to_tutor
@@ -26,6 +24,7 @@ from states.models import State
 from users.forms import ProfileForm
 from users.models import Profile
 
+import django_rq
 import json
 import os
 import socket
@@ -92,9 +91,8 @@ def choose(request, slug, format=None):
                     else:
                         # Send push notification to tutor
                         if not settings.DEV:
-                            q = Queue(connection=conn)
-                            r = q.enqueue(send_push_notification_to_tutor, 
-                                    choice)
+                            django_rq.enqueue(
+                                send_push_notification_to_tutor(choice))
                         messages.success(request, 
                             """Set the day you want to start learning
                             and the place you want to meet""")

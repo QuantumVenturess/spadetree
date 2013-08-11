@@ -43,6 +43,9 @@ urlpatterns = patterns('',
 
 if not settings.DEV:
     urlpatterns += patterns('',
+        # Static
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve', { 
-            'document_root': settings.STATIC_ROOT })
+            'document_root': settings.STATIC_ROOT }),
+        # Django RQ
+        url(r'^django-rq/', include('django_rq.urls')),
     )

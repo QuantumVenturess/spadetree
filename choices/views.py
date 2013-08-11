@@ -7,8 +7,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
-from rq import Queue
-from worker import conn
 
 from channels.models import Channel
 from cities.models import City
@@ -19,6 +17,7 @@ from sessions.decorators import sign_in_required
 from spadetree.utils import add_csrf, page
 from states.models import State
 
+import django_rq
 import json
 import pytz
 
@@ -77,11 +76,9 @@ def action(request, pk, format=None):
             }
         elif request.is_ajax():
             # If choice is accepted but not completed
-            if choice.accepted and not choice.completed:
+            if choice.accepted and not choice.completed and not settings.DEV:
                 # Send push notification to tutee
-                if not settings.DEV:
-                    q = Queue(connection=conn)
-                    r = q.enqueue(send_push_notification_to_tutee, choice)
+                django_rq.enqueue(send_push_notification_to_tutee(choice))
             d = {
                 'choice': choice,
             }
