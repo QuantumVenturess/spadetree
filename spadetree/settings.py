@@ -28,8 +28,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Amazon S3
-AWS_ACCESS_KEY_ID       = 'AKIAIXM2DMH4M2PAT5TA'
-AWS_SECRET_ACCESS_KEY   = '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'
+AWS_ACCESS_KEY_ID       = os.environ.get('AMAZON_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY   = os.environ.get('AMAZON_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = project_name
 AWS_HEADERS = {
     'Expires': 'Sun, 19 Jul 2020 18:06:32 GMT'
@@ -77,8 +77,8 @@ if DEV:
     FACEBOOK_APP_SECRET   = '9be888f73863e2962ff7a4109766acb9'
     FACEBOOK_REDIRECT_URI = 'http://localhost:8000/oauth/facebook/authenticate'
 else:
-    FACEBOOK_APP_ID       = '529124003816951'
-    FACEBOOK_APP_SECRET   = 'fe72d3e9b55b01c0cb5ee1edc1684c7e'
+    FACEBOOK_APP_ID       = os.environ.get('FACEBOOK_APP_ID')
+    FACEBOOK_APP_SECRET   = os.environ.get('FACEBOOK_APP_SECRET')
     FACEBOOK_REDIRECT_URI = 'http://spadetree.com/oauth/facebook/authenticate'
 FACEBOOK_SCOPE = ','.join([
     'email', 
@@ -133,8 +133,8 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Parse
 PARSE_API_URL        = 'https://api.parse.com/1/push'
-PARSE_APPLICATION_ID = 'iRqqfEEivn7v7W8SHTOj4qOzaXuedhJkqCDWYn1m'
-PARSE_REST_API_KEY   = 'm20pVLyyGl3ss3SHt56nCBXG9UYR2OptOF9Ugvxe'
+PARSE_APPLICATION_ID = os.environ.get('PARSE_APPLICATION_ID')
+PARSE_REST_API_KEY   = os.environ.get('PARSE_REST_API_KEY')
 
 ROOT_URLCONF = 'spadetree.urls'
 
