@@ -1,15 +1,15 @@
-/* Choose */
-.choose h1 {
+/* Pick */
+.pick h1 {
   font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 36px;
   font-weight: 300;
   margin: 40px 0 0 0;
   text-align: center; }
-.choose .audience {
+.pick .audience {
   margin: 40px 0 0 0; }
-  .choose .audience form {
+  .pick .audience form {
     width: 50%; }
-    .choose .audience form button {
+    .pick .audience form button {
       background: none;
       border: none;
       float: left;
@@ -21,10 +21,20 @@
       border-radius: 2px;
       color: #323232;
       padding: 20px; }
-      .choose .audience form button:hover {
-        background: gainsboro;
+      .pick .audience form button:hover {
         cursor: pointer; }
-      .choose .audience form button p {
+        .pick .audience form button:hover.tutees .image {
+          background-image: url("../img/tutees_green.png"); }
+        .pick .audience form button:hover.tutors .image {
+          background-image: url("../img/tutors_green.png"); }
+      .pick .audience form button.tutees .image, .pick .audience form button.tutors .image {
+        background-repeat: no-repeat;
+        background-size: 240px 240px; }
+      .pick .audience form button.tutees .image {
+        background-image: url("../img/tutees.png"); }
+      .pick .audience form button.tutors .image {
+        background-image: url("../img/tutors.png"); }
+      .pick .audience form button p {
         text-align: center; }
 
 /* Detail */

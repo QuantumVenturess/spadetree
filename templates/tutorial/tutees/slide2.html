@@ -1,0 +1,44 @@
+<div class='userDetail'>
+  <div class='top'>
+    <div class='image'>
+      <img src='{{ static }}img/tutorial_tutor.jpg'>
+    </div>
+    <div class='name'>
+      <div>
+        <h1>Chad F</h1>
+        {% if tutor.oauth.facebook_link and user_is_tutor %}
+          <a href='{{ tutor.oauth.facebook_link }}' target='_blank'>
+            view Facebook profile
+          </a>
+        {% endif %}
+      </div>
+      <div class='clear'></div>
+      <p>San Diego, California</p>
+    </div>
+    <a href='#' class='chooseTutor'>Choose Tutor</a>
+  </div>
+  <div class='bottom'>
+    <div class='section about'>
+      <h1>About</h1>
+      <p>Art and music are my passions.</p>
+      <p>I also love going outdoors and playing every kind of sport.</p>
+      <p>Let me know if you are passionate about any of my skills.</p>
+      <div class='clear'></div>
+    </div>
+    <div class='section skills'>
+      <h1>Skills</h1>
+      <ul>
+        {% for skill in skills %}
+          <li>
+            <a href='#'>
+              {{ skill }}
+            </a>
+          </li>
+        {% endfor %}
+        <div class='clear'></div>
+      </ul>
+      <div class='clear'></div>
+    </div>
+    <div class='clear'></div>
+  </div>
+</div>

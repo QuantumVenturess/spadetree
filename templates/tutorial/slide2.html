@@ -1,0 +1,22 @@
+<div class='slide slide2'>
+  <div class='inside'>
+    {% if user.profile.tutee %}
+      {% include 'tutorial/tutees/slide2.html' %}
+    {% else %}
+      {% include 'tutorial/tutors/slide2.html' %}
+    {% endif %}
+  </div>
+  <div class='message'>
+    {% if user.profile.tutee %}
+      <p>Find a tutor who shares the same interest</p>
+      <p>then choose him or her as your tutor</p>
+    {% else %}
+      <p>Search for others who share</p>
+      <p>the same interests as you</p>
+    {% endif %}
+  </div>
+  <nav>
+    <p class='back'>Back</p>
+    <p class='next'>Next</p>
+  </nav>
+</div>

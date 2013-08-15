@@ -1,0 +1,135 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+.tutorial {
+  background: rgb(0, 0, 0);
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  .headerBlocker {
+    height: 44px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .insideBlocker {
+    left: 0;
+    position: absolute;
+    top: 44px;
+    width: 100%;
+  }
+  .header {
+    .browse {
+      border: 1px solid transparent;
+    }
+  }
+  .slides {
+    nav {
+      margin: 0 auto;
+      max-width: 960px;
+      width: 100%;
+      p {
+        color: rgb(115, 202, 36);
+        font-size: 27px;
+        line-height: 36px;
+        padding: 40px;
+        &:hover {
+          cursor: pointer;
+        }
+        &.back {
+          float: left;
+        }
+        &.next {
+          float: right;
+        }
+      }
+    }
+    .slide2, .slide3 {
+      display: none;
+    }
+  }
+  .inside {
+    background: rgb(255, 255, 255);
+    @include browser(box-sizing, border-box);
+    margin: 0 auto;
+    max-width: 960px;
+    .interestListTutorial {
+      padding: 40px 20px;
+      .interestList {
+        padding: 0;
+        .search {
+          margin: 0;
+          .field {
+            input {
+              border: 1px solid transparent;
+            }
+          }
+        }
+      }
+    }
+    .userDetail {
+      .top {
+        .chooseTutor {
+          border: 1px solid transparent;
+        }
+      }
+    }
+    .choiceDetail {
+      padding: 40px 20px;
+      input {
+        border: 1px solid transparent;
+      }
+    }
+    .userEdit {
+      margin: 0;
+      padding: 40px 20px;
+      input {
+        border: 1px solid transparent;
+      }
+      .section {
+        &.about {
+          margin: 0;
+          .aboutTutorTutorial {
+            border: 1px solid transparent;
+            padding: 10px;
+            p {
+              font-size: 14px;
+              line-height: 21px;
+            }
+          }
+        }
+      }
+    }
+    .choices {
+      padding: 40px 20px;
+      button {
+        border: 1px solid transparent;
+      }
+    }
+  }
+  .message {
+    margin: 40px 0 0 0;
+    p {
+      color: rgb(255, 255, 255);
+      font-size: 27px;
+      line-height: 36px;
+      margin: 0 auto;
+      max-width: 960px;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .hiddenFields {
+    display: none;
+    font-size: 0;
+  }
+}

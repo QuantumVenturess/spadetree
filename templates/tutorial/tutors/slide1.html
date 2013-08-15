@@ -1,0 +1,37 @@
+<div class='userEdit'>
+  <div class='section about'>
+    <h1>About</h1>
+    <div class='field'>
+      <div class='aboutTutorTutorial'>
+        <p>Art and music are my passions.</p>
+        <p>I also love going outdoors and playing every kind of sport.</p>
+        <p>Let me know if you are passionate about any of my skills.</p>
+      </div>
+    </div>
+  </div>
+  <div class='section location'>
+    <h1>Location</h1>
+    <div class='field'>
+      <input readonly='readonly' type='text' value='California'>
+    </div>
+    <div class='field'>
+      <input readonly='readonly' type='text' value='San Diego'>
+    </div>
+    <div class='clear'></div>
+  </div>
+  <div class='section phone'>
+    <h1>
+      {% if user.profile.tutee %}
+        Parent's
+      {% endif %}
+      Contact Number
+    </h1>
+    <div class='field'>
+      {{ profile_form.phone }}
+    </div>
+    <div class='contactNote'>
+      <input readonly='readonly' type='text' value='408-858-1234'>
+    </div>
+  </div>
+  <div class='clear'></div>
+</div>

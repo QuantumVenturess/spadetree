@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-<div class='choose'>
+<div class='pick'>
   <h1>I am a...</h1>
   <div class='audience'>
     <form action='' method='POST'>
@@ -9,12 +9,8 @@
       <input name='tutee' type='hidden' value='1'>
       <button class='section tutees'>
         <h1>Tutee</h1>
-        <div class='image'>
-          <img src='{{ static }}img/tutees.png'>
-        </div>
-        <p>
-          if I want to learn a new skill or grow in knowledge
-        </p>
+        <div class='image'></div>
+        <p>if I want to learn a new skill or grow in knowledge</p>
       </button>
     </form>
     <form action='' method='POST'>
@@ -22,12 +18,8 @@
       <input name='tutor' type='hidden' value='1'>
       <button class='section tutors'>
         <h1>Tutor</h1>
-        <div class='image'>
-          <img src='{{ static }}img/tutors.png'>
-        </div>
-        <p>
-          if I want to teach my skills to an eager learner
-        </p>
+        <div class='image'></div>
+        <p>if I want to teach my skills to an eager learner</p>
       </button>
     </form>
   </div>

@@ -1,0 +1,54 @@
+<div class='interestListTutorial'>
+  <div class='interestList'>
+    <div class='search'>
+      <form action='{% url interests.views.browse_search %}' method='GET'>
+        <div class='field'>
+          <input readonly='readonly' type='text' value='Arc'>
+        </div>
+        <div class='action'>
+          <button>Search</button>
+        </div>
+      </form>
+      <div class='clear'></div>
+    </div>
+    <div class='results'>
+      <div class='group'>
+        <h1>A</h1>
+        <ul>
+          <li>
+            <a class='interestNameLink'>
+              Archery
+            </a>
+            <div class='tutorsInsert'>
+              <div class='label'>
+                <p>Tutors</p>
+              </div>
+              {% load common_tags %}
+              <a class='tutor'>
+                <div class='image'>
+                  <img src='{{ static }}img/tutorial_tutor.jpg'>
+                </div>
+                <div class='name'>
+                  <h2>Chad F</h2>
+                  <p>San Diego, California</p>
+                </div>
+              </a>
+              <div class='label'>
+                <p>Tutees</p>
+              </div>
+              <a class='tutor'>
+                <div class='image'>
+                  <img src='{{ static }}img/tutorial_tutee.jpg'>
+                </div>
+                <div class='name'>
+                  <h2>Helen L</h2>
+                  <p>Washington</p>
+                </div>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

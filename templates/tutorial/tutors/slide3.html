@@ -1,0 +1,45 @@
+<div class='choices'>
+  <div class='choice' id='choice_{{ choice.pk }}'>
+    <div class='top'>
+      <div class='image'>
+        <img src='{{ static }}img/tutorial_tutee.jpg'>
+      </div>
+      <div class='timestamp'>
+        <p>
+          <span class='gray150'>{{ date_string }}</span>
+        </p>
+        <span class='requestStatus'>
+          <p>
+            <span class='gray150'>Waiting for your acceptance</span>
+          </p>
+        </span>
+      </div>
+      <div class='name'>
+        <h1>
+          From: <a href='#'>Helen L</a>
+        </h1>
+        <p>
+          <a href='#'>Comedy</a> - {{ weekday }} at {{ hour }}
+        </p>
+      </div>
+    </div>
+    <div class='bottom'>
+      <p>
+        I really want to learn stand up Comedy and be funny like Chris Rock,
+        will you teach me please?
+      </p>
+    </div>
+    <div class='choiceActionForm'>
+      <div class='action'>
+        <button class='accept' name='action' value='accept'>Accept</button>
+      </div>
+    </div>
+    <div class='contactNumber'>
+      <p>
+        You can contact the parent at 
+        <span>(408) 858-1234</span>
+      </p>
+    </div>
+    <div class='clear'></div>
+  </div>
+</div>

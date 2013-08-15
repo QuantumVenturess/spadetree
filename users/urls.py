@@ -5,6 +5,7 @@ urlpatterns = patterns('users.views',
     url(r'^pick(?P<format>.json)/$', 'pick'),
     url(r'^read-tutorial.json/$', 'read_tutorial'),
     url(r'^title-count.json/$', 'title_count'),
+    url(r'^tutorial/', 'tutorial'),
 
     url(r'^(?P<slug>[-\w]+)/choose/$', 'choose'),
     url(r'^(?P<slug>[-\w]+)/choose(?P<format>.json)/$', 'choose'),

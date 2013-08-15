@@ -4,8 +4,8 @@
   -ms-#{$property}: #{$value};
   #{$property}: #{$value};
 }
-/* Choose */
-.choose {
+/* Pick */
+.pick {
   h1 {
     font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 36px;
@@ -27,8 +27,33 @@
         color: rgb(50, 50, 50);
         padding: 20px;
         &:hover {
-          background: rgb(220, 220, 220);
+          &.tutees {
+            .image {
+              background-image: url('../img/tutees_green.png');
+            }
+          }
+          &.tutors {
+            .image {
+              background-image: url('../img/tutors_green.png');
+            }
+          }
           cursor: pointer;
+        }
+        &.tutees, &.tutors {
+          .image {
+            background-repeat: no-repeat;
+            background-size: 240px 240px;
+          }
+        }
+        &.tutees {
+          .image {
+            background-image: url('../img/tutees.png');
+          }
+        }
+        &.tutors {
+          .image {
+            background-image: url('../img/tutors.png');
+          }
         }
         p {
           text-align: center;

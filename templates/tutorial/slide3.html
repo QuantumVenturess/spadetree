@@ -1,0 +1,28 @@
+<div class='slide slide3'>
+  <div class='inside'>
+    {% if user.profile.tutee %}
+      {% include 'tutorial/tutees/slide3.html' %}
+    {% else %}
+      {% include 'tutorial/tutors/slide3.html' %}
+    {% endif %}
+  </div>
+  <div class='message'>
+    {% if user.profile.tutee %}
+      <p>After sending your tutor a request</p>
+      <p>set a date and place to start learning</p>
+    {% else %}
+      <p>Accept requests from tutees</p>
+      <p>and begin teaching your skills</p>
+    {% endif %}
+  </div>
+  <nav>
+    <p class='back'>Back</p>
+    <p class='next'>
+      {% if user.profile.tutee %}
+        Start Learning
+      {% else %}
+        Start Teaching
+      {% endif %}
+    </p>
+  </nav>
+</div>

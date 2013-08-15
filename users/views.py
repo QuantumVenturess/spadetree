@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
 from choices.models import Choice
@@ -16,6 +17,7 @@ from choices.utils import send_push_notification_to_tutor
 from cities.models import City
 from days.models import Day, DayFree
 from hours.models import Hour, HourFree
+from interests.models import Interest
 from oauth.models import Oauth
 from reviews.models import Review
 from sessions.decorators import sign_in_required
@@ -358,25 +360,20 @@ def new_review(request, slug, format=None):
 @csrf_exempt
 def pick(request, format=None):
     """If user has not picked if they are a tutee or tutor."""
-    if request.user.profile.tutee or request.user.profile.tutor:
+    profile = request.user.profile
+    if profile.tutee or profile.tutor:
         return HttpResponseRedirect(reverse('users.views.detail',
-            args=[request.user.profile.slug]))
+            args=[profile.slug]))
     if request.method == 'POST':
-        profile  = request.user.profile
-        message  = ''
-        redirect = reverse('root_path')
         if request.POST.get('tutor'):
             # If user chooses to be a tutor
             profile.tutee = False
             profile.tutor = True
-            message       = 'Add your skills and update your info'
-            redirect      = reverse('users.views.edit', args=[profile.slug])
+            
         elif request.POST.get('tutee'):
             # If user chooses to be a tutee
             profile.tutee = True
             profile.tutor = False
-            message       = 'Search for your interests and learn new skills'
-            redirect      = reverse('interests.views.browse')
         profile.save()
         if format:
             if format == '.json':
@@ -386,10 +383,8 @@ def pick(request, format=None):
                 }
                 return HttpResponse(json.dumps(data), 
                     mimetype='application/json')
-        messages.success(request, message)
-        return HttpResponseRedirect(redirect)
     d = {
-        'title': 'Tutee or Tutor',
+        'title'    : 'Tutee or Tutor',
     }
     return render(request, 'users/pick.html', add_csrf(request, d))
 
@@ -423,11 +418,49 @@ def reviews(request, slug):
 def title_count(request):
     """Return total count of notifications, requests, and messages."""
     profile = request.user.profile
-    n = profile.unviewed_notification_count()
-    r = profile.choice_count()
-    m = profile.unread_message_count()
-    t = n + r + m
-    data = {
-        'count': t,
-    }
+    data    = {}
+    if profile.tutee or profile.tutor:
+        n = profile.unviewed_notification_count()
+        r = profile.choice_count()
+        m = profile.unread_message_count()
+        t = n + r + m
+        data = {
+            'count': t,
+        }
     return HttpResponse(json.dumps(data), mimetype='application/json')
+
+@sign_in_required
+def tutorial(request):
+    """Return tutorial html."""
+    if request.is_ajax():
+        profile = request.user.profile
+        if profile.tutee:
+            message  = 'Search for your interests and learn new skills'
+            redirect = reverse('interests.views.browse')
+        else:
+            message  = 'Add your skills and update your info'
+            redirect = reverse('users.views.edit', args=[profile.slug])
+        messages.success(request, message)
+        today = timezone.now()
+        date  = today.strftime('%m/%d/%Y')
+        hour  = '%s %s' % (today.strftime('%I').lstrip('0'), 
+            today.strftime('%p').lower())
+        weekday     = today.strftime('%A')
+        date_string = today.strftime('%b %d, %y')
+        skills      = ['Archery', 'Basketball', 'Painting', 
+                       'Swimming', 'Traveling', 'Violin']
+        d = {
+            'date'       : date,
+            'date_string': date_string,
+            'hour'       : hour,
+            'skills'     : skills,
+            'weekday'    : weekday,
+        }
+        t = loader.get_template('tutorial/tutorial.html')
+        context = RequestContext(request, d)
+        data = {
+            'redirect': redirect,
+            'tutorial': t.render(context),
+        }
+        return HttpResponse(json.dumps(data), mimetype='application/json')
+    return HttpResponseRedirect(reverse('root_path'))

@@ -1,0 +1,21 @@
+{% load static %}
+{% get_static_prefix as static %}
+<div class='tutorial'>
+  <div class='headerBlocker'></div>
+  <div class='insideBlocker'></div>
+  <header>
+    {% include 'header.html' %}
+  </header>
+  <div class='slides'>
+    {% include 'tutorial/slide1.html' %}
+    {% include 'tutorial/slide2.html' %}
+    {% include 'tutorial/slide3.html' %}
+    <span class='hiddenFields'>
+      <span id='tutorialUserType'
+        class='{% if user.profile.tutee %}tutee{% else %}tutor{% endif %}'>
+      </span>
+      <span id='redirect'>
+      </span>
+    </span>
+  </div>
+</div>
