@@ -14,8 +14,29 @@
       padding: 0 95px 0 0;
       width: 100%;
       input {
+        background-image: url('../img/browse_search_normal.png');
+        background-position: 12px 10px;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
         float: left;
+        padding: 10px 10px 10px 40px;
         width: 100%;
+        &:hover {
+          background-image: url('../img/browse_search_hover.png');
+        }
+        &:focus {
+          background-image: url('../img/browse_search_focus.png');
+        }
+      }
+      a {
+        display: none;
+        float: right;
+        margin: 12px 0 0 -30px;
+        position: absolute;
+        img {
+          max-height: 20px;
+          max-width: 20px;
+        }
       }
     }
     .action {

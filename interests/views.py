@@ -14,6 +14,7 @@ from spadetree.utils import add_csrf, page
 
 import json
 import operator
+import re
 
 @sign_in_required
 def browse(request, format=None):
@@ -63,7 +64,7 @@ def browse(request, format=None):
 @sign_in_required
 def browse_search(request, format=None):
     """Return search results for browse."""
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
     if query:
         queries = [word for word in query.split(' ') if word]
         qs = [(Q(name=q) | Q(name__icontains=q)) for q in queries]

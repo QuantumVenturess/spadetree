@@ -6,6 +6,9 @@
     <form action='{% url interests.views.browse_search %}' method='GET'>
       <div class='field'>
         <input autocomplete='off' name='q' placeholder='{{ placeholder }}' type='text'>
+        <a class='cancel' href='#' title='Clear'>
+          <img src='{{ static }}img/cancel.png'>
+        </a>
       </div>
       <div class='action'>
         <button>Search</button>
