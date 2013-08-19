@@ -2,7 +2,7 @@
 .join {
   background-image: url("../img/join_background.jpg");
   background-repeat: no-repeat;
-  height: 560px;
+  height: 590px;
   width: 100%; }
   .join .joinTexture {
     background-image: url("../img/texture.png");
@@ -13,6 +13,33 @@
       margin: 0 auto;
       max-width: 960px;
       width: 100%; }
+      .join .joinTexture .intro a {
+        -webkit-transition: .1s all linear;
+        -moz-transition: .1s all linear;
+        -ms-transition: .1s all linear;
+        transition: .1s all linear; }
+      .join .joinTexture .intro .downloadAppStore {
+        background: rgba(0, 0, 0, 0.7);
+        display: block;
+        float: left;
+        padding: 10px 20px;
+        position: relative;
+        top: 80px; }
+        .join .joinTexture .intro .downloadAppStore:hover {
+          background: black; }
+        .join .joinTexture .intro .downloadAppStore img {
+          float: left;
+          max-height: 60px; }
+        .join .joinTexture .intro .downloadAppStore h1, .join .joinTexture .intro .downloadAppStore h2 {
+          color: white;
+          font-weight: 300;
+          margin: 0 0 0 69px; }
+        .join .joinTexture .intro .downloadAppStore h1 {
+          font-size: 17px;
+          line-height: 25px; }
+        .join .joinTexture .intro .downloadAppStore h2 {
+          font-size: 27px;
+          line-height: 35px; }
       .join .joinTexture .intro .introContent {
         background: rgba(0, 0, 0, 0.7);
         -webkit-box-sizing: border-box;
@@ -21,9 +48,10 @@
         box-sizing: border-box;
         color: white;
         float: right;
-        margin: 80px 0 0 0;
-        max-height: 400px;
-        padding: 40px; }
+        max-height: 430px;
+        padding: 40px;
+        position: relative;
+        top: 80px; }
         .join .joinTexture .intro .introContent h1 {
           font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 36px;
@@ -167,6 +195,10 @@
       float: right;
       margin: 66px 0 0 0;
       padding: 20px 10px;
+      -webkit-transition: .1s all linear;
+      -moz-transition: .1s all linear;
+      -ms-transition: .1s all linear;
+      transition: .1s all linear;
       width: 36%; }
       .joinClosingContainer .joinClosing a:hover {
         background: #7dd42e; }

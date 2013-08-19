@@ -111,10 +111,6 @@
     });
     return $(document).on('click', '.tutorial .slide3 .next', function() {
       var redirect;
-      $.ajax({
-        type: 'POST',
-        url: '/u/read-tutorial.json/'
-      });
       $('.tutorial').fadeOut(100);
       redirect = $('.tutorial #redirect').attr('class');
       if (!redirect) {

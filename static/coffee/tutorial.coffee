@@ -83,9 +83,6 @@ $(document).ready ->
         resizeInsideBlockerHeightForSlide2()
     no
   $(document).on 'click', '.tutorial .slide3 .next', ->
-    $.ajax
-      type: 'POST',
-      url : '/u/read-tutorial.json/'
     $('.tutorial').fadeOut 100
     redirect = $('.tutorial #redirect').attr 'class'
     if not redirect

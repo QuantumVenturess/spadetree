@@ -384,7 +384,7 @@ def pick(request, format=None):
                 return HttpResponse(json.dumps(data), 
                     mimetype='application/json')
     d = {
-        'title'    : 'Tutee or Tutor',
+        'title': 'Tutee or Tutor',
     }
     return render(request, 'users/pick.html', add_csrf(request, d))
 
@@ -434,12 +434,9 @@ def tutorial(request):
     """Return tutorial html."""
     if request.is_ajax():
         profile = request.user.profile
-        if profile.tutee:
-            message  = 'Search for your interests and learn new skills'
-            redirect = reverse('interests.views.browse')
-        else:
-            message  = 'Add your skills and update your info'
-            redirect = reverse('users.views.edit', args=[profile.slug])
+        message = 'Add your %s and update your profile' % (
+            profile.skills_or_interests().lower())
+        redirect = reverse('users.views.edit', args=[profile.slug])
         messages.success(request, message)
         today = timezone.now()
         date  = today.strftime('%m/%d/%Y')

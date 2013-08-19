@@ -8,7 +8,7 @@
 .join {
   background-image: url('../img/join_background.jpg');
   background-repeat: no-repeat;
-  height: 560px;
+  height: 590px;
   width: 100%;
   .joinTexture {
     background-image: url('../img/texture.png');
@@ -19,14 +19,46 @@
       margin: 0 auto;
       max-width: 960px;
       width: 100%;
+      a {
+        @include browser(transition, '.1s all linear');
+      }
+      .downloadAppStore {
+        background: rgba(0, 0, 0, 0.7);
+        display: block;
+        float: left;
+        padding: 10px 20px;
+        position: relative;
+        top: 80px;
+        &:hover {
+          background: rgb(0, 0, 0);
+        }
+        img {
+          float: left;
+          max-height: 60px;
+        }
+        h1, h2 {
+          color: rgb(255, 255, 255);
+          font-weight: 300;
+          margin: 0 0 0 69px;
+        }
+        h1 {
+          font-size: 17px;
+          line-height: 25px;
+        }
+        h2 {
+          font-size: 27px;
+          line-height: 35px;
+        }
+      }
       .introContent {
         background: rgba(0, 0, 0, 0.7);
         @include browser(box-sizing, border-box);
         color: rgb(255, 255, 255);
         float: right;
-        margin: 80px 0 0 0;
-        max-height: 400px;
+        max-height: 430px;
         padding: 40px;
+        position: relative;
+        top: 80px;
         h1 {
           font-family: 'Varela', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 36px;
@@ -188,6 +220,7 @@
       float: right;
       margin: 66px 0 0 0;
       padding: 20px 10px;
+      @include browser(transition, '.1s all linear');
       width: 36%;
       &:hover {
         background: rgb(125, 212, 46);

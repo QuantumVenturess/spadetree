@@ -4,10 +4,18 @@
 <div class='join'>
   <div class='joinTexture'>
     <div class='intro'>
+      <a class='downloadAppStore' 
+        href='https://itunes.apple.com/us/app/spadetree/id686320991'
+          target='_blank'>
+        <img src='{{ static }}img/apple_logo.svg'>
+        <h1>Download on the</h1>
+        <h2>App Store</h2>
+      </a>
       <div class='introContent'>
         <h1>Knowledge for everyone</h1>
-        <h2>We connect passionate people with youth who are eager</h2>
-        <h2>to learn new skills that are not typically taught in school</h2>
+        <h2>We connect people who are passionate about what they do</h2>
+        <h2>with kids K-12 who are eager to learn new skills</h2>
+        <h2>not typically taught in school</h2>
         {% if user.is_anonymous %}
           <a href='{% url oauth.views.facebook %}' class='facebookButton'>
             <img src='{{ static }}img/fb.png'>
